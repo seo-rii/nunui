@@ -2,6 +2,7 @@
   import Ripple from "$lib/Ripple";
   import Button from "$lib/Button";
   import LinearProgress from "$lib/LinearProgress";
+  import Icon from "$lib/Icon";
 </script>
 
 <h1>Welcome to your library project</h1>
@@ -27,3 +28,5 @@
 <LinearProgress progress={0.3} />
 <LinearProgress progress={0.5} secondary />
 <LinearProgress indeterminate />
+<Icon icon="favorite" />
+<Icon icon="favorite" weight="200" size="36" />
