@@ -5,7 +5,7 @@
     opacity: 0;
   }
   100% {
-    opacity: var(--op);
+    opacity: var(--i-op);
   }
 }
 
@@ -14,7 +14,7 @@
 }
 
 @mixin AFadeIn( $duration, $op: 1, $additional: '' ) {
-  --op: $op;
+  --i-op: #{$op};
   @each $p in $prefix {
     #{$p}animation: fadeIn $duration $additional;
   }
@@ -22,7 +22,7 @@
 
 @mixin --fadeOut {
   0% {
-    opacity: var(--op);
+    opacity: var(--i-op);
   }
   100% {
     opacity: 0;
@@ -34,7 +34,7 @@
 }
 
 @mixin AFadeOut( $duration, $op: 1, $additional: '' ) {
-  --op: $op;
+  --i-op: #{$op};
   @each $p in $prefix {
     #{$p}animation: fadeOut $duration $additional;
   }

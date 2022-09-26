@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  export let duration = 300;
+  export let duration = 300, opacity = 0.3,
+    primary = true, secondary = false, surface = false;
 
   let container, adapter;
   let x = 0, y = 0, size = 0, show = false, hide = false, back = false, ts = 0;
@@ -56,28 +57,29 @@
   });
 </script>
 
-<div class="adapter" bind:this={adapter} class:show class:hide>
-  <div class="ripple" style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;" class:show></div>
+<div class="adapter" bind:this={adapter} class:show class:hide style:--rop={opacity}>
+  <div class="ripple" class:show class:primary class:secondary class:surface
+       style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;"></div>
 </div>
-<div class="back" class:show={back}></div>
+<div class="back" class:show={back} style:--bop="0.1" class:primary class:secondary class:surface></div>
 
 <style lang="scss">
-  @import "src/lib/Style/index";
+  @import "src/lib/Style";
 
   .adapter {
     @include full;
-    @include CShow(var(--ripple-opacity), 0);
+    @include CShow(var(--rop), 0);
     pointer-events: none;
     transition: background 0.3s;
 
     .ripple {
+      @include applyTheme(background);
+      @include round(round);
       position: absolute;
       left: var(--x);
       top: var(--y);
       width: var(--size);
       height: var(--size);
-      border-radius: 100%;
-      background: #12345678;
 
       &.show {
         @include AScaleIn(var(--dur), 0, forwards);
@@ -85,13 +87,13 @@
     }
 
     &.hide {
-      @include AFadeOut(0.2s, var(--ripple-opacity), forwards);
+      @include AFadeOut(0.2s, var(--rop), forwards);
     }
   }
 
   .back {
     @include full;
-    @include CShow(var(--back-opacity));
-    background: #12345678;
+    @include CShow(var(--bop));
+    @include applyTheme(background);
   }
 </style>

@@ -1,0 +1,25 @@
+$shadow-common: 20px 20px 60px #bebebe77, -20px -20px 60px #ffffff77;
+$shadow-common-dark: 20px 20px 60px #11111199, -20px -20px 60px #11111199;
+
+$shadow-common-mini: 20px 20px 30px #bebebe55, -20px -20px 30px #ffffff55;
+$shadow-common-mini-dark: 20px 20px 60px #11111199, -20px -20px 60px #11111199;
+
+$shadow-primary: rgba(44, 41, 99, 0.4) 0px 7px 29px 0px;
+
+@mixin shadow($variant:"", $mini:"") {
+  @if $variant == "dark" {
+    @if $mini=="mini" {
+      box-shadow: $shadow-common-mini-dark;
+    } @else {
+      box-shadow: $shadow-common-dark;
+    }
+  } @else if $variant == "primary" {
+    box-shadow: $shadow-primary;
+  } @else {
+    @if $mini=="mini" {
+      box-shadow: $shadow-common-mini;
+    } @else {
+      box-shadow: $shadow-common;
+    }
+  }
+}

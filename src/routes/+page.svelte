@@ -1,5 +1,6 @@
 <script>
   import Ripple from "$lib/Ripple";
+  import Button from "$lib/Button";
 </script>
 
 <h1>Welcome to your library project</h1>
@@ -10,3 +11,13 @@
 <a href="/" style="width: 400px;height:100px;position: relative;background: #eee;display: block;-webkit-tap-highlight-color: transparent;">
   <Ripple/>
 </a>
+<a href="/" style="width: 400px;height:100px;position: relative;background: #eee;display: block;-webkit-tap-highlight-color: transparent;">
+  <Ripple secondary/>
+</a>
+
+<Button primary>dfdfd</Button>
+<Button secondary>dfdfd</Button>
+<Button outlined>dfdfd</Button>
+<Button small>dfdfd</Button>
+<Button primary raised>dfdfd</Button>
+<Button primary disabled>dfdfd</Button>

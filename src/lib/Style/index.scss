@@ -1,4 +1,5 @@
 @import "./animation";
+@import "./shadow";
 
 @mixin full {
   position: absolute;
@@ -17,5 +18,43 @@
 
   &.show {
     opacity: $op;
+  }
+}
+
+@mixin round( $radius: 12px ) {
+  @if $radius == small {
+    $radius: 4px;
+  } @else if $radius == medium {
+    $radius: 12px;
+  } @else if $radius == round {
+    $radius: 100%;
+  }
+  border-radius: $radius;
+}
+
+@mixin applyTheme($target) {
+  @each $key in ['primary', 'secondary', 'surface'] {
+    &.#{$key} {
+      #{$target}: var(--#{$key});
+    }
+  }
+}
+
+@mixin applyThemeOn($target) {
+  @each $key in ['primary', 'secondary', 'surface'] {
+    &.#{$key} {
+      #{$target}: var(--on-#{$key});
+    }
+  }
+}
+
+:global {
+  :root {
+    --primary: #6200ee;
+    --secondary: #03dac6;
+    --surface: #ffffff;
+
+    --on-primary: #ffffff;
+    --on-secondary: #000000;
   }
 }

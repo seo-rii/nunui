@@ -2,7 +2,7 @@
 
 @mixin --scaleIn {
   0% {
-    transform: scale(var(--sc));
+    transform: scale(var(--i-sc));
   }
   100% {
     transform: scale(1);
@@ -14,7 +14,7 @@
 }
 
 @mixin AScaleIn( $duration, $sc: 1, $additional: '' ) {
-  --sc: #{$sc};
+  --i-sc: #{$sc};
   @each $p in $prefix {
     #{$p}animation: scaleIn $duration $additional;
   }
