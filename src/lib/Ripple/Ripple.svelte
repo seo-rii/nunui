@@ -21,12 +21,12 @@
     new Promise((resolve) => setTimeout(resolve, 50)).then(() => show = true);
   }
 
-  const showRippleMouse = ({ pageX, pageY }) => rippleShowEvent(pageX, pageY);
-  const showRippleTouch = (e) => {
-    e.preventDefault();
-    back = false;
-    rippleShowEvent(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
-  };
+  const showRippleMouse = ({ pageX, pageY }) => rippleShowEvent(pageX, pageY),
+    showRippleTouch = (e) => {
+      e.preventDefault();
+      back = false;
+      rippleShowEvent(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+    };
 
   const hideRipple = () => new Promise((resolve) => setTimeout(resolve, Math.max(0, duration - (Date.now() - ts)))).then(() => hide = true),
     exitRipple = () => hideRipple().then(() => back = false);
@@ -66,7 +66,7 @@
 
   .adapter {
     @include full;
-    @include show(var(--ripple-opacity), 0);
+    @include CShow(var(--ripple-opacity), 0);
     pointer-events: none;
     transition: background 0.3s;
 
@@ -80,18 +80,18 @@
       background: #12345678;
 
       &.show {
-        @include scaleIn(var(--dur), 0, forwards);
+        @include AScaleIn(var(--dur), 0, forwards);
       }
     }
 
     &.hide {
-      @include fadeOut(0.2s, var(--ripple-opacity), forwards);
+      @include AFadeOut(0.2s, var(--ripple-opacity), forwards);
     }
   }
 
   .back {
     @include full;
-    @include show(var(--back-opacity));
+    @include CShow(var(--back-opacity));
     background: #12345678;
   }
 </style>

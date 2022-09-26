@@ -9,7 +9,7 @@
 }
 
 
-@mixin show( $op: 1, $duration: 0.3s, $additional: '' ) {
+@mixin CShow( $op: 1, $duration: 0.3s, $additional: '' ) {
   opacity: 0;
   @if $duration != 0 {
     transition: opacity $duration #{$additional};

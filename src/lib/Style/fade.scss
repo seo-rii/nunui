@@ -13,7 +13,7 @@
   @include --fadeIn;
 }
 
-@mixin fadeIn( $duration, $op: 1, $additional: '' ) {
+@mixin AFadeIn( $duration, $op: 1, $additional: '' ) {
   --op: $op;
   @each $p in $prefix {
     #{$p}animation: fadeIn $duration $additional;
@@ -33,7 +33,7 @@
   @include --fadeOut;
 }
 
-@mixin fadeOut( $duration, $op: 1, $additional: '' ) {
+@mixin AFadeOut( $duration, $op: 1, $additional: '' ) {
   --op: $op;
   @each $p in $prefix {
     #{$p}animation: fadeOut $duration $additional;

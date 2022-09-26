@@ -13,7 +13,7 @@
   @include --scaleIn;
 }
 
-@mixin scaleIn( $duration, $sc: 1, $additional: '' ) {
+@mixin AScaleIn( $duration, $sc: 1, $additional: '' ) {
   --sc: #{$sc};
   @each $p in $prefix {
     #{$p}animation: scaleIn $duration $additional;
