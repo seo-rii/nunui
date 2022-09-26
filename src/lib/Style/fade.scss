@@ -1,6 +1,6 @@
 @import './cross';
 
-@mixin keyframe-fadeIn {
+@mixin --fadeIn {
   0% {
     opacity: 0;
   }
@@ -10,18 +10,17 @@
 }
 
 @include keyframes(fadeIn) {
-  @include keyframe-fadeIn;
+  @include --fadeIn;
 }
 
 @mixin fadeIn( $duration, $op: 1, $additional: '' ) {
   --op: $op;
-  $keyframe-name: fadeIn;
   @each $p in $prefix {
-    #{$p}animation: $keyframe-name $duration $additional;
+    #{$p}animation: fadeIn $duration $additional;
   }
 }
 
-@mixin keyframe-fadeOut {
+@mixin --fadeOut {
   0% {
     opacity: var(--op);
   }
@@ -31,13 +30,12 @@
 }
 
 @include keyframes(fadeOut) {
-  @include keyframe-fadeOut;
+  @include --fadeOut;
 }
 
 @mixin fadeOut( $duration, $op: 1, $additional: '' ) {
   --op: $op;
-  $keyframe-name: fadeOut;
   @each $p in $prefix {
-    #{$p}animation: $keyframe-name $duration $additional;
+    #{$p}animation: fadeOut $duration $additional;
   }
 }

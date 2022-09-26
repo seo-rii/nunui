@@ -3,7 +3,7 @@
 
   export let duration = 300;
 
-  let container, adapter, ripple;
+  let container, adapter;
   let x = 0, y = 0, size = 0, show = false, hide = false, back = false, ts = 0;
 
   function rippleSize(targetX, targetY) {
@@ -14,12 +14,11 @@
     return { x, y, size };
   }
 
-  async function rippleShowEvent(targetX, targetY) {
+  function rippleShowEvent(targetX, targetY) {
     show = hide = false;
     ({ x, y, size } = rippleSize(targetX, targetY));
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    show = true;
     ts = Date.now();
+    new Promise((resolve) => setTimeout(resolve, 50)).then(() => show = true);
   }
 
   const showRippleMouse = ({ pageX, pageY }) => rippleShowEvent(pageX, pageY);
@@ -29,19 +28,10 @@
     rippleShowEvent(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
   };
 
-  async function hideRipple() {
-    await new Promise((resolve) => setTimeout(resolve, Math.max(0, duration - (Date.now() - ts))));
-    hide = true;
-  }
+  const hideRipple = () => new Promise((resolve) => setTimeout(resolve, Math.max(0, duration - (Date.now() - ts)))).then(() => hide = true),
+    exitRipple = () => hideRipple().then(() => back = false);
 
-  function exitRipple() {
-    hideRipple();
-    back = false;
-  }
-
-  function showBackground() {
-    back = true;
-  }
+  const showBackground = () => back = true;
 
   onMount(() => {
     container = adapter.parentElement;
@@ -67,24 +57,21 @@
 </script>
 
 <div class="adapter" bind:this={adapter} class:show class:hide>
-  <div class="ripple" style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;"
-       bind:this={ripple} class:show></div>
+  <div class="ripple" style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;" class:show></div>
 </div>
 <div class="back" class:show={back}></div>
 
 <style lang="scss">
-  @import "../Style/index";
+  @import "src/lib/Style/index";
 
   .adapter {
     @include full;
+    @include show(var(--ripple-opacity), 0);
     pointer-events: none;
     transition: background 0.3s;
-    opacity: 0;
 
     .ripple {
       position: absolute;
-      overflow: hidden;
-      transform: translate3d(0, 0, 0);
       left: var(--x);
       top: var(--y);
       width: var(--size);
@@ -93,12 +80,8 @@
       background: #12345678;
 
       &.show {
-        animation: ripple var(--dur) forwards;
+        @include scaleIn(var(--dur), 0, forwards);
       }
-    }
-
-    &.show {
-      opacity: var(--ripple-opacity);
     }
 
     &.hide {
@@ -108,22 +91,7 @@
 
   .back {
     @include full;
+    @include show(var(--back-opacity));
     background: #12345678;
-    transition: opacity 0.3s;
-    opacity: 0;
-
-    &.show {
-      opacity: var(--back-opacity);
-    }
-  }
-
-  @keyframes ripple {
-    from {
-      transform: scale(0);
-    }
-
-    to {
-      transform: scale(1);
-    }
   }
 </style>

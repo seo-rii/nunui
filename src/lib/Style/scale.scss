@@ -1,0 +1,21 @@
+@import './cross';
+
+@mixin --scaleIn {
+  0% {
+    transform: scale(var(--sc));
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@include keyframes(scaleIn) {
+  @include --scaleIn;
+}
+
+@mixin scaleIn( $duration, $sc: 1, $additional: '' ) {
+  --sc: #{$sc};
+  @each $p in $prefix {
+    #{$p}animation: scaleIn $duration $additional;
+  }
+}
