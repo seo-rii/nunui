@@ -5,7 +5,7 @@
   export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
     raised = false, tabindex = undefined, disabled = false;
 
-  let clicked = false, active = false;
+  let clicked = false, hover = false;
 </script>
 
 <style lang="scss">
@@ -63,15 +63,15 @@
 </style>
 
 <div class="wrapper button" class:primary class:secondary class:surface={outlined} {tabindex} class:small class:round
-     class:active={active && !disabled} class:clicked={clicked && !disabled} class:outlined class:raised {style}
+     class:active={hover && !disabled} class:clicked={clicked && !disabled} class:outlined class:raised {style}
      on:click on:mousedown on:mouseup on:touchstart on:touchend on:keypress={(e)=>{
 			if(e.key==='Enter'){
 				e.target.click();
 			}
 		 }}>
-  <div style:--weight={(active && !clicked) ? 500 : 300}>
+  <div style:--weight={(hover && !clicked) ? 500 : 300}>
     <slot />
   </div>
-  <Ripple {primary} surface={!outlined} opacity={disabled?0:undefined} bind:clicked bind:active />
+  <Ripple {primary} surface={!outlined} opacity={disabled?0:undefined} bind:clicked bind:hover />
   <Blocker active={disabled} />
 </div>

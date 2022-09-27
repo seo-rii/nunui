@@ -5,7 +5,7 @@
   import Icon from "$lib/Icon";
   import IconButton from "$lib/IconButton";
 
-  let fl = false;
+  let fl = false, m = 0;
   const toggle = () => fl = !fl;
 </script>
 
@@ -22,12 +22,7 @@
   }
 </style>
 
-
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-
+<h1>Ripple</h1>
 <a href="/"
    style="width: 400px;height:100px;position: relative;background: #eee;display: block;-webkit-tap-highlight-color: transparent;">
   <Ripple />
@@ -37,6 +32,7 @@
   <Ripple secondary />
 </a>
 
+<h1>Button</h1>
 <Button primary on:click={toggle}>
   <Icon icon="star" outlined={fl} />
   Primary
@@ -47,12 +43,18 @@
 <Button primary raised>dfdfd</Button>
 <Button primary disabled>dfdfd</Button>
 
+<h1>Linear Progress</h1>
 <LinearProgress progress={0.3} />
 <LinearProgress progress={0.5} secondary />
 <LinearProgress indeterminate />
 
+<h1>Icon</h1>
 <Icon icon="favorite" />
 <Icon icon="favorite" weight="200" size="36" />
+
+<h1>Icon Button</h1>
+<IconButton icon="home" flat active={m==0} on:click={()=>m=0} />
+<IconButton icon="alarm" flat active={m==1} on:click={()=>m=1} />
 
 <IconButton icon="favorite" outlined={fl} on:click={toggle} />
 <IconButton icon="drive_folder_upload" size="48" outlined={fl} on:click={toggle} />

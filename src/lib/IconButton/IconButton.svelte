@@ -3,9 +3,9 @@
   import Ripple from "$lib/Ripple";
   import Blocker from "$lib/Blocker";
 
-  export let icon: string, size = 36, outlined = false, style = "", disabled = false;
+  export let icon: string, flat = false, size = 36, outlined = undefined, style = "", disabled = false, active = false;
 
-  let clicked = false, active = false;
+  let clicked = false, hover = false;
 </script>
 
 <style lang="scss">
@@ -19,7 +19,7 @@
     cursor: pointer;
     height: var(--icon-size);
 
-    .iconButton {
+    .button {
       width: var(--size);
       height: var(--size);
       display: flex;
@@ -32,14 +32,19 @@
         font-size: calc(var(--size) * 0.7);
         line-height: calc(var(--size) * 0.7);
       }
+
+      &.flat {
+        width: calc(var(--size) * 1.25);
+        height: calc(var(--size) * 0.75);
+      }
     }
   }
 </style>
 
 <div class="container" style="--size:{size}px;{style}" on:click>
-  <div class="iconButton">
-    <Icon icon={icon} size={size*0.7} weight={(!disabled && active && !clicked) ? 500 : 300} {outlined} />
+  <div class="button" class:flat>
+    <Icon icon={icon} size={size*0.7} weight={(!disabled && hover && !clicked) ? 500 : 300} outlined={outlined === undefined ? !active : outlined} />
   </div>
-  <Ripple center primary bind:clicked bind:active />
+  <Ripple center primary bind:clicked bind:hover {active} />
   <Blocker active={disabled} />
 </div>

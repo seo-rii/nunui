@@ -1,16 +1,16 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  export let duration = 300, opacity = 0.3, center = false,
+  export let duration = 300, opacity = 0.3, center = false, active = false,
     primary = true, secondary = false, surface = false;
 
-  export let clicked = false, active = false;
+  export let clicked = false, hover = false;
 
   let container, adapter;
   let x = 0, y = 0, size = 0, show = false, hide = false, back = false, ts = 0;
 
   $: clicked = show && !hide;
-  $: active = !clicked && back;
+  $: hover = !clicked && back;
 
   function rippleSize(targetX, targetY) {
     const rect = container.getBoundingClientRect();
@@ -73,7 +73,7 @@
   <div class="ripple" class:show class:primary class:secondary class:surface
        style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;"></div>
 </div>
-<div class="back" class:show={back} style:--bop="0.2" class:primary class:secondary class:surface></div>
+<div class="back" class:show={back || active} style:--bop="0.2" class:primary class:secondary class:surface></div>
 
 <style lang="scss">
   @import "src/lib/Style";
