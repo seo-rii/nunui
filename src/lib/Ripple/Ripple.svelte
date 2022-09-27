@@ -2,15 +2,22 @@
   import { onMount } from "svelte";
 
   export let duration = 300, opacity = 0.3, center = false, active = false,
-    primary = true, secondary = false, surface = true;
+    primary = true, secondary = false, surface = true, additional = null;
 
   export let clicked = false, hover = false;
 
-  let container, adapter;
+  let container, adapter, lastAdditional;
   let x = 0, y = 0, size = 0, show = false, hide = false, back = false, ts = 0;
 
   $: clicked = show && !hide;
   $: hover = !clicked && back;
+  $: {
+    if (additional !== lastAdditional) {
+      removeHandler(lastAdditional);
+      applyHandler(additional);
+      lastAdditional = additional;
+    }
+  }
 
   function rippleSize(targetX, targetY) {
     const rect = container.getBoundingClientRect();
@@ -46,26 +53,33 @@
 
   const showBackground = () => back = true;
 
+  const applyHandler = (el) => {
+    if (!el) return;
+    el.addEventListener("mousemove", showBackground);
+    el.addEventListener("mousedown", showRippleMouse);
+    el.addEventListener("mouseup", hideRipple);
+    el.addEventListener("mouseleave", exitRipple);
+    el.addEventListener("touchstart", showRippleTouch);
+    el.addEventListener("touchend", exitRipple);
+    el.addEventListener("touchcancel", exitRipple);
+  };
+
+  const removeHandler = (el) => {
+    if (!el) return;
+    el.removeEventListener("mousemove", showBackground);
+    el.removeEventListener("mousedown", showRippleMouse);
+    el.removeEventListener("mouseup", hideRipple);
+    el.removeEventListener("mouseleave", exitRipple);
+    el.removeEventListener("touchstart", showRippleTouch);
+    el.removeEventListener("touchend", exitRipple);
+    el.removeEventListener("touchcancel", exitRipple);
+  };
+
   onMount(() => {
     container = adapter.parentElement;
     container.style.overflow = "hidden";
-    container.addEventListener("mousemove", showBackground);
-    container.addEventListener("mousedown", showRippleMouse);
-    container.addEventListener("mouseup", hideRipple);
-    container.addEventListener("mouseleave", exitRipple);
-    container.addEventListener("touchstart", showRippleTouch);
-    container.addEventListener("touchend", exitRipple);
-    container.addEventListener("touchcancel", exitRipple);
-
-    return () => {
-      container.style.overflow = "";
-      container.removeEventListener("mousedown", showRippleMouse);
-      container.removeEventListener("mouseup", hideRipple);
-      container.removeEventListener("mouseleave", exitRipple);
-      container.removeEventListener("touchstart", showRippleTouch);
-      container.removeEventListener("touchend", exitRipple);
-      container.removeEventListener("touchcancel", exitRipple);
-    };
+    applyHandler(container);
+    return () => removeHandler(container);
   });
 </script>
 

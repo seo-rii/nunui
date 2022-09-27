@@ -46,7 +46,7 @@
   Outlined
 </Button>
 <Button secondary outlined={fl} on:click={toggle}>
-  <Icon icon="radio_button_checked" outlined={fl} />
+  <Icon icon="done" outlined={fl} />
   Outlined?
 </Button>
 <Button small>dfdfd</Button>
@@ -64,8 +64,8 @@
 <Icon icon="favorite" weight="200" size="36" />
 
 <h1>Icon Button</h1>
-<IconButton icon="home" flat active={m==0} on:click={()=>m=0} />
-<IconButton icon="alarm" flat active={m==1} on:click={()=>m=1} />
+<IconButton icon="home" label="home" flat active={m===0} on:click={()=>m=0} />
+<IconButton icon="alarm" label="alarm" flat active={m===1} on:click={()=>m=1} />
 
 <IconButton icon="favorite" outlined={fl} on:click={toggle} />
 <IconButton icon="drive_folder_upload" size="48" outlined={fl} on:click={toggle} />
