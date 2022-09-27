@@ -8,6 +8,14 @@
   let clicked = false, hover = false;
 </script>
 
+<div class="container" style="--size:{size}px;{style}" on:click>
+  <div class="button" class:flat>
+    <Icon icon={icon} size={size*0.7} weight={clicked ? 200 : (hover ? 500 : 300)} outlined={outlined === undefined ? !active : outlined} />
+  </div>
+  <Ripple center primary bind:clicked bind:hover {active} />
+  <Blocker active={disabled} />
+</div>
+
 <style lang="scss">
   @import "src/lib/Style";
 
@@ -40,11 +48,3 @@
     }
   }
 </style>
-
-<div class="container" style="--size:{size}px;{style}" on:click>
-  <div class="button" class:flat>
-    <Icon icon={icon} size={size*0.7} weight={(!disabled && hover && !clicked) ? 500 : 300} outlined={outlined === undefined ? !active : outlined} />
-  </div>
-  <Ripple center primary bind:clicked bind:hover {active} />
-  <Blocker active={disabled} />
-</div>

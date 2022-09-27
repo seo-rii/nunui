@@ -8,6 +8,20 @@
   let clicked = false, hover = false;
 </script>
 
+<div class="wrapper button" class:primary class:secondary class:surface={outlined} {tabindex} class:small class:round
+     class:active={hover && !disabled} class:clicked={clicked && !disabled} class:outlined class:raised {style}
+     on:click on:mousedown on:mouseup on:touchstart on:touchend on:keypress={(e)=>{
+			if(e.key==='Enter'){
+				e.target.click();
+			}
+		 }}>
+  <div style:--weight={clicked ? 200 : (hover ? 500 : 300)}>
+    <slot />
+  </div>
+  <Ripple {primary} surface={!outlined} opacity={disabled ? 0 : undefined} bind:clicked bind:hover />
+  <Blocker active={disabled} />
+</div>
+
 <style lang="scss">
   @import "src/lib/Style";
 
@@ -61,17 +75,3 @@
     @include applyThemeOn(color);
   }
 </style>
-
-<div class="wrapper button" class:primary class:secondary class:surface={outlined} {tabindex} class:small class:round
-     class:active={hover && !disabled} class:clicked={clicked && !disabled} class:outlined class:raised {style}
-     on:click on:mousedown on:mouseup on:touchstart on:touchend on:keypress={(e)=>{
-			if(e.key==='Enter'){
-				e.target.click();
-			}
-		 }}>
-  <div style:--weight={(hover && !clicked) ? 500 : 300}>
-    <slot />
-  </div>
-  <Ripple {primary} surface={!outlined} opacity={disabled?0:undefined} bind:clicked bind:hover />
-  <Blocker active={disabled} />
-</div>

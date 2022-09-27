@@ -20,6 +20,20 @@
   $: setTimeout(() => (_progress = (Math.max(0, progress) || 0)), 0);
 </script>
 
+<div class="progressContainer" style={`width: ${width};${style}`}>
+  <div class="progressBar">
+    {#if _indeterminate}
+      <div class:exit={startProgress}>
+        <div class="progressIndicator ind-1" class:primary class:secondary></div>
+        <div class="progressIndicator ind-2" class:primary class:secondary></div>
+      </div>
+    {/if}
+    {#if !indeterminate}
+      <div class="progressIndicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary></div>
+    {/if}
+  </div>
+</div>
+
 <style lang="scss">
   @import "src/lib/Style";
 
@@ -111,17 +125,3 @@
     }
   }
 </style>
-
-<div class="progressContainer" style={`width: ${width};${style}`}>
-  <div class="progressBar">
-    {#if _indeterminate}
-      <div class:exit={startProgress}>
-        <div class="progressIndicator ind-1" class:primary class:secondary></div>
-        <div class="progressIndicator ind-2" class:primary class:secondary></div>
-      </div>
-    {/if}
-    {#if !indeterminate}
-      <div class="progressIndicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary></div>
-    {/if}
-  </div>
-</div>

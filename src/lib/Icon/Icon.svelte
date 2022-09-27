@@ -2,6 +2,9 @@
   export let icon: string, color = "", outlined = false, size = 0, style = "", weight: number;
 </script>
 
+<span
+  style="--fill:{outlined ? 0 : 1};{weight?`--weight:${weight || 500};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon}</span>
+
 <style lang="scss">
   @font-face {
     font-family: 'Material Symbols Rounded';
@@ -32,6 +35,3 @@
     'GRAD' 0
   }
 </style>
-
-<span
-  style="--fill:{outlined ? 0 : 1};{weight?`--weight:${weight || 500};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon}</span>
