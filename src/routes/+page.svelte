@@ -4,6 +4,7 @@
   import LinearProgress from "$lib/LinearProgress";
   import Icon from "$lib/Icon";
   import IconButton from "$lib/IconButton";
+  import CircularProgress from "$lib/CircularProgress";
 
   let fl = false, m = 0;
   const toggle = () => fl = !fl;
@@ -46,7 +47,7 @@
   Outlined
 </Button>
 <Button secondary outlined={fl} on:click={toggle}>
-  <Icon icon="done" outlined={fl} />
+  <Icon icon="priority" outlined={fl} />
   Outlined?
 </Button>
 <Button small>dfdfd</Button>
@@ -58,6 +59,12 @@
 <LinearProgress progress={0.3} />
 <LinearProgress progress={0.5} secondary />
 <LinearProgress indeterminate />
+
+<h1>Circular Progress</h1>
+<CircularProgress progress={fl?0:1} />
+<CircularProgress progress={0.3} />
+<CircularProgress indeterminate={m===0} progress={0.1} />
+<CircularProgress indeterminate secondary size="30" />
 
 <h1>Icon</h1>
 <Icon icon="favorite" />
