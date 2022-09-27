@@ -12,7 +12,7 @@
   <div class="button" class:flat>
     <Icon icon={icon} size={size*0.7} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))} outlined={outlined === undefined ? !active : outlined} />
   </div>
-  <Ripple center primary bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} />
+  <Ripple center primary bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface />
   <Blocker active={disabled} />
 </div>
 

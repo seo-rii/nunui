@@ -8,7 +8,7 @@
   let clicked = false, hover = false;
 </script>
 
-<div class="wrapper button" class:primary class:secondary class:surface={outlined} {tabindex} class:small class:round
+<div class="wrapper button" class:primary class:secondary {tabindex} class:small class:round
      class:active={hover && !disabled} class:clicked={clicked && !disabled} class:outlined class:raised {style}
      on:click on:mousedown on:mouseup on:touchstart on:touchend on:keypress={(e)=>{
 			if(e.key==='Enter'){
@@ -18,7 +18,7 @@
   <div style:--weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}>
     <slot />
   </div>
-  <Ripple {primary} surface={!outlined} opacity={disabled ? 0 : undefined} bind:clicked bind:hover />
+  <Ripple {primary} {secondary} surface={outlined} opacity={disabled ? 0 : undefined} bind:clicked bind:hover />
   <Blocker active={disabled} />
 </div>
 
@@ -60,18 +60,22 @@
     }
 
     &.round {
-      @include round(round);
+      @include round(100px);
     }
 
     &.outlined {
-      border: 1px solid #dfdfdf;
+      @include applyTheme(color);
+      @include applyTheme(border, 1px solid);
+    }
+
+    &:not(.outlined) {
+      @include applyTheme(background);
     }
 
     &.raised {
       @include shadow("common", "mini");
     }
 
-    @include applyTheme(background);
     @include applyThemeOn(color);
   }
 </style>

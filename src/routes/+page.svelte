@@ -37,9 +37,20 @@
   <Icon icon="star" outlined={fl} />
   Primary
 </Button>
-<Button secondary>Secondary</Button>
-<Button outlined>dfdfd</Button>
+<Button secondary on:click={toggle}>
+  <Icon icon="check_circle" outlined={fl} />
+  Secondary
+</Button>
+<Button outlined on:click={toggle}>
+  <Icon icon="radio_button_checked" outlined={fl} />
+  Outlined
+</Button>
+<Button secondary outlined on:click={toggle}>
+  <Icon icon="radio_button_checked" outlined={fl} />
+  Outlined
+</Button>
 <Button small>dfdfd</Button>
+<Button primary round>dfdfd</Button>
 <Button primary raised>dfdfd</Button>
 <Button primary disabled>dfdfd</Button>
 

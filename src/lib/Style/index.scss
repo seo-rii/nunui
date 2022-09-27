@@ -34,18 +34,18 @@
   border-radius: $radius;
 }
 
-@mixin applyTheme($target) {
-  @each $key in ['primary', 'secondary', 'surface'] {
+@mixin applyTheme($target, $additional: '') {
+  @each $key in ['primary', 'secondary'] {
     &.#{$key} {
-      #{$target}: var(--#{$key});
+      #{$target}: var(--#{$key}) #{$additional};
     }
   }
 }
 
-@mixin applyThemeOn($target) {
-  @each $key in ['primary', 'secondary', 'surface'] {
+@mixin applyThemeOn($target, $additional: '') {
+  @each $key in ['primary', 'secondary'] {
     &.#{$key} {
-      #{$target}: var(--on-#{$key});
+      #{$target}: var(--on-#{$key}) #{$additional};
     }
   }
 }
@@ -58,6 +58,7 @@
 
     --on-primary: #ffffff;
     --on-secondary: #000000;
+    --on-surface: #000000;
 
     --weight: 500;
   }

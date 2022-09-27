@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   export let duration = 300, opacity = 0.3, center = false, active = false,
-    primary = true, secondary = false, surface = false;
+    primary = true, secondary = false, surface = true;
 
   export let clicked = false, hover = false;
 
@@ -85,13 +85,18 @@
     transition: background 0.3s;
 
     .ripple {
-      @include applyTheme(background);
       @include round(round);
       position: absolute;
       left: var(--x);
       top: var(--y);
       width: var(--size);
       height: var(--size);
+
+      @include applyThemeOn(background);
+
+      &.surface {
+        @include applyTheme(background);
+      }
 
       &.show {
         @include AScaleIn(var(--dur), 0, forwards);
@@ -106,6 +111,13 @@
   .back {
     @include full;
     @include CShow(var(--bop));
-    @include applyTheme(background);
+
+    &.surface {
+      @include applyTheme(background);
+    }
+
+    &:not(.surface) {
+      @include applyThemeOn(background);
+    }
   }
 </style>
