@@ -4,7 +4,7 @@
   import Blocker from "$lib/Blocker";
 
   export let icon: string, flat = false, size = 36, outlined = undefined, style = "", disabled = false, active = false,
-    label = "";
+    label = "", secondary = false, primary = !secondary;
 
   let clicked = false, hover = false, container;
 </script>
@@ -16,8 +16,8 @@
         <Icon icon={icon} size={size*0.7} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
               outlined={outlined === undefined ? !active : outlined} />
       </div>
-      <Ripple center primary bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface
-              additional={container} />
+      <Ripple center bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface
+              additional={container} {primary} {secondary} />
       <Blocker active={disabled} />
     </div>
     {#if label}

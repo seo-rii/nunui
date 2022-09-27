@@ -58,10 +58,10 @@
 <h1>Linear Progress</h1>
 <LinearProgress progress={0.3} />
 <LinearProgress progress={0.5} secondary />
-<LinearProgress indeterminate />
+<LinearProgress indeterminate={m===0} />
 
 <h1>Circular Progress</h1>
-<CircularProgress progress={fl?0:1} />
+<CircularProgress progress={fl?0.5:1} />
 <CircularProgress progress={0.3} />
 <CircularProgress indeterminate={m===0} progress={0.1} />
 <CircularProgress indeterminate secondary size="30" />
@@ -75,5 +75,5 @@
 <IconButton icon="alarm" label="alarm" flat active={m===1} on:click={()=>m=1} />
 
 <IconButton icon="favorite" outlined={fl} on:click={toggle} />
-<IconButton icon="drive_folder_upload" size="48" outlined={fl} on:click={toggle} />
-<IconButton icon="drive_folder_upload" size="48" outlined={fl} on:click={toggle} disabled />
+<IconButton icon="drive_folder_upload" size="48" outlined={fl} on:click={toggle} secondary />
+<IconButton icon="delete" size="48" outlined={fl} on:click={toggle} disabled />
