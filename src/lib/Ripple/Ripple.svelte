@@ -118,7 +118,7 @@
     }
 
     &.hide {
-      @include AFadeOut(0.2s, var(--rop), forwards);
+      @include AFadeOut(0.2s, var(--rop));
     }
   }
 

@@ -58,12 +58,12 @@
 <h1>Linear Progress</h1>
 <LinearProgress progress={0.3} />
 <LinearProgress progress={0.5} secondary />
-<LinearProgress indeterminate={m===0} />
+<LinearProgress indeterminate={m===0} progress={0.5} />
 
 <h1>Circular Progress</h1>
 <CircularProgress progress={fl?0.5:1} />
 <CircularProgress progress={0.3} />
-<CircularProgress indeterminate={m===0} progress={0.1} />
+<CircularProgress indeterminate={m===0} progress={0.6} />
 <CircularProgress indeterminate secondary size="30" />
 
 <h1>Icon</h1>

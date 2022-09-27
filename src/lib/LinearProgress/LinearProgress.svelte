@@ -1,35 +1,41 @@
 <script lang="ts">
   export let progress = 0, width = "100%", style = "", indeterminate = false, secondary = false, primary = !secondary;
 
-  let _progress, _indeterminate = indeterminate, startProgress = false;
+  let _progress, _indeterminate = indeterminate, start = false, stop = false;
 
   $: {
     if (indeterminate !== _indeterminate) {
-
       if (!indeterminate) {
-        startProgress = true;
+        start = true;
         setTimeout(() => {
-          startProgress = false;
+          start = false;
           _indeterminate = indeterminate;
         }, 200);
       } else {
-        _indeterminate = indeterminate;
+        stop = true;
+        setTimeout(() => {
+          stop = false;
+          _indeterminate = indeterminate;
+        }, 200);
       }
     }
   }
-  $: setTimeout(() => (_progress = (Math.max(0, progress) || 0)), 0);
+
+  $: setTimeout(() => _progress = stop ? 1 : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 0);
 </script>
 
-<div class="progressContainer" style={`width: ${width};${style}`}>
-  <div class="progressBar">
-    {#if _indeterminate}
-      <div class:exit={startProgress}>
-        <div class="progressIndicator ind-1" class:primary class:secondary></div>
-        <div class="progressIndicator ind-2" class:primary class:secondary></div>
+<div class="adapter" style={`width: ${width};${style}`}>
+  <div class="container">
+    {#if _indeterminate || indeterminate}
+      <div class:exit={start}>
+        <div class="indicator ind-1" class:primary class:secondary></div>
+        <div class="indicator ind-2" class:primary class:secondary></div>
       </div>
     {/if}
-    {#if !indeterminate}
-      <div class="progressIndicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary></div>
+    {#if !_indeterminate || !indeterminate}
+      <div class:exit={stop}>
+        <div class="indicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary></div>
+      </div>
     {/if}
   </div>
 </div>
@@ -37,7 +43,7 @@
 <style lang="scss">
   @import "src/lib/Style";
 
-  .progressContainer {
+  .adapter {
     @include round(50px);
     position: relative;
     overflow: hidden;
@@ -45,7 +51,7 @@
     height: 8px;
   }
 
-  .progressBar {
+  .container {
     @include round(50px);
     position: absolute;
     background-color: #e2e2e2;
@@ -54,7 +60,7 @@
     width: 100%;
   }
 
-  .progressIndicator {
+  .indicator {
     @include applyTheme(background);
     position: absolute;
     top: -2px;
@@ -73,7 +79,7 @@
   }
 
   .exit {
-    animation: fadeOut .2s ease-in forwards;
+    @include AFadeOut(0.3s);
   }
 
   @keyframes ind-1 {
@@ -112,16 +118,6 @@
     100% {
       left: 100%;
       width: 9%;
-    }
-  }
-
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
     }
   }
 </style>
