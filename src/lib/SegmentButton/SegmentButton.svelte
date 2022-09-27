@@ -1,5 +1,6 @@
 <script lang="ts">
   import Button from "$lib/Button";
+  import Icon from "$lib/Icon";
 
   export let data = [], selected = null;
 
@@ -21,7 +22,12 @@
           }
         }
         selected = selected;
-      }}>{item}</Button>
+      }}>
+      <span class="check" class:hide={selected !== i && !selected?.includes?.(i)}>
+        <Icon icon={item.icon || 'done'} />
+      </span>
+      {item}
+    </Button>
   {/each}
   <slot />
 </main>
@@ -30,20 +36,40 @@
   @import "src/lib/Style";
 
   main {
+    .check {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      transition: all 0.3s ease;
+      width: 1em;
+      margin: 0 -2px;
+
+      &.hide {
+        width: 0;
+      }
+    }
+
     & > :global(*) {
+      padding-left: 0.7em !important;
+      padding-right: 0.7em !important;
       border-radius: 0 !important;
 
       &:first-child {
-        border-radius: 12px 0 0 12px !important;
+        border-radius: 100px 0 0 100px !important;
       }
 
       &:last-child {
-        border-radius: 0 12px 12px 0 !important;
+        border-radius: 0 100px 100px 0 !important;
       }
 
       &:not(:first-child) {
         margin-left: -1px;
       }
+    }
+
+    & > :global(*.--active) {
+      padding-left: 0.2em !important;
+      padding-right: 0.2em !important;
     }
   }
 </style>
