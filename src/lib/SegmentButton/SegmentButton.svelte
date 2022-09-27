@@ -1,13 +1,29 @@
 <script lang="ts">
   import Button from "$lib/Button";
 
-  export let data = ["a", "b", "c", "d"];
+  export let data = [], selected = null;
+
+  export let selectable = true, multiple = false;
 </script>
 
 <main>
   {#each data as item, i}
-    <Button outlined>{item}</Button>
+    <Button outlined active={selected === i || selected?.includes?.(i)} on:click={()=>{
+        if (selectable) {
+          if (multiple) {
+            if(!selected) selected = [];
+            if (selected.includes(i)) selected.splice(selected.indexOf(i), 1);
+            else selected.push(i);
+          }
+          else {
+            if(selected === i) selected = null;
+            else selected = i;
+          }
+        }
+        selected = selected;
+      }}>{item}</Button>
   {/each}
+  <slot />
 </main>
 
 <style lang="scss">

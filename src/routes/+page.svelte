@@ -80,4 +80,5 @@
 <IconButton icon="delete" size="48" outlined={fl} on:click={toggle} disabled />
 
 <h1>Segment Button</h1>
-<SegmentButton />
+<SegmentButton data={['multiple', 1, 2, 3, 4]} multiple />
+<SegmentButton data={['single', 1, 2, 3, 4]} />

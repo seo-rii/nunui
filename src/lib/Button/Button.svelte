@@ -3,7 +3,7 @@
   import Blocker from "$lib/Blocker";
 
   export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
-    raised = false, tabindex = undefined, disabled = false;
+    raised = false, tabindex = undefined, disabled = false, active = false;
 
   let clicked = false, hover = false;
 </script>
@@ -18,7 +18,8 @@
   <div style:--weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}>
     <slot />
   </div>
-  <Ripple {primary} {secondary} surface={outlined} opacity={disabled ? 0 : undefined} bind:clicked bind:hover />
+  <Ripple {primary} {secondary} {active} surface={outlined} opacity={disabled ? 0 : undefined} bind:clicked
+          bind:hover />
   <Blocker active={disabled} />
 </div>
 
