@@ -23,8 +23,8 @@
     const rect = container.getBoundingClientRect();
     if (!center) {
       const size = Math.sqrt(rect.width ** 2 + rect.height ** 2) * 2,
-        x = targetX - rect.left - size / 2,
-        y = targetY - rect.top - size / 2;
+        x = targetX - rect.left - size / 2- window.scrollX,
+        y = targetY - rect.top - size / 2- window.scrollY;
       return { x, y, size };
     } else {
       const size = Math.max(rect.width, rect.height),
