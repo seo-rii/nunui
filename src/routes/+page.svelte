@@ -5,6 +5,7 @@
   import Icon from "$lib/Icon";
   import IconButton from "$lib/IconButton";
   import CircularProgress from "$lib/CircularProgress";
+  import SegmentButton from "$lib/SegmentButton";
 
   let fl = false, m = 0;
   const toggle = () => fl = !fl;
@@ -77,3 +78,6 @@
 <IconButton icon="favorite" outlined={fl} on:click={toggle} />
 <IconButton icon="drive_folder_upload" size="48" outlined={fl} on:click={toggle} secondary />
 <IconButton icon="delete" size="48" outlined={fl} on:click={toggle} disabled />
+
+<h1>Segment Button</h1>
+<SegmentButton />

@@ -21,7 +21,7 @@
   }
 }
 
-@mixin round( $radius: 12px ) {
+@mixin round( $radius: 12px, $additional: '' ) {
   @if $radius == small {
     $radius: 8px;
   } @else if $radius == medium {
@@ -31,7 +31,7 @@
   } @else if $radius == round {
     $radius: 100%;
   }
-  border-radius: $radius;
+  border-radius: $radius #{$additional};
 }
 
 @mixin applyTheme($target, $additional: '') {
