@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  export let duration = 300, opacity = 0.3,
+  export let duration = 300, opacity = 0.3, center = false,
     primary = true, secondary = false, surface = false;
 
   export let clicked = false, active = false;
@@ -14,10 +14,17 @@
 
   function rippleSize(targetX, targetY) {
     const rect = container.getBoundingClientRect();
-    const size = Math.sqrt(rect.width ** 2 + rect.height ** 2) * 2,
-      x = targetX - rect.left - size / 2,
-      y = targetY - rect.top - size / 2;
-    return { x, y, size };
+    if (!center) {
+      const size = Math.sqrt(rect.width ** 2 + rect.height ** 2) * 2,
+        x = targetX - rect.left - size / 2,
+        y = targetY - rect.top - size / 2;
+      return { x, y, size };
+    } else {
+      const size = Math.max(rect.width, rect.height),
+        x = rect.width / 2 - size / 2,
+        y = rect.height / 2 - size / 2;
+      return { x, y, size };
+    }
   }
 
   function rippleShowEvent(targetX, targetY) {
@@ -66,7 +73,7 @@
   <div class="ripple" class:show class:primary class:secondary class:surface
        style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;"></div>
 </div>
-<div class="back" class:show={back} style:--bop="0.1" class:primary class:secondary class:surface></div>
+<div class="back" class:show={back} style:--bop="0.2" class:primary class:secondary class:surface></div>
 
 <style lang="scss">
   @import "src/lib/Style";

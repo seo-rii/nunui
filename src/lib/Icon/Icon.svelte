@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let icon: string, color = "", outlined = false, size = 0, style = "", weight;
+  export let icon: string, color = "", outlined = false, size = 0, style = "", weight: number;
 </script>
 
 <style lang="scss">
@@ -25,6 +25,7 @@
     -webkit-font-smoothing: antialiased;
     user-select: none;
     vertical-align: bottom;
+    transition: all 0.2s;
 
     font-variation-settings: 'FILL' var(--fill),
     'wght' var(--weight),
@@ -33,4 +34,4 @@
 </style>
 
 <span
-  style="--fill:{outlined?0:1};{weight?`--weight:${weight};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon}</span>
+  style="--fill:{outlined ? 0 : 1};{weight?`--weight:${weight || 500};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon}</span>

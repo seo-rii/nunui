@@ -23,9 +23,11 @@
 
 @mixin round( $radius: 12px ) {
   @if $radius == small {
-    $radius: 4px;
+    $radius: 8px;
   } @else if $radius == medium {
     $radius: 12px;
+  } @else if $radius==large {
+    $radius: 16px;
   } @else if $radius == round {
     $radius: 100%;
   }
