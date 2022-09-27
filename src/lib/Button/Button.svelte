@@ -64,6 +64,12 @@
     }
 
     &.outlined {
+      padding: 9px;
+
+      &.small {
+        padding: 6px 9px;
+      }
+
       @include applyTheme(color);
       @include applyTheme(border, 1px solid);
     }

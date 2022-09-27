@@ -45,9 +45,9 @@
   <Icon icon="radio_button_checked" outlined={fl} />
   Outlined
 </Button>
-<Button secondary outlined on:click={toggle}>
+<Button secondary outlined={fl} on:click={toggle}>
   <Icon icon="radio_button_checked" outlined={fl} />
-  Outlined
+  Outlined?
 </Button>
 <Button small>dfdfd</Button>
 <Button primary round>dfdfd</Button>
