@@ -21,7 +21,7 @@
     }
   }
 
-  $: setTimeout(() => _progress = stop ? Math.min(1, progress + 0.4) : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 0);
+  $: setTimeout(() => _progress = stop ? Math.min(1, progress + 0.4) : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 50);
 </script>
 
 <svg style="width: {size}px;height:{size}px;"

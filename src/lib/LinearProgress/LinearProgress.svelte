@@ -21,7 +21,7 @@
     }
   }
 
-  $: setTimeout(() => _progress = stop ? 1 : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 0);
+  $: setTimeout(() => _progress = stop ? 1 : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 50);
 </script>
 
 <div class="adapter" style={`width: ${width};${style}`}>
