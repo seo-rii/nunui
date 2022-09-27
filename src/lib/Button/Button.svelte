@@ -15,7 +15,7 @@
 				e.target.click();
 			}
 		 }}>
-  <div style:--weight={clicked ? 200 : (hover ? 500 : 300)}>
+  <div style:--weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}>
     <slot />
   </div>
   <Ripple {primary} surface={!outlined} opacity={disabled ? 0 : undefined} bind:clicked bind:hover />
