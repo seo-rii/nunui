@@ -19,7 +19,7 @@
   <Ripple secondary />
 </a>
 
-<Button primary>dfdfd</Button>
+<Button primary><Icon icon="upload" />dfdfd</Button>
 <Button secondary>dfdfd</Button>
 <Button outlined>dfdfd</Button>
 <Button small>dfdfd</Button>

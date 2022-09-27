@@ -4,8 +4,13 @@
   export let duration = 300, opacity = 0.3,
     primary = true, secondary = false, surface = false;
 
+  export let clicked = false, active = false;
+
   let container, adapter;
   let x = 0, y = 0, size = 0, show = false, hide = false, back = false, ts = 0;
+
+  $: clicked = show && !hide;
+  $: active = !clicked && back;
 
   function rippleSize(targetX, targetY) {
     const rect = container.getBoundingClientRect();

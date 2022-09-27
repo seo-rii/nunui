@@ -1,8 +1,13 @@
 <script lang="ts">
   import Ripple from "$lib/Ripple";
+  import { tweened } from "svelte/motion";
 
   export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
     raised = false, tabindex = undefined, disabled = false;
+
+  let clicked = false, active = false, weight = tweened(500, { duration: 100 });
+
+  $: $weight = (active && !clicked) ? 500 : 300;
 </script>
 
 <style lang="scss">
@@ -63,9 +68,9 @@
 				e.target.click();
 			}
 		 }}>
-  <div>
+  <div style:--weight={$weight}>
     <slot />
   </div>
-  <Ripple {primary} surface={!outlined} opacity={disabled?0:undefined} />
+  <Ripple {primary} surface={!outlined} opacity={disabled?0:undefined} bind:clicked bind:active />
   <div class="blocker" class:active={disabled}></div>
 </div>

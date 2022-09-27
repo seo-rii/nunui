@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let icon: string, color = "", outlined = false, size = 0, style = "", weight = 500;
+  export let icon: string, color = "", outlined = false, size = 0, style = "", weight;
 </script>
 
 <style lang="scss">
@@ -14,7 +14,6 @@
     font-family: 'Material Symbols Rounded';
     font-weight: normal;
     font-style: normal;
-    font-size: 24px;
     line-height: 1;
     letter-spacing: normal;
     text-transform: none;
@@ -25,11 +24,13 @@
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     user-select: none;
+    vertical-align: bottom;
 
-    font-variation-settings: 'FILL' 0,
+    font-variation-settings: 'FILL' var(--fill),
     'wght' var(--weight),
     'GRAD' 0
   }
 </style>
 
-<span style="--weight:{weight};{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon}</span>
+<span
+  style="--fill:{outlined?0:1};{weight?`--weight:${weight};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon}</span>
