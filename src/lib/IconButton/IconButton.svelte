@@ -11,7 +11,7 @@
 
 <div class="adapter">
   <div class="container" on:click bind:this={container} style:--size="{size}px">
-    <div class="wrapper" {style}>
+    <div class="wrapper" {style} class:flat>
       <div class="button" class:flat>
         <Icon icon={icon} size={size*0.7} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
               outlined={outlined === undefined ? !active : outlined} />
@@ -49,6 +49,14 @@
         position: relative;
         overflow: hidden;
         cursor: pointer;
+        width: var(--size);
+        height: var(--size);
+        margin: auto;
+
+        &.flat {
+          width: calc(var(--size) * 1.25);
+          height: calc(var(--size) * 0.75);
+        }
 
         .button {
           width: var(--size);

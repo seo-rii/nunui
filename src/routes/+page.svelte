@@ -76,7 +76,7 @@
 
 <h1>Icon Button</h1>
 <IconButton icon="home" label="home" flat active={m===0} on:click={()=>m=0} />
-<IconButton icon="alarm" label="alarm" flat active={m===1} on:click={()=>m=1} />
+<IconButton icon="alarm" label="alarm button test" flat active={m===1} on:click={()=>m=1} />
 
 <IconButton icon="favorite" outlined={fl} on:click={toggle} />
 <IconButton icon="drive_folder_upload" size="48" outlined={fl} on:click={toggle} secondary />
