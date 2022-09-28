@@ -9,23 +9,24 @@
 
 <main>
   {#each data as item, i}
-    <Button outlined active={selected === i || selected?.includes?.(i)} on:click={()=>{
+    {@const active = selected === i || selected?.includes?.(i)}
+    <Button className={item.icon ? '--custom' : ''} outlined {active} on:click={()=>{
         if (selectable) {
           if (multiple) {
             if(!selected) selected = [];
-            if (selected.includes(i)) selected.splice(selected.indexOf(i), 1);
+            if (active) selected.splice(selected.indexOf(i), 1);
             else selected.push(i);
           }
           else {
-            if(selected === i && nullable) selected = null;
+            if(active && nullable) selected = null;
             else selected = i;
           }
         }
         selected = selected;
       }}>
       {#if check}
-        <span class="check" class:hide={selected !== i && !selected?.includes?.(i)}>
-          <Icon icon={item.icon || 'done'} />
+        <span class="check" class:hide={!item.icon && !active}>
+          <Icon icon={item.icon || 'done'} outlined={item.icon && !active} />
         </span>
       {/if}
       {item.text || item}
@@ -54,8 +55,8 @@
     }
 
     & > :global(*) {
-      padding-left: 0.7em !important;
-      padding-right: 0.7em !important;
+      padding-left: 0.8em !important;
+      padding-right: 0.8em !important;
       border-radius: 0 !important;
 
       &:first-child {
@@ -71,9 +72,9 @@
       }
     }
 
-    & > :global(*.--active) {
-      padding-left: 0.2em !important;
-      padding-right: 0.2em !important;
+    & > :global(*.--active), & > :global(*.--custom) {
+      padding-left: 0.3em !important;
+      padding-right: 0.3em !important;
     }
   }
 </style>

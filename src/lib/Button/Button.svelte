@@ -3,14 +3,14 @@
   import Blocker from "$lib/Blocker";
 
   export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
-    raised = false, tabindex = undefined, disabled = false, active = false;
+    raised = false, tabindex = undefined, disabled = false, active = false, className = "";
 
   let clicked = false, hover = false;
 </script>
 
-<div class="wrapper button" class:primary class:secondary {tabindex} class:small class:round class:--active={active}
-     class:active={(hover && !disabled) || active} class:clicked={clicked && !disabled} class:outlined class:raised
-     {style} on:click on:mousedown on:mouseup on:touchstart on:touchend on:keypress={(e)=>{
+<div class="wrapper button {className}" class:primary class:secondary {tabindex} class:small class:round
+     class:--active={active} class:active={(hover && !disabled) || active} class:clicked={clicked && !disabled}
+     class:outlined class:raised {style} on:click on:mousedown on:mouseup on:touchstart on:touchend on:keypress={(e)=>{
 			if(e.key==='Enter'){
 				e.target.click();
 			}

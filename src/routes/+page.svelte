@@ -82,8 +82,8 @@
 <IconButton icon="delete" size="48" outlined={fl} on:click={toggle} disabled />
 
 <h1>Segment Button</h1>
-<SegmentButton data={['multiple', 1, 2, 3, 4]} multiple />
-<SegmentButton data={['single', 1, 2, 3, 4]} />
+<SegmentButton data={['multiple', {text:1, icon:'alarm'}, 2, 3, 4]} multiple />
+<SegmentButton data={['single', {text:1, icon:'alarm'}, 2, 3, 4]} />
 
 <h1>Card</h1>
 <Card>
