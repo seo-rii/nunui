@@ -2,7 +2,7 @@
   import Button from "$lib/Button";
   import Icon from "$lib/Icon";
 
-  export let data = [], selected = null;
+  export let data = [], selected = null, check = true, nullable = true;
 
   export let selectable = true, multiple = false;
 </script>
@@ -17,16 +17,18 @@
             else selected.push(i);
           }
           else {
-            if(selected === i) selected = null;
+            if(selected === i && nullable) selected = null;
             else selected = i;
           }
         }
         selected = selected;
       }}>
-      <span class="check" class:hide={selected !== i && !selected?.includes?.(i)}>
-        <Icon icon={item.icon || 'done'} />
-      </span>
-      {item}
+      {#if check}
+        <span class="check" class:hide={selected !== i && !selected?.includes?.(i)}>
+          <Icon icon={item.icon || 'done'} />
+        </span>
+      {/if}
+      {item.text || item}
     </Button>
   {/each}
   <slot />
@@ -36,6 +38,8 @@
   @import "src/lib/Style";
 
   main {
+    display: inline-block;
+
     .check {
       display: inline-block;
       overflow: hidden;
