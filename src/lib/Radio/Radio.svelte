@@ -64,13 +64,14 @@
       }
 
       &:after {
-        top: (1rem / 2) + .15rem;
-        left: (1rem / 2) + .15rem;
-        width: 1rem - .3;
-        height: 1rem - .3;
-        content: '';
         position: absolute;
-        transform: translate(-50%, -50%) scale(0, 0) translateZ(0);
+        top: .3rem;
+        left: .3rem;
+        width: 0.7rem;
+        height: 0.7rem;
+        content: '';
+        transform: scale(0, 0) translateZ(0);
+        transform-origin: center;
         transition: all .2s ease;
         will-change: transform;
         border-radius: 50%;
@@ -87,7 +88,7 @@
           @include applyTheme(background-color, '', ':after');
 
           &:after {
-            transform: translate(-50%, -50%) scale(1, 1) translateZ(0);
+            transform: scale(1, 1) translateZ(0);
           }
         }
       }

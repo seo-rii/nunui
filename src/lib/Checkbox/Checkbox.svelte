@@ -66,12 +66,12 @@
       }
 
       &:after {
+        position: absolute;
         top: 0.5rem;
         left: 0.5rem;
         width: 0.75rem;
         height: 0.375rem;
         content: '';
-        position: absolute;
         transform: scale(0, 0) rotate(-90deg) translateZ(0);
         transition: all .2s ease;
         will-change: transform;
