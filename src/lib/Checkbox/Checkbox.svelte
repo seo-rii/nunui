@@ -1,13 +1,19 @@
 <script lang="ts">
+  import Ripple from "../Ripple/Ripple.svelte";
+
   export let secondary = false, primary = !secondary, label = "";
 
-  export let error = false;
+  export let error = false, checked;
 
-  let checkbox;
+  let checkbox, container;
 </script>
 
-<span class="checkbox" class:primary class:secondary class:error on:click on:click={()=>checkbox.click()}>
-  <input type="checkbox" name="checkbox" bind:this={checkbox} class:primary class:secondary>
+<span class="checkbox" class:primary class:secondary class:error on:click on:click={()=>checkbox.click()}
+      bind:this={container}>
+  <div class="ripple">
+    <Ripple additional={container} center surface={!!checked} primary={primary && !!checked} secondary={secondary && !!checked} />
+  </div>
+  <input type="checkbox" name="checkbox" bind:this={checkbox} class:primary class:secondary bind:checked>
   <label class:primary class:secondary>{label}</label>
   {#if error}<span class="message">{error}</span>{/if}
 </span>
@@ -19,6 +25,16 @@
     position: relative;
     margin-bottom: .8rem;
     display: inline-block;
+
+    .ripple {
+      position: absolute;
+      top: 0rem;
+      left: -0.5rem;
+      width: 2.3rem;
+      height: 2.3rem;
+      z-index: 1;
+      border-radius: 100px;
+    }
 
     label {
       color: inherit;

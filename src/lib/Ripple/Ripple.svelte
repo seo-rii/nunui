@@ -23,8 +23,8 @@
     const rect = container.getBoundingClientRect();
     if (!center) {
       const size = Math.sqrt(rect.width ** 2 + rect.height ** 2) * 2,
-        x = targetX - rect.left - size / 2- window.scrollX,
-        y = targetY - rect.top - size / 2- window.scrollY;
+        x = targetX - rect.left - size / 2 - window.scrollX,
+        y = targetY - rect.top - size / 2 - window.scrollY;
       return { x, y, size };
     } else {
       const size = Math.max(rect.width, rect.height),
@@ -105,6 +105,7 @@
       top: var(--y);
       width: var(--size);
       height: var(--size);
+      background: #888888;
 
       @include applyThemeOn(background);
 
@@ -125,6 +126,7 @@
   .back {
     @include full;
     @include CShow(var(--bop));
+    background: #888888;
 
     &.surface {
       @include applyTheme(background);
