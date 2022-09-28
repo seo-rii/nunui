@@ -1,31 +1,31 @@
 <script lang="ts">
   import Ripple from "../Ripple/Ripple.svelte";
 
-  export let secondary = false, primary = !secondary, label = "";
+  export let secondary = false, primary = !secondary, label = "", name = "", value, group;
 
-  export let error = false, checked;
+  export let error = false;
 
-  let checkbox, container;
+  let radio, container, checked;
+
+  $: checked = value === group;
 </script>
 
-<span class="checkbox" class:primary class:secondary class:error on:click on:click={()=>checkbox.click()}
-      bind:this={container}>
+<div class="radio" bind:this={container} on:click={()=>radio.click()}>
   <div class="ripple">
     <Ripple additional={container} center surface={!!checked} primary={primary && !!checked}
             secondary={secondary && !!checked} error={error && !!checked} />
   </div>
-  <input type="checkbox" name="checkbox" bind:this={checkbox} class:primary class:secondary bind:checked>
-  <label class:primary class:secondary>{label}</label>
-  {#if error}<span class="message">{error}</span>{/if}
-</span>
+  <input type="radio" {name} bind:this={radio} bind:group {value}>
+  <label class:primary class:secondary class:error>{label}</label>
+</div>
 
 <style lang="scss">
   @import "src/lib/Style";
 
-  .checkbox {
-    position: relative;
-    margin-bottom: .6rem;
+  .radio {
     display: inline-block;
+    position: relative;
+    margin-bottom: .8rem;
     margin-left: 0.6rem;
     cursor: pointer;
 
@@ -47,48 +47,47 @@
       user-select: none;
       font-weight: 400;
       vertical-align: middle;
-      @include applyThemeOn(border-left, .15rem solid, ':after');
-      @include applyThemeOn(border-bottom, .15rem solid, ':after');
 
       &:before {
         width: 1rem;
-        height: 1rem;
         border: .15rem solid rgba(0, 0, 0, .45);
+        height: 1rem;
         content: '';
         display: inline-block;
         transition: all .3s ease;
-        user-select: none;
         will-change: background-color, border-color;
-        margin: -0.15rem 0.5rem 0 0;
-        border-radius: .3rem;
+        user-select: none;
+        margin: 0 0.5rem 0.2rem 0;
+        border-radius: 50%;
         vertical-align: middle;
-        background-color: var(--surface);
+        background-color: white;
       }
 
       &:after {
-        top: 0.5rem;
-        left: 0.5rem;
-        width: 0.75rem;
-        height: 0.375rem;
+        top: (1rem / 2) + .15rem;
+        left: (1rem / 2) + .15rem;
+        width: 1rem - .3;
+        height: 1rem - .3;
         content: '';
         position: absolute;
-        transform: scale(0, 0) rotate(-90deg) translateZ(0);
+        transform: translate(-50%, -50%) scale(0, 0) translateZ(0);
         transition: all .2s ease;
         will-change: transform;
-        transform-origin: bottom left;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, .45);
       }
     }
 
-    input[type=checkbox] {
+    input[type=radio] {
       display: none;
 
       &:checked {
         + label {
-          @include applyTheme(background-color, '', ':before');
           @include applyTheme(border-color, '', ':before');
+          @include applyTheme(background-color, '', ':after');
 
           &:after {
-            transform: scale(1, 1) rotate(-45deg) translateZ(0);
+            transform: translate(-50%, -50%) scale(1, 1) translateZ(0);
           }
         }
       }
@@ -96,8 +95,9 @@
 
     .message {
       color: inherit;
-      font-size: 0.85rem;
-      margin-left: 1.8rem;
+      display: block;
+      font-size: 1.4rem;
+      margin-left: 1rem+ (1rem/ 2) + (.15rem * 2);
     }
 
     &.error {
@@ -111,12 +111,16 @@
         display: block;
       }
 
-      input[type=checkbox]:checked + label {
+      input[type=radio]:checked + label {
         &:before {
-          background-color: var(--error);
           border-color: var(--error);
+        }
+
+        &:after {
+          background-color: var(--error);
         }
       }
     }
   }
+
 </style>

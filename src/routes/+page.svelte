@@ -8,6 +8,7 @@
   import SegmentButton from "$lib/SegmentButton";
   import Card from "../lib/Card/Card.svelte";
   import Checkbox from "../lib/Checkbox/Checkbox.svelte";
+  import Radio from "../lib/Radio/Radio.svelte";
 
   let fl = false, m = 0;
   const toggle = () => fl = !fl;
@@ -109,3 +110,9 @@
 <Checkbox label="Primary" />
 <Checkbox label="Secondary" secondary />
 <Checkbox label="Error" error="Error Message" />
+
+<h1>Radio</h1>
+<Radio label="R1 Primary" name="r1" value="1" />
+<Radio label="R1 Secondary" name="r1" value="2" />
+<Radio label="R2 Primary" name="r2" secondary />
+<Radio label="R2 Secondary" name="r2" secondary />
