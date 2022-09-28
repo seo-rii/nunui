@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   export let duration = 300, opacity = 0.3, center = false, active = false,
-    primary = true, secondary = false, surface = true, additional = null;
+    primary = true, secondary = false, error = false, surface = true, additional = null;
 
   export let clicked = false, hover = false;
 
@@ -84,10 +84,11 @@
 </script>
 
 <div class="adapter" bind:this={adapter} class:show class:hide style:--rop={opacity}>
-  <div class="ripple" class:show class:primary class:secondary class:surface
+  <div class="ripple" class:show class:primary class:secondary class:error class:surface
        style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;"></div>
 </div>
-<div class="back" class:show={back || active} style:--bop="0.2" class:primary class:secondary class:surface></div>
+<div class="back" class:show={back || active} style:--bop="0.2" class:primary class:secondary class:error
+     class:surface></div>
 
 <style lang="scss">
   @import "src/lib/Style";

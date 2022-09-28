@@ -11,7 +11,8 @@
 <span class="checkbox" class:primary class:secondary class:error on:click on:click={()=>checkbox.click()}
       bind:this={container}>
   <div class="ripple">
-    <Ripple additional={container} center surface={!!checked} primary={primary && !!checked} secondary={secondary && !!checked} />
+    <Ripple additional={container} center surface={!!checked} primary={primary && !!checked}
+            secondary={secondary && !!checked} error={error && !!checked} />
   </div>
   <input type="checkbox" name="checkbox" bind:this={checkbox} class:primary class:secondary bind:checked>
   <label class:primary class:secondary>{label}</label>
@@ -25,6 +26,8 @@
     position: relative;
     margin-bottom: .8rem;
     display: inline-block;
+    margin-left: 0.6rem;
+    cursor: pointer;
 
     .ripple {
       position: absolute;
@@ -45,6 +48,8 @@
       user-select: none;
       font-weight: 400;
       vertical-align: middle;
+      @include applyThemeOn(border-left, .15rem solid, ':after');
+      @include applyThemeOn(border-bottom, .15rem solid, ':after');
 
       &:before {
         width: 1rem;
@@ -58,14 +63,13 @@
         margin: 0 0.5rem 0 0;
         border-radius: .3rem;
         vertical-align: middle;
-        background-color: white;
+        background-color: var(--surface);
       }
 
       &:after {
         top: 0.9rem;
         left: 0.5rem;
         width: 0.75rem;
-        border: .15rem solid white;
         height: 0.375rem;
         content: '';
         position: absolute;
@@ -73,8 +77,6 @@
         transition: all .2s ease;
         will-change: transform;
         transform-origin: bottom left;
-        border-top-style: none;
-        border-right-style: none;
       }
     }
 
