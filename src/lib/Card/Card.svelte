@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let outlined, secondary = false, primary = !secondary;
+  export let outlined, secondary = false, primary = false;
 </script>
 
 <main class:primary class:secondary class:outlined>

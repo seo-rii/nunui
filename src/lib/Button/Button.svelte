@@ -30,9 +30,9 @@
     @include round;
     display: inline-block;
     position: relative;
-    padding: 10px;
-    font-size: 20px;
-    line-height: 20px;
+    padding: 0.6em;
+    font-size: 1.1em;
+    line-height: 1.1em;
     cursor: pointer;
     user-select: none;
     transition: all 0.3s ease;
@@ -48,7 +48,7 @@
     &.small {
       font-size: 16px;
       line-height: 16px;
-      padding: 7px 10px;
+      padding: 0.4em;
       @include round(small);
 
       &.active {
@@ -65,10 +65,10 @@
     }
 
     &.outlined {
-      padding: 9px;
+      padding: calc(0.6em - 1px);
 
       &.small {
-        padding: 6px 9px;
+        padding: calc(0.4em - 1px);
       }
 
       @include applyTheme(color);

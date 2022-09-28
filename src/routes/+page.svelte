@@ -20,7 +20,7 @@
     body, html, body > div {
       margin: 0;
       padding: 0;
-      font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+      font: normal 16px 'Spoqa Han Sans Neo', 'sans-serif';
       height: 100%;
     }
   }
@@ -87,6 +87,12 @@
 
 <h1>Card</h1>
 <Card>
+  <h1>Card</h1>
+  <p>Card</p>
+  <Button primary style="float:right;">dfdfd</Button>
+</Card>
+<br>
+<Card primary>
   <h1>Card</h1>
   <p>Card</p>
   <Button primary style="float:right;">dfdfd</Button>

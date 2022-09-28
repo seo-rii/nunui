@@ -24,14 +24,14 @@
 
   .checkbox {
     position: relative;
-    margin-bottom: .8rem;
+    margin-bottom: .6rem;
     display: inline-block;
     margin-left: 0.6rem;
     cursor: pointer;
 
     .ripple {
       position: absolute;
-      top: 0rem;
+      top: -0.5rem;
       left: -0.5rem;
       width: 2.3rem;
       height: 2.3rem;
@@ -44,7 +44,6 @@
       cursor: pointer;
       display: block;
       position: relative;
-      font-size: 1.6rem;
       user-select: none;
       font-weight: 400;
       vertical-align: middle;
@@ -60,14 +59,14 @@
         transition: all .3s ease;
         user-select: none;
         will-change: background-color, border-color;
-        margin: 0 0.5rem 0 0;
+        margin: -0.15rem 0.5rem 0 0;
         border-radius: .3rem;
         vertical-align: middle;
         background-color: var(--surface);
       }
 
       &:after {
-        top: 0.9rem;
+        top: 0.5rem;
         left: 0.5rem;
         width: 0.75rem;
         height: 0.375rem;
@@ -97,12 +96,13 @@
 
     .message {
       color: inherit;
-      font-size: 1.4rem;
+      font-size: 0.85rem;
       margin-left: 1.8rem;
     }
 
     &.error {
       color: var(--error);
+      font-size: 1rem;
 
       label:before {
         border-color: var(--error);
