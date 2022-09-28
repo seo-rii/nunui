@@ -7,6 +7,7 @@
   import CircularProgress from "$lib/CircularProgress";
   import SegmentButton from "$lib/SegmentButton";
   import Card from "../lib/Card/Card.svelte";
+  import Checkbox from "../lib/Checkbox/Checkbox.svelte";
 
   let fl = false, m = 0;
   const toggle = () => fl = !fl;
@@ -97,3 +98,8 @@
   <Button secondary style="float:right;">dfdfd</Button>
 </Card>
 <br>
+
+<h1>Checkbox</h1>
+<Checkbox label="Primary" />
+<Checkbox label="Secondary" secondary />
+<Checkbox label="Error" error="Error Message" />
