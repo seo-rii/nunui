@@ -1,3 +1,3 @@
-# nuni
+# nunui
 
 Svelte UI Library
