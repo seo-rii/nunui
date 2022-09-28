@@ -6,6 +6,7 @@
   import IconButton from "$lib/IconButton";
   import CircularProgress from "$lib/CircularProgress";
   import SegmentButton from "$lib/SegmentButton";
+  import Card from "../lib/Card/Card.svelte";
 
   let fl = false, m = 0;
   const toggle = () => fl = !fl;
@@ -82,3 +83,17 @@
 <h1>Segment Button</h1>
 <SegmentButton data={['multiple', 1, 2, 3, 4]} multiple />
 <SegmentButton data={['single', 1, 2, 3, 4]} />
+
+<h1>Card</h1>
+<Card>
+  <h1>Card</h1>
+  <p>Card</p>
+  <Button primary round style="float:right;">dfdfd</Button>
+</Card>
+<br>
+<Card outlined secondary>
+  <h1>Card</h1>
+  <p>Card</p>
+  <Button secondary round style="float:right;">dfdfd</Button>
+</Card>
+<br>
