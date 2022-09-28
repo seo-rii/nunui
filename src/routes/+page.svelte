@@ -88,12 +88,12 @@
 <Card>
   <h1>Card</h1>
   <p>Card</p>
-  <Button primary round style="float:right;">dfdfd</Button>
+  <Button primary style="float:right;">dfdfd</Button>
 </Card>
 <br>
 <Card outlined secondary>
   <h1>Card</h1>
   <p>Card</p>
-  <Button secondary round style="float:right;">dfdfd</Button>
+  <Button secondary style="float:right;">dfdfd</Button>
 </Card>
 <br>

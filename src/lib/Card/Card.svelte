@@ -28,6 +28,7 @@
       @include full;
       @include applyTheme(background);
       opacity: 0.1;
+      pointer-events: none;
     }
   }
 </style>
