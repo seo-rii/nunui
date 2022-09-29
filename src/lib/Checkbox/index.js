@@ -1,2 +1,2 @@
-import IconButton from "./IconButton.svelte";
-export default IconButton;
+import Checkbox from "./Checkbox.svelte";
+export default Checkbox;
