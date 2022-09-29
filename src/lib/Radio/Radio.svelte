@@ -1,22 +1,25 @@
 <script lang="ts">
-  import Ripple from "../Ripple/Ripple.svelte";
+    import Ripple from "$lib/Ripple";
 
-  export let secondary = false, primary = !secondary, label = "", name = "", value, group;
+    export let secondary = false, primary = !secondary, label = "", name = "", value, group;
 
-  export let error = false;
+    export let error = false;
 
-  let radio, container, checked;
+    let radio, container, checked;
 
-  $: checked = value === group;
+    $: checked = value === group;
 </script>
 
-<div class="radio" bind:this={container} on:click={()=>radio.click()}>
-  <div class="ripple">
-    <Ripple additional={container} center surface={!!checked} primary={primary && !!checked}
-            secondary={secondary && !!checked} error={error && !!checked} />
-  </div>
-  <input type="radio" {name} bind:this={radio} bind:group {value}>
-  <label class:primary class:secondary class:error>{label}</label>
+<div class="radio" bind:this={container} on:click={()=>radio.click()}
+     on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
+     on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
+     on:drop on:scroll>
+    <div class="ripple">
+        <Ripple additional={container} center surface={!!checked} primary={primary && !!checked}
+                secondary={secondary && !!checked} error={error && !!checked}/>
+    </div>
+    <input type="radio" {name} bind:this={radio} bind:group {value}>
+    <label class:primary class:secondary class:error>{label}</label>
 </div>
 
 <style lang="scss">

@@ -1,43 +1,46 @@
 <script lang="ts">
-  export let progress = 0, width = "100%", style = "", indeterminate = false, secondary = false, primary = !secondary;
+    export let progress = 0, width = "100%", style = "", indeterminate = false, secondary = false, primary = !secondary;
 
-  let _progress, _indeterminate = indeterminate, start = false, stop = false;
+    let _progress, _indeterminate = indeterminate, start = false, stop = false;
 
-  $: {
-    if (indeterminate !== _indeterminate) {
-      if (!indeterminate) {
-        start = true;
-        setTimeout(() => {
-          start = false;
-          _indeterminate = indeterminate;
-        }, 200);
-      } else {
-        stop = true;
-        setTimeout(() => {
-          stop = false;
-          _indeterminate = indeterminate;
-        }, 200);
-      }
+    $: {
+        if (indeterminate !== _indeterminate) {
+            if (!indeterminate) {
+                start = true;
+                setTimeout(() => {
+                    start = false;
+                    _indeterminate = indeterminate;
+                }, 200);
+            } else {
+                stop = true;
+                setTimeout(() => {
+                    stop = false;
+                    _indeterminate = indeterminate;
+                }, 200);
+            }
+        }
     }
-  }
 
-  $: setTimeout(() => _progress = stop ? 1 : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 50);
+    $: setTimeout(() => _progress = stop ? 1 : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 50);
 </script>
 
-<div class="adapter" style={`width: ${width};${style}`}>
-  <div class="container">
-    {#if _indeterminate || indeterminate}
-      <div class:exit={start}>
-        <div class="indicator ind-1" class:primary class:secondary></div>
-        <div class="indicator ind-2" class:primary class:secondary></div>
-      </div>
-    {/if}
-    {#if !_indeterminate || !indeterminate}
-      <div class:exit={stop}>
-        <div class="indicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary></div>
-      </div>
-    {/if}
-  </div>
+<div class="adapter" style={`width: ${width};${style}`}
+     on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
+     on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
+     on:drop on:scroll>
+    <div class="container">
+        {#if _indeterminate || indeterminate}
+            <div class:exit={start}>
+                <div class="indicator ind-1" class:primary class:secondary></div>
+                <div class="indicator ind-2" class:primary class:secondary></div>
+            </div>
+        {/if}
+        {#if !_indeterminate || !indeterminate}
+            <div class:exit={stop}>
+                <div class="indicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary></div>
+            </div>
+        {/if}
+    </div>
 </div>
 
 <style lang="scss">

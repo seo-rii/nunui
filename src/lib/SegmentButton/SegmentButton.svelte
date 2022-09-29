@@ -1,16 +1,18 @@
 <script lang="ts">
-  import Button from "$lib/Button";
-  import Icon from "$lib/Icon";
+    import Button from "$lib/Button";
+    import Icon from "$lib/Icon";
 
-  export let data = [], selected = null, check = true, nullable = true;
+    export let data = [], selected = null, check = true, nullable = true;
 
-  export let selectable = true, multiple = false;
+    export let selectable = true, multiple = false;
 </script>
 
-<main>
-  {#each data as item, i}
-    {@const active = selected === i || selected?.includes?.(i)}
-    <Button className={item.icon ? '--custom' : ''} outlined {active} on:click={()=>{
+<main on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
+      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
+      on:drop on:scroll>
+    {#each data as item, i}
+        {@const active = selected === i || selected?.includes?.(i)}
+        <Button className={item.icon ? '--custom' : ''} outlined {active} on:click={()=>{
         if (selectable) {
           if (multiple) {
             if(!selected) selected = [];
@@ -24,15 +26,15 @@
         }
         selected = selected;
       }}>
-      {#if check}
+            {#if check}
         <span class="check" class:hide={!item.icon && !active}>
-          <Icon icon={item.icon || 'done'} outlined={item.icon && !active} />
+          <Icon icon={item.icon || 'done'} outlined={item.icon && !active}/>
         </span>
-      {/if}
-      {item.text || item}
-    </Button>
-  {/each}
-  <slot />
+            {/if}
+            {item.text || item}
+        </Button>
+    {/each}
+    <slot/>
 </main>
 
 <style lang="scss">

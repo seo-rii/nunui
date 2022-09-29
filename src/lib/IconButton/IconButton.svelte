@@ -1,29 +1,33 @@
 <script lang="ts">
-  import Icon from "$lib/Icon";
-  import Ripple from "$lib/Ripple";
-  import Blocker from "$lib/Blocker";
+    import Icon from "$lib/Icon";
+    import Ripple from "$lib/Ripple";
+    import Blocker from "$lib/Blocker";
 
-  export let icon: string, flat = false, size = 36, outlined = undefined, style = "", disabled = false, active = false,
-    label = "", secondary = false, primary = !secondary;
+    export let icon: string, flat = false, size = 36, outlined = undefined, style = "", disabled = false,
+        active = false,
+        label = "", secondary = false, primary = !secondary;
 
-  let clicked = false, hover = false, container;
+    let clicked = false, hover = false, container;
 </script>
 
 <div class="adapter">
-  <div class="container" on:click bind:this={container} style:--size="{size}px">
-    <div class="wrapper" {style} class:flat>
-      <div class="button" class:flat>
-        <Icon icon={icon} size={size*0.7} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
-              outlined={outlined === undefined ? !active : outlined} />
-      </div>
-      <Ripple center bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface
-              additional={container} {primary} {secondary} />
-      <Blocker active={disabled} />
+    <div class="container" bind:this={container} style:--size="{size}px"
+         on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove
+         on:mouseout on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover
+         on:dragstart on:drop on:scroll>
+        <div class="wrapper" {style} class:flat>
+            <div class="button" class:flat>
+                <Icon icon={icon} size={size*0.7} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
+                      outlined={outlined === undefined ? !active : outlined}/>
+            </div>
+            <Ripple center bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface
+                    additional={container} {primary} {secondary}/>
+            <Blocker active={disabled}/>
+        </div>
+        {#if label}
+            <div class="label">{label}</div>
+        {/if}
     </div>
-    {#if label}
-      <div class="label">{label}</div>
-    {/if}
-  </div>
 </div>
 
 <style lang="scss">

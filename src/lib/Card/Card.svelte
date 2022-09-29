@@ -1,10 +1,13 @@
 <script lang="ts">
-  export let outlined, secondary = false, primary = false;
+    export let outlined, secondary = false, primary = false;
 </script>
 
-<main class:primary class:secondary class:outlined>
-  <slot />
-  <div class="background" class:primary class:secondary></div>
+<main class:primary class:secondary class:outlined
+      on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
+      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
+      on:drop on:scroll>
+    <slot/>
+    <div class="background" class:primary class:secondary></div>
 </main>
 
 <style lang="scss">

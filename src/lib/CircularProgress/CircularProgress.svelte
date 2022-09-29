@@ -1,48 +1,51 @@
 <script lang="ts">
-  export let progress = 0, indeterminate = false, size = 60, secondary = false, primary = !secondary;
+    export let progress = 0, indeterminate = false, size = 60, secondary = false, primary = !secondary;
 
-  let _progress, _indeterminate = indeterminate, start = false, stop = false;
+    let _progress, _indeterminate = indeterminate, start = false, stop = false;
 
-  $: {
-    if (indeterminate !== _indeterminate) {
-      if (!indeterminate) {
-        start = true;
-        setTimeout(() => {
-          start = false;
-          _indeterminate = indeterminate;
-        }, 500);
-      } else {
-        stop = true;
-        setTimeout(() => {
-          stop = false;
-          _indeterminate = indeterminate;
-        }, 500);
-      }
+    $: {
+        if (indeterminate !== _indeterminate) {
+            if (!indeterminate) {
+                start = true;
+                setTimeout(() => {
+                    start = false;
+                    _indeterminate = indeterminate;
+                }, 500);
+            } else {
+                stop = true;
+                setTimeout(() => {
+                    stop = false;
+                    _indeterminate = indeterminate;
+                }, 500);
+            }
+        }
     }
-  }
 
-  $: setTimeout(() => _progress = stop ? Math.min(1, progress + 0.4) : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 50);
+    $: setTimeout(() => _progress = stop ? Math.min(1, progress + 0.4) : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 50);
 </script>
 
-<svg style="width: {size}px;height:{size}px;"
-     width="35px" height="35px" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
-  {#if indeterminate || _indeterminate}
-    <g class:exit={start}>
-      <g class="spinner indeterminate">
-        <circle class="circle indeterminate" class:primary class:secondary fill="none" stroke-width="8"
-                stroke-linecap="round" cx="35" cy="35" r="30"></circle>
-      </g>
-    </g>
-  {/if}
-  {#if !indeterminate || !_indeterminate}
-    <g class:exit={stop}>
-      <g class="spinner determinate">
-        <circle class="circle determinate" class:primary class:secondary fill="none" stroke-width="8"
-                stroke-linecap="round" cx="35" cy="35" r="30" style:--progress={_progress * 188.49}></circle>
-      </g>
-    </g>
-  {/if}
-  <circle class="rail" fill="none" stroke-width="3" stroke-linecap="round" cx="35" cy="35" r="30"></circle>
+<svg style="width: {size}px;height:{size}px;" width="35px" height="35px" viewBox="0 0 70 70"
+     xmlns="http://www.w3.org/2000/svg"
+     on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
+     on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
+     on:drop on:scroll>
+    {#if indeterminate || _indeterminate}
+        <g class:exit={start}>
+            <g class="spinner indeterminate">
+                <circle class="circle indeterminate" class:primary class:secondary fill="none" stroke-width="8"
+                        stroke-linecap="round" cx="35" cy="35" r="30"></circle>
+            </g>
+        </g>
+    {/if}
+    {#if !indeterminate || !_indeterminate}
+        <g class:exit={stop}>
+            <g class="spinner determinate">
+                <circle class="circle determinate" class:primary class:secondary fill="none" stroke-width="8"
+                        stroke-linecap="round" cx="35" cy="35" r="30" style:--progress={_progress * 188.49}></circle>
+            </g>
+        </g>
+    {/if}
+    <circle class="rail" fill="none" stroke-width="3" stroke-linecap="round" cx="35" cy="35" r="30"></circle>
 </svg>
 
 <style lang="scss">

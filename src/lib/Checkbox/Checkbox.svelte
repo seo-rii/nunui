@@ -1,22 +1,25 @@
 <script lang="ts">
-  import Ripple from "../Ripple/Ripple.svelte";
+    import Ripple from "$lib/Ripple";
 
-  export let secondary = false, primary = !secondary, label = "";
+    export let secondary = false, primary = !secondary, label = "";
 
-  export let error = false, checked;
+    export let error = false, checked;
 
-  let checkbox, container;
+    let checkbox, container;
 </script>
 
-<span class="checkbox" class:primary class:secondary class:error on:click on:click={()=>checkbox.click()}
-      bind:this={container}>
+<span class="checkbox" class:primary class:secondary class:error on:click={()=>checkbox.click()}
+      bind:this={container}
+      on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
+      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
+      on:drop on:scroll>
   <div class="ripple">
     <Ripple additional={container} center surface={!!checked} primary={primary && !!checked}
-            secondary={secondary && !!checked} error={error && !!checked} />
+            secondary={secondary && !!checked} error={error && !!checked}/>
   </div>
   <input type="checkbox" name="checkbox" bind:this={checkbox} class:primary class:secondary bind:checked>
   <label class:primary class:secondary>{label}</label>
-  {#if error}<span class="message">{error}</span>{/if}
+    {#if error}<span class="message">{error}</span>{/if}
 </span>
 
 <style lang="scss">

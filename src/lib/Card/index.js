@@ -1,2 +1,2 @@
-import Card from "./Card.svelte";
-export default Card;
+import Checkbox from "./Checkbox.svelte";
+export default Checkbox;

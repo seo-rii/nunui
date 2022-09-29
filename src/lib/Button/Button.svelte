@@ -1,26 +1,29 @@
 <script lang="ts">
-  import Ripple from "$lib/Ripple";
-  import Blocker from "$lib/Blocker";
+    import Ripple from "$lib/Ripple";
+    import Blocker from "$lib/Blocker";
 
-  export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
-    raised = false, tabindex = undefined, disabled = false, active = false, className = "";
+    export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
+        raised = false, tabindex = undefined, disabled = false, active = false, className = "";
 
-  let clicked = false, hover = false;
+    let clicked = false, hover = false;
 </script>
 
 <div class="wrapper button {className}" class:primary class:secondary {tabindex} class:small class:round
      class:--active={active} class:active={(hover && !disabled) || active} class:clicked={clicked && !disabled}
-     class:outlined class:raised {style} on:click on:mousedown on:mouseup on:touchstart on:touchend on:keypress={(e)=>{
+     class:outlined class:raised {style} on:keypress={(e)=>{
 			if(e.key==='Enter'){
 				e.target.click();
 			}
-		 }}>
-  <div style:--weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}>
-    <slot />
-  </div>
-  <Ripple {primary} {secondary} {active} surface={outlined} opacity={disabled ? 0 : undefined} bind:clicked
-          bind:hover />
-  <Blocker active={disabled} />
+		 }}
+     on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
+     on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
+     on:drop on:scroll>
+    <div style:--weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}>
+        <slot/>
+    </div>
+    <Ripple {primary} {secondary} {active} surface={outlined} opacity={disabled ? 0 : undefined} bind:clicked
+            bind:hover/>
+    <Blocker active={disabled}/>
 </div>
 
 <style lang="scss">
