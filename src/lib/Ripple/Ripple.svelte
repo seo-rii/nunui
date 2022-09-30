@@ -7,7 +7,7 @@
     export let clicked = false, hover = false;
 
     let container, adapter, lastAdditional;
-    let x = 0, y = 0, size = 0, show = false, hide = false, back = false, ts = 0, ig = 0;
+    let x = 0, y = 0, size = 0, show = false, hide = false, back = false, ts = 0, ig = 0, iig = 0;
 
     $: clicked = show && !hide;
     $: hover = !clicked && back;
@@ -35,9 +35,13 @@
     }
 
     function rippleShowEvent(targetX, targetY) {
+        if (iig) {
+            iig--;
+            return;
+        }
         if (ig) {
             ig--;
-            return;
+            iig++;
         }
         show = hide = false;
         ({x, y, size} = rippleSize(targetX, targetY));
