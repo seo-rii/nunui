@@ -13,23 +13,23 @@
     {#each data as item, i}
         {@const active = selected === i || selected?.includes?.(i)}
         <Button className={item.icon ? '--custom' : ''} outlined {active} on:click={()=>{
-        if (selectable) {
-          if (multiple) {
-            if(!selected) selected = [];
-            if (active) selected.splice(selected.indexOf(i), 1);
-            else selected.push(i);
-          }
-          else {
-            if(active && nullable) selected = null;
-            else selected = i;
-          }
-        }
-        selected = selected;
-      }}>
+            if (selectable) {
+              if (multiple) {
+                if(!selected) selected = [];
+                if (active) selected.splice(selected.indexOf(i), 1);
+                else selected.push(i);
+              }
+              else {
+                if(active && nullable) selected = null;
+                else selected = i;
+              }
+            }
+            selected = selected;
+          }}>
             {#if check}
-        <span class="check" class:hide={!item.icon && !active}>
-          <Icon icon={item.icon || 'done'} outlined={item.icon && !active}/>
-        </span>
+                <span class="check" class:hide={!item.icon && !active}>
+                  <Icon icon={item.icon || 'done'} outlined={item.icon && !active}/>
+                </span>
             {/if}
             {item.text || item}
         </Button>

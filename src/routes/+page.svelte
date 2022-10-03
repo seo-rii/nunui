@@ -12,6 +12,7 @@
     import List from "$lib/List";
     import OneLine from "$lib/List/components/OneLine.svelte";
     import TwoLine from "$lib/List/components/TwoLine.svelte";
+    import Paper from "$lib/Paper";
 
     let fl = false, m = 0;
     const toggle = () => fl = !fl;
@@ -128,3 +129,23 @@
     <OneLine title="OneLine" icon="star"/>
     <TwoLine title="TwoLine" subtitle="subtitle" icon="favorite"/>
 </List>
+
+<h1>Paper</h1>
+<Paper left top xstack icon="list" title="Menu">
+    <Button slot="target">Open menu</Button>
+    <List>
+        <OneLine title="OneLine" icon="star"/>
+        <OneLine title="OneLine" icon="star"/>
+        <OneLine title="OneLine" icon="star"/>
+        <OneLine title="OneLine" icon="star"/>
+    </List>
+</Paper>
+<Paper left top xstack icon="list" title="Menu" mobile>
+    <Button slot="target">Open mobile menu</Button>
+    <List>
+        <OneLine title="OneLine" icon="star"/>
+        <OneLine title="OneLine" icon="star"/>
+        <OneLine title="OneLine" icon="star"/>
+        <OneLine title="OneLine" icon="star"/>
+    </List>
+</Paper>
