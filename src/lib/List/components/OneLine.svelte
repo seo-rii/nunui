@@ -2,10 +2,10 @@
     import Base from "./Base.svelte";
     import Icon from "$lib/Icon/Icon.svelte";
 
-    export let title, icon = '', round = false;
+    export let title, icon = '', round = false, active = false;
 </script>
 
-<Base {round}>
+<Base {round} {active}>
     <main>
         <Icon {icon}/>
         <div>{title}</div>

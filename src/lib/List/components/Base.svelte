@@ -1,12 +1,12 @@
 <script lang="ts">
     import Ripple from "$lib/Ripple";
 
-    export let round = true;
+    export let round = true, active = false;
 </script>
 
 <main class:round>
     <slot/>
-    <Ripple/>
+    <Ripple {active}/>
 </main>
 
 <style lang="scss">
