@@ -75,7 +75,7 @@
         }
     };
     let target, paper, targetLeft, targetTop, lock = false, scrim;
-    let clientWidth, clientHeight = 0;
+    let clientWidth;
     let _left = 0, _top = 0, _height = 0;
     let render = false;
     let touchY = 0, paperY = '0' as any, _open = open;
@@ -158,7 +158,7 @@
         }
     }
 
-    $: $mobileAnim = open ? 0 : clientHeight;
+    $: tick().then(() => $mobileAnim = open ? 0 : paper?.offsetHeight || 0);
 
     $: _style = mobile ? `left:0;bottom:calc(${paperY}px - ${$mobileAnim}px);width:calc(100% - ${padding}px * 2);padding:${padding}px;`
         : `left:${_left}px;top:${_top}px;width:${width};padding:${padding}px;${_height ? `height:${_height}px;` : ''}${scroll ? `overflow-y:scroll;` : ''}`;
@@ -258,7 +258,7 @@
     </div>
     <div class='scrim' on:click|stopPropagation={()=>hide(stacked)} class:open={open && mobile}
          bind:this={scrim}></div>
-    <div class='paper' bind:this={paper} class:open={open || exOpen} style={_style} bind:clientWidth bind:clientHeight
+    <div class='paper' bind:this={paper} class:open={open || exOpen} style={_style} bind:clientWidth
          on:click={()=>(lock=true)} class:left class:center class:right class:top class:middle class:bottom
          class:xstack class:ystack class:nxstack={!xstack} class:nystack={!ystack} class:desktop={!mobile}
          class:mobile={mobile}>
