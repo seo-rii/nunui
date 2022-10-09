@@ -50,20 +50,6 @@
           }
         }
       }
-
-      tr {
-        &:not(:first-child) {
-          transition: background 0.2s ease-in-out;
-
-          &:hover {
-            background-color: var(--primary-light3);
-          }
-        }
-
-        &:nth-child(even) {
-          background-color: var(--primary-light2);
-        }
-      }
     }
   }
 </style>
