@@ -2,12 +2,12 @@
     import {setContext} from "svelte";
     import {writable} from "svelte/store";
 
-    export let minWidth = 600;
+    export let minWidth = 600, style = '';
     const header = writable();
     setContext("header", header);
 </script>
 
-<main style:--minWidth="{minWidth}px">
+<main style:--minWidth="{minWidth}px" {style}>
     <div class="header" bind:this={$header}></div>
     <table>
         <slot/>
