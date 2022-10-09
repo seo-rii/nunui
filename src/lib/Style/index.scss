@@ -34,10 +34,10 @@
   border-radius: $radius #{$additional};
 }
 
-@mixin applyTheme($target, $additional: '', $selector: '') {
+@mixin applyTheme($target, $additional: '', $selector: '', $light: 0) {
   @each $key in ['primary', 'secondary', 'error'] {
     &.#{$key}#{$selector} {
-      #{$target}: var(--#{$key})#{if($additional, ' ' + $additional, '')};
+      #{$target}: var(--#{$key}#{if($light > 0, '-light' + $light, '')})#{if($additional, ' ' + $additional, '')};
     }
   }
 }
@@ -52,16 +52,6 @@
 
 :global {
   :root {
-    --primary: #6200ee;
-    --secondary: #03dac6;
-    --surface: #ffffff;
-    --error: #b00020;
-
-    --on-primary: #ffffff;
-    --on-secondary: #000000;
-    --on-surface: #000000;
-    --on-error: #ffffff;
-
     --weight: 500;
   }
 }

@@ -7,7 +7,6 @@
       on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
       on:drop on:scroll>
     <slot/>
-    <div class="background" class:primary class:secondary></div>
 </main>
 
 <style lang="scss">
@@ -20,18 +19,12 @@
     overflow: hidden;
     @include shadow(medium);
     @include round;
+    @include applyTheme(background, '', '', 3);
 
     &.outlined {
       @include applyTheme(border, 1px solid);
       padding: 9px;
       box-shadow: none;
-    }
-
-    .background {
-      @include full;
-      @include applyTheme(background);
-      opacity: 0.1;
-      pointer-events: none;
     }
   }
 </style>

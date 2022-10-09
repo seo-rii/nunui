@@ -28,7 +28,7 @@
      on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
      on:drop on:scroll>
-    <div class="container">
+    <div class="container" class:primary class:secondary>
         {#if _indeterminate || indeterminate}
             <div class:exit={start}>
                 <div class="indicator ind-1" class:primary class:secondary></div>
@@ -56,8 +56,8 @@
 
   .container {
     @include round(50px);
+    @include applyTheme(background-color, '', '', 3);
     position: absolute;
-    background-color: #e2e2e2;
     top: 3px;
     height: 2px;
     width: 100%;

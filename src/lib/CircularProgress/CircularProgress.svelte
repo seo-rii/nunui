@@ -45,7 +45,8 @@
             </g>
         </g>
     {/if}
-    <circle class="rail" fill="none" stroke-width="3" stroke-linecap="round" cx="35" cy="35" r="30"></circle>
+    <circle class="rail" fill="none" stroke-width="3" stroke-linecap="round" cx="35" cy="35" r="30" class:primary
+            class:secondary></circle>
 </svg>
 
 <style lang="scss">
@@ -83,7 +84,7 @@
   }
 
   .rail {
-    stroke: #99999944;
+    @include applyTheme(stroke, '', '', 3);
   }
 
   @keyframes rotation {
