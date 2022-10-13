@@ -50,4 +50,4 @@
 >
     <slot/>
 </main>
-<canvas bind:this={c}></canvas>
+<canvas bind:this={c} style="display: none;"></canvas>
