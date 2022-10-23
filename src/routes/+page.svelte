@@ -156,7 +156,7 @@
     <h1>Table</h1>
     <Table>
         <tr>
-            <Th>1</Th>
+            <Th width="2">1</Th>
             <Th>2</Th>
         </tr>
         <Tr>

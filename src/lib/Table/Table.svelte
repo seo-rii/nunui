@@ -3,8 +3,9 @@
     import {writable} from "svelte/store";
 
     export let minWidth = 600, style = '';
-    const header = writable();
+    const header = writable(), col = writable([]);
     setContext("header", header);
+    setContext("col", col);
 </script>
 
 <main style:--minWidth="{minWidth}px" {style}
@@ -13,6 +14,11 @@
       on:drop on:scroll>
     <div class="header" bind:this={$header}></div>
     <table>
+        <colgroup>
+            {#each $col as item}
+                <col style='width:{(item * 100) / $col.reduce((a, b) => a + b, 0)}%;'/>
+            {/each}
+        </colgroup>
         <slot/>
     </table>
 </main>
@@ -30,7 +36,7 @@
 
     :global {
       th {
-        border-bottom: 1px solid #c0cad0;
+        border-bottom: 1px solid var(--primary-light3);
         padding: 10px;
         font-weight: 700;
         text-align: left;
