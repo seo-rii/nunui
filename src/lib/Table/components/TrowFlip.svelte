@@ -1,10 +1,10 @@
 <script lang="ts">
     import {flip as fl} from "svelte/animate";
 
-    export let style = '';
+    export let style = '', flip;
 </script>
 
-<tr {style}
+<tr {style} animate:fl={flip}
     on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove
     on:mouseout on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover
     on:dragstart on:drop on:scroll>
