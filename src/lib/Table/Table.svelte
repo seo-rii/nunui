@@ -42,6 +42,23 @@
         text-align: left;
       }
 
+      tr {
+        &:not(:nth-child(2)) {
+          transition: background 0.2s ease-in-out;
+
+          &:hover {
+            background-color: var(--primary-light2);
+          }
+        }
+
+        &:nth-child(even) {
+          background-color: var(--primary-light1);
+        }
+
+        &:nth-child(2) {
+          background-color: unset;
+        }
+      }
 
       td {
         padding: 10px;
