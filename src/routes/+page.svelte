@@ -14,7 +14,7 @@
     import OneLine from "$lib/List/components/OneLine.svelte";
     import TwoLine from "$lib/List/components/TwoLine.svelte";
     import Paper from "$lib/Paper";
-    import Table, {Th, Tr} from "$lib/Table";
+    import Table, {Th} from "$lib/Table";
 
     let fl = false, m = 0;
     const toggle = () => fl = !fl;
@@ -159,17 +159,17 @@
             <Th width="2">1</Th>
             <Th>2</Th>
         </tr>
-        <Tr>
+        <tr>
             <td>1</td>
             <td>2</td>
-        </Tr>
-        <Tr>
+        </tr>
+        <tr>
             <td>1</td>
             <td>2</td>
-        </Tr>
-        <Tr>
+        </tr>
+        <tr>
             <td>1</td>
             <td>2</td>
-        </Tr>
+        </tr>
     </Table>
 </ThemeProvider>
