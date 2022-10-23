@@ -11,7 +11,7 @@
 
 <style lang="scss">
   tr {
-    &:not(:first-child) {
+    &:not(:nth-child(2)) {
       transition: background 0.2s ease-in-out;
 
       &:hover {
