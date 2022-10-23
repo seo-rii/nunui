@@ -40,6 +40,14 @@
       td {
         padding: 10px;
 
+        &:first-child {
+          border-radius: 12px 0 0 12px;
+        }
+
+        &:last-child {
+          border-radius: 0 12px 12px 0;
+        }
+
         & > :global(*) {
           display: block;
           color: #000;

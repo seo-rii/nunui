@@ -1,11 +1,11 @@
 <script lang="ts">
-    export let icon: string, color = "", outlined = false, size = 0, style = "", weight: number;
+    export let icon: string, color = "", outlined = false, size = 0, style = "", weight: number = <any>undefined;
 </script>
 
 <span on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
       on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-      on:drop on:scroll
-      style="--fill:{outlined ? 0 : 1};{weight?`--weight:${weight || 500};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon || ''}</span>
+      on:drop on:scroll style:--fill={outlined ? 0 : 1}
+      style="{weight?`--weight:${weight || 500};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon || ''}</span>
 
 <style lang="scss">
   @font-face {
