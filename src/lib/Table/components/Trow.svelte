@@ -22,5 +22,9 @@
     &:nth-child(even) {
       background-color: var(--primary-light1);
     }
+
+    &:nth-child(2) {
+      background-color: unset;
+    }
   }
 </style>
