@@ -15,6 +15,7 @@
     import TwoLine from "$lib/List/components/TwoLine.svelte";
     import Paper from "$lib/Paper";
     import Table, {Th} from "$lib/Table";
+    import Input from "$lib/Input";
 
     let fl = false, m = 0;
     const toggle = () => fl = !fl;
@@ -152,6 +153,10 @@
             <OneLine title="OneLine" icon="star"/>
         </List>
     </Paper>
+
+    <h1>Input</h1>
+    <Input placeholder="filled"/>
+    <Input placeholder="outlined" outlined/>
 
     <h1>Table</h1>
     <Table>
