@@ -26,13 +26,17 @@
 <style lang="scss">
   @import "../Style";
 
-  table {
+  main {
     width: 100%;
+    overflow-x: scroll;
+  }
+
+  table {
     border-collapse: collapse;
-    overflow: hidden;
     margin-bottom: 20px;
     table-layout: fixed;
     min-width: var(--minWidth);
+    width: 100%;
 
     :global {
       th {

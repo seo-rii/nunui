@@ -177,4 +177,34 @@
             <td>2</td>
         </tr>
     </Table>
+    <Table fullWidth>
+        <tr>
+            <Th width="2">1</Th>
+            <Th>2</Th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+    </Table>
+    <Table minWidth="2000">
+        <tr>
+            {#each {length: 40} as _}
+                <Th>12345</Th>
+            {/each}
+        </tr>
+        <tr>
+            {#each {length: 40} as _}
+                <td>12345</td>
+            {/each}
+        </tr>
+    </Table>
 </ThemeProvider>
