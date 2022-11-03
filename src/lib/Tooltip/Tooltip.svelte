@@ -12,7 +12,7 @@
     export let width = 'fit-content;';
     export let padding = 5;
     export let mobileSupport = false, mobile = false;
-	export let delay = 300;
+	export let delay = 200;
 </script>
 
 <style lang='scss'>

@@ -40,10 +40,28 @@
 
     :global {
       th {
-        border-bottom: 1px solid var(--primary-light3);
         padding: 10px;
-        font-weight: 700;
+        font-weight: 600;
         text-align: left;
+        position: relative;
+
+        &:after {
+          position: absolute;
+          content: '';
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          border-bottom: 1px solid var(--primary-light3);
+        }
+
+        &:first-child:after {
+          left: 12px;
+        }
+
+        &:last-child:after {
+          right: 12px;
+        }
       }
 
       tr {
