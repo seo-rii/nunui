@@ -16,6 +16,7 @@
     import Paper from "$lib/Paper";
     import Table, {Th} from "$lib/Table";
     import Input from "$lib/Input";
+    import Tooltip from "$lib/Tooltip";
 
     let fl = false, m = 0;
     const toggle = () => fl = !fl;
@@ -207,4 +208,10 @@
             {/each}
         </tr>
     </Table>
+
+    <h1>Tooltip</h1>
+    <Tooltip left top xstack>
+        <Button slot="target">Tooltip</Button>
+        <div>Tooltip</div>
+    </Tooltip>
 </ThemeProvider>
