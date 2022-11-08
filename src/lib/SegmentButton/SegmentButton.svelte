@@ -4,7 +4,7 @@
     import {createEventDispatcher} from "svelte";
 
     export let data = [], selected = null, check = true, nullable = true;
-    export let selectable = true, multiple = false;
+    export let selectable = true, multiple = false, small = false;
 
     const dispatch = createEventDispatcher();
 </script>
@@ -14,7 +14,7 @@
       on:drop on:scroll>
     {#each data as item, i}
         {@const active = selected === i || selected?.includes?.(i)}
-        <Button className={item.icon ? '--custom' : ''} outlined {active} on:click={()=>{
+        <Button {small} className={item.icon ? '--custom' : ''} outlined {active} on:click={()=>{
             if (selectable) {
               if (multiple) {
                 if(!selected) selected = [];
