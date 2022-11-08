@@ -1,14 +1,16 @@
 <script lang="ts">
     import Button from "$lib/Button";
     import Icon from "$lib/Icon";
+    import {createEventDispatcher} from "svelte";
 
     export let data = [], selected = null, check = true, nullable = true;
-
     export let selectable = true, multiple = false;
+
+    const dispatch = createEventDispatcher();
 </script>
 
 <main on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
-      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
+      on:mouseover on:mouseup on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
       on:drop on:scroll>
     {#each data as item, i}
         {@const active = selected === i || selected?.includes?.(i)}
@@ -25,6 +27,7 @@
               }
             }
             selected = selected;
+            dispatch('select', selected);
           }}>
             {#if check}
                 <span class="check" class:hide={!item.icon && !active}>
