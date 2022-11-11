@@ -65,6 +65,7 @@
     export let padding = 0;
     export let mobile = false;
     export let marginTop = 0;
+    export let inline = false;
 
     export let open = false, show = () => {
         setTimeout(() => open = true, 0);
@@ -253,7 +254,7 @@
 
 <main>
     <div class='target' bind:this={target} on:click={()=>open=!open} on:click={()=>(lock=true)} {style} class:fullWidth
-         class:noTarget={!$$slots.target}>
+         class:noTarget={!$$slots.target} class:inline>
         <slot name='target'/>
     </div>
     <div class='scrim' on:click|stopPropagation={()=>hide(stacked)} class:open={open && mobile}
@@ -300,6 +301,10 @@
       width: 100%;
       display: inline-block;
       position: relative;
+    }
+
+    &.inline {
+      display: inline-block;
     }
   }
 
