@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let progress = 0, indeterminate = false, size = 60, secondary = false, primary = !secondary;
+    export let progress = 0, indeterminate = false, size = 60, secondary = false, primary = !secondary, color = '';
 
     let _progress, _indeterminate = indeterminate, start = false, stop = false;
 
@@ -30,7 +30,7 @@
      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
      on:drop on:scroll>
     <circle class="rail" fill="none" stroke-width="3" stroke-linecap="round" cx="35" cy="35" r="30" class:primary
-            class:secondary></circle>
+            class:secondary  style:stroke={color}></circle>
     {#if indeterminate || _indeterminate}
         <g class:exit={start}>
             <g class="spinner indeterminate">

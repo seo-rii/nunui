@@ -3,7 +3,7 @@
     import Blocker from "$lib/Blocker";
 
     export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
-        raised = false, tabindex = undefined, disabled = false, active = false, className = "";
+        raised = false, tabindex = undefined, disabled = false, active = false, className = "", color = '';
 
     let clicked = false, hover = false;
 </script>
@@ -17,7 +17,7 @@
 		 }}
      on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-     on:drop on:scroll>
+     on:drop on:scroll style:background={color}>
     <div style:--weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}>
         <slot/>
     </div>

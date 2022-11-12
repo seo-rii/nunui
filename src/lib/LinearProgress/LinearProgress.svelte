@@ -1,5 +1,6 @@
 <script lang="ts">
-    export let progress = 0, width = "100%", style = "", indeterminate = false, secondary = false, primary = !secondary;
+    export let progress = 0, width = "100%", style = "", indeterminate = false, secondary = false, primary = !secondary,
+        color = '';
 
     let _progress, _indeterminate = indeterminate, start = false, stop = false;
 
@@ -31,13 +32,14 @@
     <div class="container" class:primary class:secondary>
         {#if _indeterminate || indeterminate}
             <div class:exit={start}>
-                <div class="indicator ind-1" class:primary class:secondary></div>
-                <div class="indicator ind-2" class:primary class:secondary></div>
+                <div class="indicator ind-1" class:primary class:secondary style:background={color}></div>
+                <div class="indicator ind-2" class:primary class:secondary style:background={color}></div>
             </div>
         {/if}
         {#if !_indeterminate || !indeterminate}
             <div class:exit={stop}>
-                <div class="indicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary></div>
+                <div class="indicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary
+                     style:background={color}></div>
             </div>
         {/if}
     </div>
