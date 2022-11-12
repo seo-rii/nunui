@@ -38,8 +38,8 @@
         {/if}
         {#if !_indeterminate || !indeterminate}
             <div class:exit={stop}>
-                <div class="indicator" style={`width: ${(_progress||0) * 100}%`} class:primary class:secondary
-                     style:background={color}></div>
+                <div class="indicator" class:primary class:secondary style:background={color}
+                     style:width="{$_progress * 100 || 0}%"></div>
             </div>
         {/if}
     </div>
