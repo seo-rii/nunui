@@ -312,7 +312,7 @@
     position: fixed;
     z-index: 9999999;
     @include shadow;
-    background: white;
+    background: var(--surface);
     overflow: hidden;
     opacity: 0;
     pointer-events: none;
