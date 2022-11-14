@@ -9,12 +9,12 @@
 
   .blocker {
     @include full;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--surface);
     opacity: 0;
     pointer-events: none;
 
     &.active {
-      opacity: 1;
+      opacity: 0.5;
       pointer-events: initial;
       cursor: not-allowed;
       z-index: 1;
