@@ -95,6 +95,10 @@
     max-width: 280px;
     border-radius: var(--border);
 
+    .input {
+      color: var(--on-surface);
+    }
+
     &.outlined {
       --border: 5px;
     }
@@ -125,16 +129,12 @@
       top: 12px;
       left: 10px;
       font-size: 18px;
-      color: rgba(#000, .5);
+      color: var(--on-surface);
       font-weight: 300;
       transform-origin: 0 0;
       transform: translate3d(0, 0, 0);
       transition: all .2s ease;
       pointer-events: none;
-
-      :global(.darkMode) & {
-        color: rgba(#fff, .5);
-      }
     }
 
     .background {
@@ -189,10 +189,6 @@
         border-bottom: 1px solid #bbb;
       }
 
-      :global(.darkMode) & {
-        color: white;
-      }
-
       &:not(:placeholder-shown) + .placeholder {
         transform: translate3d(0, -8px, 0) scale(.5);
       }
@@ -208,6 +204,7 @@
         & + .placeholder {
           transform: translate3d(0, -8px, 0) scale(.5);
           color: var(--primary);
+          opacity: 1;
 
           & + .background {
             transform: scaleX(1);
@@ -250,12 +247,12 @@
         }
 
         &:focus + .placeholder {
-          color: #d33f3f;
+          color: var(--error);
         }
       }
 
       .helper {
-        color: #d33f3f;
+        color: var(--error);
         opacity: 1;
       }
     }
