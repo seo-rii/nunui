@@ -65,11 +65,13 @@
       border-radius: 0 !important;
 
       &:first-child {
-        border-radius: 100px 0 0 100px !important;
+        border-top-left-radius: 100px !important;
+        border-bottom-left-radius: 100px !important;
       }
 
       &:last-child {
-        border-radius: 0 100px 100px 0 !important;
+        border-top-right-radius: 100px !important;
+        border-bottom-right-radius: 100px !important;
       }
 
       &:not(:first-child) {
