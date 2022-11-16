@@ -66,6 +66,7 @@
     <Button small>dfdfd</Button>
     <Button primary round>dfdfd</Button>
     <Button primary raised>dfdfd</Button>
+    <Button transparent>dfdfd</Button>
     <Button primary disabled>dfdfd</Button>
 
     <h1>Linear Progress</h1>
