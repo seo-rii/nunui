@@ -21,6 +21,7 @@
 
     &.round {
       border-radius: 100px;
+      margin: 1px;
     }
   }
 </style>
