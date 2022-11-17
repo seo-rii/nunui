@@ -13,6 +13,10 @@
     export let padding = 5;
     export let mobileSupport = false, mobile = false;
     export let delay = 200;
+
+    export let hovering = false, open = (!mobile && hovering) || exOpen;
+
+    $: open = (!mobile && hovering) || exOpen;
 </script>
 
 <style lang='scss'>
@@ -33,12 +37,12 @@
 
 {#if !mobile || mobileSupport}
 <span class:fullWidth>
-	<Hoverable let:hovering {delay}>
+	<Hoverable bind:hovering {delay}>
 		<Paper {left} {center} {right} {top} {middle} {bottom} {unbounded} {absolutex} {absolutey} {tooltip}
                exOpen={(!mobile && hovering) || exOpen} hover={!mobile} {xstack} {ystack} {stacked} {style} {title}
                {fullWidth} {__remap} {width} {padding} let:hide>
 			<slot name='target' slot='target' {hide}/>
-			<slot {hide} open={(!mobile && hovering) || exOpen}/>
+			<slot {hide} {open}/>
 		</Paper>
 	</Hoverable>
 </span>
