@@ -12,7 +12,7 @@
     export let width = 'fit-content;';
     export let padding = 5;
     export let mobileSupport = false, mobile = false;
-	export let delay = 200;
+    export let delay = 200;
 </script>
 
 <style lang='scss'>
@@ -38,7 +38,7 @@
                exOpen={(!mobile && hovering) || exOpen} hover={!mobile} {xstack} {ystack} {stacked} {style} {title}
                {fullWidth} {__remap} {width} {padding} let:hide>
 			<slot name='target' slot='target' {hide}/>
-			<slot {hide}/>
+			<slot {hide} open={(!mobile && hovering) || exOpen}/>
 		</Paper>
 	</Hoverable>
 </span>
