@@ -12,6 +12,7 @@
     <main>
         <Icon {icon}/>
         <div>{title}</div>
+        <slot/>
     </main>
 </Base>
 

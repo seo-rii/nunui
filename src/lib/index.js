@@ -8,12 +8,12 @@ import Icon from "./Icon";
 import IconButton from "./IconButton";
 import Input from "./Input";
 import LinearProgress from "./LinearProgress";
-import List from "./List";
+import List, {Base, OneLine, TwoLine} from "./List";
 import Paper from "./Paper";
 import Radio from "./Radio";
 import Ripple from "./Ripple";
 import SegmentButton from "./SegmentButton";
-import Table from "./Table";
+import Table, {Th} from "./Table";
 import ThemeProvider from "./ThemeProvider";
 import Tooltip from "./Tooltip";
 
@@ -35,5 +35,10 @@ export {
     SegmentButton,
     Table,
     ThemeProvider,
-    Tooltip
+    Tooltip,
+
+    Base,
+    OneLine,
+    TwoLine,
+    Th
 }

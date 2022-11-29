@@ -15,6 +15,7 @@
             <div class="title">{title}</div>
             <div class="subtitle">{subtitle}</div>
         </div>
+        <slot/>
     </main>
 </Base>
 
