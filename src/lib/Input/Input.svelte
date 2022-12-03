@@ -6,7 +6,7 @@
 
     export let outlined = false;
     export let placeholder: string, value = '', multiline = false, error = '', fullWidth = false;
-    export let required = false, number = false, min = null, max = null;
+    export let required = false, number = false, min = null, max = null, helper = '';
     export let autofocus = false, password = false, trailingIcon = '', round = false, nohelper = false,
         autocapitalize = undefined, tabindex = undefined;
     export let input = null, style = '';
@@ -20,7 +20,7 @@
         else error = '';
     }
 
-    $:if (multiline) {
+    $: if (multiline) {
         let _ = value;
         rf = rf;
         setTimeout(() => {
@@ -76,7 +76,8 @@
 		{/if}
 	</div>
     {#if !nohelper}
-		<span class='helper'><span style='position: relative;top:-2px;margin-left: 2px;'>{error}</span></span>
+		<span class='helper' class:error><span
+                style='position: relative;top:-2px;margin-left: 2px;'>{error || helper}</span></span>
 	{/if}
 </span>
 
@@ -252,8 +253,13 @@
       }
 
       .helper {
-        color: var(--error);
-        opacity: 1;
+        color: var(--on-surface);
+        opacity: 0.7;
+
+        &.error {
+          color: var(--error);
+          opacity: 1;
+        }
       }
     }
 
