@@ -11,13 +11,13 @@
         autocapitalize = undefined, tabindex = undefined;
     export let input = null, style = '';
 
-    let rf;
+    let rf, _error;
 
     $: {
-        if (!value && required) error = '필수 항목입니다.';
-        else if (number && !/^[\-]?[0-9]+(\.[0-9]+)?$/.test(value)) error = '숫자만 입력해주세요.';
-        else if (number && ((min !== undefined && parseFloat(value) < min) || (max !== undefined && parseFloat(value) > max))) error = `${min}부터 ${max}까지의 숫자를 입력해주세요.`;
-        else error = '';
+        if (!value && required) _error = '필수 항목입니다.';
+        else if (number && !/^[\-]?[0-9]+(\.[0-9]+)?$/.test(value)) _error = '숫자만 입력해주세요.';
+        else if (number && ((min !== undefined && parseFloat(value) < min) || (max !== undefined && parseFloat(value) > max))) _error = `${min}부터 ${max}까지의 숫자를 입력해주세요.`;
+        else _error = error;
     }
 
     $: if (multiline) {
@@ -32,7 +32,7 @@
     }
 </script>
 
-<span class='container' class:error class:fullWidth class:round class:outlined>
+<span class='container' class:error={_error} class:fullWidth class:round class:outlined>
 	<div style='position: relative;'>
 		{#if multiline}
 			<textarea class='input' placeholder='&nbsp;' bind:value on:change on:keydown bind:this={input} rows='1'
@@ -75,9 +75,9 @@
 			</div>
 		{/if}
 	</div>
-    {#if !nohelper}
-		<span class='helper' class:error><span
-                style='position: relative;top:-2px;margin-left: 2px;'>{error || helper}</span></span>
+    {#if !nohelper && (_error || helper)}
+		<span class='helper'><span
+                style='position: relative;top:-2px;margin-left: 2px;'>{_error || helper}</span></span>
 	{/if}
 </span>
 
@@ -253,13 +253,8 @@
       }
 
       .helper {
-        color: var(--on-surface);
-        opacity: 0.7;
-
-        &.error {
-          color: var(--error);
-          opacity: 1;
-        }
+        color: var(--error);
+        opacity: 1;
       }
     }
 
@@ -280,6 +275,7 @@
     transition: all .2s ease;
     position: absolute;
     top: 100%;
-    opacity: 0;
+    color: var(--on-surface);
+    opacity: 0.7;
   }
 </style>

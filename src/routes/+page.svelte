@@ -159,6 +159,8 @@
     <h1>Input</h1>
     <Input placeholder="filled"/>
     <Input placeholder="outlined" outlined/>
+    <Input placeholder="filled" helper="헬퍼"/>
+    <Input placeholder="filled" error="에러"/>
 
     <h1>Table</h1>
     <Table>
