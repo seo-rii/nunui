@@ -50,30 +50,29 @@
       user-select: none;
       font-weight: 400;
       vertical-align: middle;
-      @include applyThemeOn(border-left, .15rem solid, ':after');
-      @include applyThemeOn(border-bottom, .15rem solid, ':after');
+      @include applyThemeOn(border-left, .12rem solid, ':after');
+      @include applyThemeOn(border-bottom, .12rem solid, ':after');
 
       &:before {
         width: 1rem;
         height: 1rem;
-        border: .15rem solid rgba(0, 0, 0, .45);
+        border: .12rem solid rgba(0, 0, 0, .45);
         content: '';
         display: inline-block;
         transition: all .3s ease;
         user-select: none;
         will-change: background-color, border-color;
-        margin: -0.15rem 0.5rem 0 0;
+        margin: -0.14rem 0.5rem 0 0;
         border-radius: .3rem;
         vertical-align: middle;
-        background-color: var(--surface);
       }
 
       &:after {
         position: absolute;
         top: 0.5rem;
-        left: 0.5rem;
+        left: 0.45rem;
         width: 0.75rem;
-        height: 0.375rem;
+        height: 0.35rem;
         content: '';
         transform: scale(0, 0) rotate(-90deg) translateZ(0);
         transition: all .2s ease;
