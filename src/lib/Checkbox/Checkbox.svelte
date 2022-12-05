@@ -3,7 +3,7 @@
 
     export let secondary = false, primary = !secondary, label = "";
 
-    export let error = false, checked;
+    export let error = false, checked, tabindex = 0;
 
     let checkbox, container;
 </script>
@@ -17,7 +17,7 @@
     <Ripple additional={container} center surface={!!checked} primary={primary && !!checked}
             secondary={secondary && !!checked} error={error && !!checked}/>
   </div>
-  <input type="checkbox" name="checkbox" bind:this={checkbox} class:primary class:secondary bind:checked>
+  <input type="checkbox" name="checkbox" {tabindex} bind:this={checkbox} class:primary class:secondary bind:checked on:change>
   <label class:primary class:secondary>{label}</label>
     {#if error}<span class="message">{error}</span>{/if}
 </span>
