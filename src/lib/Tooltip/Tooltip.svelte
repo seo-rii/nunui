@@ -13,7 +13,7 @@
     export let padding = 5;
     export let mobileSupport = false, mobile = false;
     export let delay = 200, openDelay = 0;
-    export let ignoreTarget = false;
+    export let ignoreTarget = false, forceRender = false;
 
     export let hovering = false, open = (!mobile && hovering) || exOpen;
     let hoveringTarget = false, hoveringTooltip = false;
@@ -42,7 +42,7 @@
 <span class:fullWidth>
 		<Paper {left} {center} {right} {top} {middle} {bottom} {unbounded} {absolutex} {absolutey} {tooltip}
                exOpen={(!mobile && hovering) || exOpen} hover={!mobile} {xstack} {ystack} {stacked} {style} {title}
-               {fullWidth} {__remap} {width} {padding} let:hide>
+               {fullWidth} {__remap} {width} {padding} {forceRender} let:hide>
 			<Hoverable bind:hovering={hoveringTarget} {delay} {openDelay} slot='target'>
 					<slot name='target' {hide}/>
 			</Hoverable>

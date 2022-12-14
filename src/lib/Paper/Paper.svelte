@@ -66,6 +66,7 @@
     export let mobile = false;
     export let marginTop = 0;
     export let inline = false;
+    export let forceRender = false;
 
     export let open = false, show = () => {
         setTimeout(() => open = true, 0);
@@ -280,7 +281,7 @@
                     </h4>
                 {/if}
             {/if}
-            {#if render}
+            {#if render && (forceRender || open || exOpen)}
                 <slot {open} {show} {hide}/>
             {/if}
         </Hoverable>
