@@ -180,8 +180,6 @@
         }, 0);
     };
 
-    let _place;
-
     function touchStart(e) {
         touchY = e.touches[0].clientY;
         paperY = 0;
@@ -217,7 +215,6 @@
     };
 
     onMount(() => {
-        _place = paper.parentElement;
         closeFunc.add(hide);
         window.addEventListener('click', outsideClickDetect);
 
