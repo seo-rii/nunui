@@ -2,7 +2,6 @@
     import {wheelEvent, wheelOpt} from "$lib/Utility/scroll.js";
 
     declare const window;
-    const keys = {37: 1, 38: 1, 39: 1, 40: 1};
     const closeFunc = new Set();
     let globalLock = false, lockLevel = 0;
 
@@ -15,16 +14,13 @@
     }
 
     function preventDefaultForScrollKeys(e) {
-        if (keys[e.keyCode]) {
-            preventDefault(e);
-            return false;
-        }
+        if (e.keyCode > 36 && e.keyCode < 41) e.preventDefault();
     }
 
     function disableScroll() {
-        window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
-        window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-        window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+        window.addEventListener('DOMMouseScroll', preventDefault, false);
+        window.addEventListener(wheelEvent, preventDefault, wheelOpt);
+        window.addEventListener('touchmove', preventDefault, wheelOpt);
         window.addEventListener('keydown', preventDefaultForScrollKeys, false);
     }
 
@@ -76,11 +72,11 @@
             exOpen = false;
         }
     };
-    let target, paper, targetLeft, targetTop, lock = false, scrim;
+    let target, paper, lock = false, scrim;
     let clientWidth;
     let _left = 0, _top = 0, _height = 0;
     let render = false;
-    let touchY = 0, paperY = '0' as any, _open = open;
+    let touchY = 0, paperY = 0, _open = open;
     let hovering;
     let scroll = false;
     let diffX, diffY;
@@ -160,7 +156,7 @@
         }
     }
 
-    $: tick().then(() => $mobileAnim = open ? 0 : paper?.offsetHeight || 0);
+    $: setTimeout(() => $mobileAnim = open ? 0 : paper?.offsetHeight || 0);
 
     $: _style = mobile ? `left:0;bottom:calc(${paperY}px - ${$mobileAnim}px);width:calc(100% - ${padding}px * 2);padding:${padding}px;`
         : `left:${_left}px;top:${_top}px;width:${width};padding:${padding}px;${_height ? `height:${_height}px;` : ''}${scroll ? `overflow-y:scroll;` : ''}`;
@@ -178,11 +174,9 @@
 
     const outsideClickDetect = () => {
         if (lock) lock = false;
-        else {
-            setTimeout(() => {
-                if (!globalLock) hide(0);
-            }, 0);
-        }
+        else setTimeout(() => {
+            if (!globalLock) hide(0);
+        }, 0);
     };
 
     let _place;
@@ -202,11 +196,8 @@
     }
 
     function touchEnd(e) {
-        if (paperY < -100) {
-            hide();
-        } else {
-            paperY = 0;
-        }
+        if (paperY < -100) hide();
+        else paperY = 0;
         e.stopPropagation();
     }
 
@@ -221,12 +212,8 @@
             e.stopPropagation();
             if (!scroll) e.preventDefault();
             else if (e.wheelDelta < 0) {
-                if ((e.currentTarget.scrollHeight - e.currentTarget.scrollTop - _height) <= 0) {
-                    e.preventDefault();
-                }
-            } else if (e.currentTarget.scrollTop == 0) {
-                e.preventDefault();
-            }
+                if ((e.currentTarget.scrollHeight - e.currentTarget.scrollTop - _height) <= 0) e.preventDefault();
+            } else if (e.currentTarget.scrollTop == 0) e.preventDefault();
         };
 
         _place = paper.parentElement;
@@ -258,22 +245,22 @@
 </script>
 
 <main>
-    <div class='target' bind:this={target} on:click={()=>open=!open} on:click={()=>(lock=true)} {style} class:fullWidth
+    <div class='target' bind:this={target} on:click={()=>open=!open} on:click={()=>lock=true} {style} class:fullWidth
          class:noTarget={!$$slots.target} class:inline>
         <slot name='target'/>
     </div>
-    <div class='scrim' on:click|stopPropagation={()=>hide(stacked)} class:open={open && mobile}
-         bind:this={scrim}></div>
-    <div class='paper' bind:this={paper} class:open={open || exOpen} style={_style} bind:clientWidth
-         on:click={()=>(lock=true)} class:left class:center class:right class:top class:middle class:bottom
-         class:xstack class:ystack class:nxstack={!xstack} class:nystack={!ystack} class:desktop={!mobile}
-         class:mobile={mobile}>
-        {#if mobile}
-            <div class='dragContainer'>
-                <div class='drag'></div>
-            </div>
-        {/if}
-        {#if render}
+    {#if render}
+        <div class='scrim' on:click|stopPropagation={()=>hide(stacked)} class:open={open && mobile}
+             bind:this={scrim}></div>
+        <div class='paper' bind:this={paper} class:open={open || exOpen} style={_style} bind:clientWidth
+             on:click={()=>(lock=true)} class:left class:center class:right class:top class:middle class:bottom
+             class:xstack class:ystack class:nxstack={!xstack} class:nystack={!ystack} class:desktop={!mobile}
+             class:mobile={mobile}>
+            {#if mobile}
+                <div class='dragContainer'>
+                    <div class='drag'></div>
+                </div>
+            {/if}
             <Hoverable bind:hovering>
                 {#if title}
                     {#if mobile}
@@ -288,8 +275,8 @@
                 {/if}
                 <slot {open} {show} {hide}/>
             </Hoverable>
-        {/if}
-    </div>
+        </div>
+    {/if}
 </main>
 
 <style lang='scss'>
