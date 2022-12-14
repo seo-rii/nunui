@@ -56,7 +56,6 @@
     export let stacked = 0;
     export let style = '', title = '', icon = '';
     export let fullWidth = false;
-    export let __remap = false;
     export let width = '240px;';
     export let padding = 0;
     export let mobile = false;
@@ -98,6 +97,7 @@
     }
 
     function updatePosition() {
+        if (!paper) return;
         const paperBounding = paper.getBoundingClientRect();
         const targetBounding = target.getBoundingClientRect();
         let __left, __top;
@@ -138,6 +138,7 @@
 
 
     function getDiff() {
+        if (!paper) return;
         const paperBounding = paper.getBoundingClientRect();
         diffX = paperBounding.left - _left;
         diffY = paperBounding.top - _top;
@@ -207,41 +208,41 @@
         else setTimeout(() => render = false, 200);
     }
 
-    onMount(() => {
-        const scrollEvent = (e) => {
-            e.stopPropagation();
-            if (!scroll) e.preventDefault();
-            else if (e.wheelDelta < 0) {
-                if ((e.currentTarget.scrollHeight - e.currentTarget.scrollTop - _height) <= 0) e.preventDefault();
-            } else if (e.currentTarget.scrollTop == 0) e.preventDefault();
-        };
+    const scrollEvent = (e) => {
+        e.stopPropagation();
+        if (!scroll) e.preventDefault();
+        else if (e.wheelDelta < 0) {
+            if ((e.currentTarget.scrollHeight - e.currentTarget.scrollTop - _height) <= 0) e.preventDefault();
+        } else if (e.currentTarget.scrollTop == 0) e.preventDefault();
+    };
 
+    onMount(() => {
         _place = paper.parentElement;
-        if (__remap) {
-            document.getElementById('app').append(paper);
-            document.getElementById('app').append(scrim);
-        }
         closeFunc.add(hide);
         window.addEventListener('click', outsideClickDetect);
-        paper.addEventListener('touchstart', touchStart);
-        paper.addEventListener('touchmove', touchMove);
-        paper.addEventListener('touchend', touchEnd);
-        paper.addEventListener(wheelEvent, scrollEvent, wheelOpt);
 
         return () => {
             if (open && !tooltip) unlockScroll();
             closeFunc.delete(hide);
             window.removeEventListener('click', outsideClickDetect);
-            paper.removeEventListener('touchstart', touchStart);
-            paper.removeEventListener('touchmove', touchMove);
-            paper.removeEventListener('touchend', touchEnd);
-            paper.removeEventListener(wheelEvent, scrollEvent, wheelOpt);
-            if (__remap) {
-                _place.append(paper);
-                _place.append(scrim);
+            if (paperMount) {
+                paper.removeEventListener('touchstart', touchStart);
+                paper.removeEventListener('touchmove', touchMove);
+                paper.removeEventListener('touchend', touchEnd);
+                paper.removeEventListener(wheelEvent, scrollEvent, wheelOpt);
             }
         };
     });
+
+    let paperMount = false;
+
+    $:if (!paperMount && paper) {
+        paperMount = true;
+        paper.addEventListener('touchstart', touchStart);
+        paper.addEventListener('touchmove', touchMove);
+        paper.addEventListener('touchend', touchEnd);
+        paper.addEventListener(wheelEvent, scrollEvent, wheelOpt);
+    }
 </script>
 
 <main>
