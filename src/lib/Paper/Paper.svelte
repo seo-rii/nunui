@@ -223,10 +223,10 @@
             closeFunc.delete(hide);
             window.removeEventListener('click', outsideClickDetect);
             if (paperMount) {
-                paper.removeEventListener('touchstart', touchStart);
-                paper.removeEventListener('touchmove', touchMove);
-                paper.removeEventListener('touchend', touchEnd);
-                paper.removeEventListener(wheelEvent, scrollEvent, wheelOpt);
+                paper?.removeEventListener?.('touchstart', touchStart);
+                paper?.removeEventListener?.('touchmove', touchMove);
+                paper?.removeEventListener?.('touchend', touchEnd);
+                paper?.removeEventListener?.(wheelEvent, scrollEvent, wheelOpt);
             }
         };
     });
