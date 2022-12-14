@@ -12,10 +12,13 @@
     export let width = 'fit-content;';
     export let padding = 5;
     export let mobileSupport = false, mobile = false;
-    export let delay = 200;
+    export let delay = 200, openDelay = 0;
+    export let ignoreTarget = false;
 
     export let hovering = false, open = (!mobile && hovering) || exOpen;
+    let hoveringTarget = false, hoveringTooltip = false;
 
+    $: hovering = hoveringTarget || hoveringTooltip;
     $: open = (!mobile && hovering) || exOpen;
 </script>
 
@@ -37,14 +40,20 @@
 
 {#if !mobile || mobileSupport}
 <span class:fullWidth>
-	<Hoverable bind:hovering {delay}>
 		<Paper {left} {center} {right} {top} {middle} {bottom} {unbounded} {absolutex} {absolutey} {tooltip}
                exOpen={(!mobile && hovering) || exOpen} hover={!mobile} {xstack} {ystack} {stacked} {style} {title}
                {fullWidth} {__remap} {width} {padding} let:hide>
-			<slot name='target' slot='target' {hide}/>
-			<slot {hide} {open}/>
+			<Hoverable bind:hovering={hoveringTarget} {delay} {openDelay} slot='target'>
+					<slot name='target' {hide}/>
+			</Hoverable>
+            {#if ignoreTarget}
+				<slot {hide} {open}/>
+			{:else}
+				<Hoverable bind:hovering={hoveringTooltip} {delay} {openDelay}>
+					<slot {hide} {open}/>
+				</Hoverable>
+			{/if}
 		</Paper>
-	</Hoverable>
 </span>
 {:else}
     <slot name='target'/>

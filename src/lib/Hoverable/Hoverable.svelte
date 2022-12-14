@@ -1,9 +1,12 @@
 <script>
-	export let delay = 0, hovering = false;
+	export let delay = 0, openDelay = 0, hovering = false;
 	let _hovering;
 
 	function enter() {
-		hovering = _hovering = true;
+		_hovering = true;
+		setTimeout(() => {
+			if (_hovering) hovering = true;
+		}, openDelay);
 	}
 
 	function leave() {
