@@ -210,6 +210,11 @@
         e.stopPropagation();
     }
 
+    $: {
+        let _render = open || exOpen || forceRender;
+        if (_render) render = true;
+        else setTimeout(() => render = false, 200);
+    }
 
     onMount(() => {
         const scrollEvent = (e) => {
@@ -229,7 +234,6 @@
             document.getElementById('app').append(paper);
             document.getElementById('app').append(scrim);
         }
-        render = true;
         closeFunc.add(hide);
         window.addEventListener('click', outsideClickDetect);
         paper.addEventListener('touchstart', touchStart);
@@ -269,22 +273,22 @@
                 <div class='drag'></div>
             </div>
         {/if}
-        <Hoverable bind:hovering>
-            {#if title}
-                {#if mobile}
-                    <h3 class='title'>
-                        <Icon {icon} style="margin-right: 10px;"/>{title}
-                    </h3>
-                {:else}
-                    <h4 class='title'>
-                        <Icon {icon} style="margin-right: 10px;"/>{title}
-                    </h4>
+        {#if render}
+            <Hoverable bind:hovering>
+                {#if title}
+                    {#if mobile}
+                        <h3 class='title'>
+                            <Icon {icon} style="margin-right: 10px;"/>{title}
+                        </h3>
+                    {:else}
+                        <h4 class='title'>
+                            <Icon {icon} style="margin-right: 10px;"/>{title}
+                        </h4>
+                    {/if}
                 {/if}
-            {/if}
-            {#if render && (forceRender || open || exOpen)}
                 <slot {open} {show} {hide}/>
-            {/if}
-        </Hoverable>
+            </Hoverable>
+        {/if}
     </div>
 </main>
 
