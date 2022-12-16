@@ -144,20 +144,26 @@
         diffY = paperBounding.top - _top;
     }
 
-    $: {
-        if (open || exOpen) {
-            if (!tooltip) closeAll(stacked);
-            open = true;
-            tick().then(() => {
-                getDiff();
-                _height = 0;
-                scroll = false;
-                tick().then(updatePosition);
-            });
-        }
+    $: if (open || exOpen) {
+        if (!tooltip) closeAll(stacked);
+        open = true;
+        tick().then(() => {
+            getDiff();
+            _height = 0;
+            scroll = false;
+            tick().then(updatePosition);
+        });
     }
 
-    $: setTimeout(() => $mobileAnim = open ? 0 : paper?.offsetHeight || 0);
+    $: {
+        if (open) {
+            mobileAnim.set(1000, {duration: 0});
+            setTimeout(() => {
+                mobileAnim.set(paper?.offsetHeight || 0, {duration: 0});
+                mobileAnim.set(0);
+            }, 10);
+        } else mobileAnim.set(paper?.offsetHeight || 0);
+    }
 
     $: _style = mobile ? `left:0;bottom:calc(${paperY}px - ${$mobileAnim}px);width:calc(100% - ${padding}px * 2);padding:${padding}px;`
         : `left:${_left}px;top:${_top}px;width:${width};padding:${padding}px;${_height ? `height:${_height}px;` : ''}${scroll ? `overflow-y:scroll;` : ''}`;
@@ -233,7 +239,7 @@
 
     let paperMount = false;
 
-    $:if (!paperMount && paper) {
+    $: if (paper) {
         paperMount = true;
         paper.addEventListener('touchstart', touchStart);
         paper.addEventListener('touchmove', touchMove);
