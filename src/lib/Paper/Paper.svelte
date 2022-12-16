@@ -99,7 +99,7 @@
     function updatePosition() {
         if (!paper) return;
         const paperBounding = paper.getBoundingClientRect();
-        const targetBounding = target.getBoundingClientRect();
+        const targetBounding = target.children?.[0] ? target.children[0].getBoundingClientRect() : target.getBoundingClientRect();
         let __left, __top;
 
         if (unbounded) {
