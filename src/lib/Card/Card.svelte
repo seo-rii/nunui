@@ -23,6 +23,7 @@
     @include applyThemeOn(color);
 
     &.outlined {
+      border: var(--on-surface-light3) 1px solid;
       @include applyTheme(border, 1px solid);
       padding: 9px;
       box-shadow: none;

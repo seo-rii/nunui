@@ -47,6 +47,13 @@
       style:--secondary-light4={mix(norm(c, secondary), norm(c, surface), 0.20)}
       style:--secondary-light5={mix(norm(c, secondary), norm(c, surface), 0.25)}
       style:--secondary-light6={mix(norm(c, secondary), norm(c, surface), 0.30)}
+
+      style:--on-surface-light1={mix(norm(c, onSurface), norm(c, surface), 0.05)}
+      style:--on-surface-light2={mix(norm(c, onSurface), norm(c, surface), 0.10)}
+      style:--on-surface-light3={mix(norm(c, onSurface), norm(c, surface), 0.15)}
+      style:--on-surface-light4={mix(norm(c, onSurface), norm(c, surface), 0.20)}
+      style:--on-surface-light5={mix(norm(c, onSurface), norm(c, surface), 0.25)}
+      style:--on-surface-light6={mix(norm(c, onSurface), norm(c, surface), 0.30)}
 >
     <slot/>
 </main>

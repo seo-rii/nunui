@@ -115,6 +115,12 @@
         <Button secondary style="float:right;">dfdfd</Button>
     </Card>
     <br>
+    <Card outlined>
+        <h1>Card</h1>
+        <p>Card</p>
+        <Button secondary outlined style="float:right;">dfdfd</Button>
+    </Card>
+    <br>
 
     <h1>Checkbox</h1>
     <Checkbox label="Primary"/>
