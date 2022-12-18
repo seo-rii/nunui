@@ -9,7 +9,7 @@
     const upd = () => $col = $col;
 
     $: {
-        $col[idx] = parseInt(<any>width);
+        $col[idx] = parseFloat(<any>width);
         upd();
     }
 
