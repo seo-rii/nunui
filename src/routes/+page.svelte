@@ -17,6 +17,7 @@
     import Table, {Th} from "$lib/Table";
     import Input from "$lib/Input";
     import Tooltip from "$lib/Tooltip";
+    import Select from "$lib/Select";
 
     let fl = false, m = 0;
     const toggle = () => fl = !fl;
@@ -165,8 +166,8 @@
     <h1>Input</h1>
     <Input placeholder="filled"/>
     <Input placeholder="outlined" outlined/>
-    <Input placeholder="filled" helper="헬퍼"/>
-    <Input placeholder="filled" error="에러"/>
+    <Input placeholder="filled" helper="Helper"/>
+    <Input placeholder="filled" error="Error"/>
 
     <h1>Table</h1>
     <Table>
@@ -223,4 +224,12 @@
         <Button slot="target">Tooltip</Button>
         <div>Tooltip</div>
     </Tooltip>
+
+    <h1>Tooltip</h1>
+    <Select placeholder="select"/>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </ThemeProvider>
