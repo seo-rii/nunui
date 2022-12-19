@@ -1,8 +1,9 @@
 <script lang='ts'>
     import Icon from '$lib/Icon';
-    import {createEventDispatcher} from 'svelte';
+    import {createEventDispatcher, setContext} from 'svelte';
     import Paper from "$lib/Paper/Paper.svelte";
     import List from "$lib/List/List.svelte";
+    import {writable} from "svelte/store";
 
     const dispatch = createEventDispatcher();
 
@@ -11,25 +12,37 @@
     export let helper = '';
     export let round = false, nohelper = false, tabindex = undefined;
     export let input = null, style = '';
+    export let multiple = false, selected = null;
 
-    let open = false;
+    let open = false, hide, clientWidth;
+
+    const _multiple = writable(false);
+    const _selected = writable();
+    const display = writable([]);
+    $: $_multiple = multiple;
+    $: selected = $_selected;
+    setContext('hide', () => hide?.());
+    setContext('multiple', _multiple);
+    setContext('selected', _selected);
+    setContext('display', display);
 </script>
 
-<Paper bind:open left bottom xstack>
+<Paper bind:open bind:hide left bottom xstack width="{clientWidth}px">
     <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 4px;"></span>
     <List>
-        sdfsdfs
+        <slot/>
     </List>
 </Paper>
-<span class='container' class:error class:fullWidth class:round class:outlined>
+<span class='container' class:error class:fullWidth class:round class:outlined bind:clientWidth>
 	<div style='position: relative;'>
 		<div class='input' type='text' placeholder='&nbsp;' on:change on:keydown
-             class:focus={open} {tabindex} on:click={() => setTimeout(() => open = !open, 1)}
+             class:focus={open} class:active={open || $display.length} {tabindex}
+             on:click={() => setTimeout(() => open = !open, 1)}
              on:keydown={(e)=>{
 				if (e.key === 'Enter') {
 					dispatch('submit', value);
 				}
-			}} bind:this={input} {style} class:outlined></div>
+			}} bind:this={input} {style} class:outlined><span>{$display.map(e => e.title)}</span></div>
         <span class='placeholder'>{placeholder}</span>
         {#if !outlined}
 			<span class='background' class:round></span>
@@ -130,12 +143,18 @@
       width: 100%;
       cursor: pointer;
 
-      appearance: none;
       font-family: inherit;
       padding: 8px 8px 0 8px;
       height: 46px;
       background: rgba(92, 102, 121, 0.03);
       transition: all .15s ease;
+      position: relative;
+      overflow: hidden;
+
+      span {
+        position: relative;
+        top: 6px;
+      }
 
       &.outlined {
         background: unset;
@@ -154,11 +173,11 @@
         border-bottom: 1px solid #bbb;
       }
 
-      &.focus + .placeholder {
+      &.active + .placeholder {
         transform: translate3d(0, -8px, 0) scale(.5);
       }
 
-      &.outlined.focus + .placeholder {
+      &.outlined.active + .placeholder {
         transform: translate3d(0, -12px, 0) scale(.5);
         background-color: var(--surface);
       }

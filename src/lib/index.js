@@ -16,6 +16,7 @@ import SegmentButton from "./SegmentButton";
 import Table, {Th} from "./Table";
 import ThemeProvider from "./ThemeProvider";
 import Tooltip from "./Tooltip";
+import Select, {Option} from "./Select";
 
 export {
     Blocker,
@@ -36,9 +37,11 @@ export {
     Table,
     ThemeProvider,
     Tooltip,
+    Select,
 
     Base,
     OneLine,
     TwoLine,
-    Th
+    Th,
+    Option,
 }
