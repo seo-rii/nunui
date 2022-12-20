@@ -6,7 +6,7 @@
     const hide = getContext("hide");
     const multiple = getContext("multiple");
     const selected: any = getContext("selected");
-    const display = getContext("display");
+    const display: any = getContext("display");
 
     export let title = '', subtitle = '', icon = '', data: any;
     let active = false;
@@ -21,19 +21,28 @@
         }
     }
 
+    $: {
+        if ($multiple) {
+            if (!active) {
+                display.update((display) => display.filter((item) => item.title !== _title));
+            } else if (get(display).filter((item) => item.title === _title).length === 0) {
+                display.update((display) => [...display, {title: _title, data}]);
+            }
+        } else {
+            if (active) display.set([{title: _title, data}]);
+        }
+    }
+
     function select() {
         if ($multiple) {
             if (!get(selected)?.length) selected.set([]);
             if (active) {
                 selected.update((selected) => selected.filter((item) => item !== data));
-                display.update((display) => display.filter((item) => item.title !== _title));
             } else {
                 selected.update((selected) => [...selected, data]);
-                display.update((display) => [...display, {title: _title, data}]);
             }
         } else {
             selected.set(data);
-            display.set([{title: _title, data}]);
             hide();
         }
     }
