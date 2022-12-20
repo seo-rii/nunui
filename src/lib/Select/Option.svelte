@@ -30,6 +30,7 @@
             }
         } else {
             if (active) display.set([{title: _title, data}]);
+            else display.update((display) => display.filter((item) => item.title !== _title));
         }
     }
 

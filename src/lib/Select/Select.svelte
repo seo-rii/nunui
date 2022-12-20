@@ -27,7 +27,8 @@
     $: {
         void selected;
         update();
-    };
+    }
+
     setContext('hide', () => hide?.());
     setContext('multiple', _multiple);
     setContext('selected', _selected);
