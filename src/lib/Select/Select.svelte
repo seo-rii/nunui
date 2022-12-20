@@ -5,22 +5,30 @@
     import List from "$lib/List/List.svelte";
     import {writable} from "svelte/store";
 
-    const dispatch = createEventDispatcher();
-
     export let outlined = false;
-    export let placeholder: string, value = '', error = '', fullWidth = false;
+    export let placeholder: string, error = '', fullWidth = false;
     export let helper = '';
     export let round = false, nohelper = false, tabindex = undefined;
-    export let input = null, style = '';
-    export let multiple = false, selected = null;
+    export let style = '';
+    export let multiple = false, selected = null, separator = ', ';
 
     let open = false, hide, clientWidth;
 
     const _multiple = writable(false);
     const _selected = writable();
     const display = writable([]);
+
     $: $_multiple = multiple;
+
+    const update = () => {
+        if (selected !== $_selected) $_selected = selected
+    }
     $: selected = $_selected;
+    $: {
+        void selected;
+        update();
+    }
+    ;
     setContext('hide', () => hide?.());
     setContext('multiple', _multiple);
     setContext('selected', _selected);
@@ -40,9 +48,9 @@
              on:click={() => setTimeout(() => open = !open, 1)}
              on:keydown={(e)=>{
 				if (e.key === 'Enter') {
-					dispatch('submit', value);
+					open = true;
 				}
-			}} bind:this={input} {style} class:outlined><span>{$display.map(e => e.title)}</span></div>
+			}} {style} class:outlined><span>{$display.map(e => e.title).join(separator)}</span></div>
         <span class='placeholder'>{placeholder}</span>
         {#if !outlined}
 			<span class='background' class:round></span>
