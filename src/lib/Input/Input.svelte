@@ -10,6 +10,7 @@
     export let autofocus = false, password = false, trailingIcon = '', round = false, nohelper = false,
         autocapitalize = undefined, tabindex = undefined;
     export let input = null, style = '';
+    export let trailingHandler = () => null;
 
     let rf, _error;
 
@@ -71,7 +72,7 @@
 		{/if}
         {#if trailingIcon}
 			<div class='trailingIcon'>
-				<IconButton icon={trailingIcon} size='34'/>
+				<IconButton icon={trailingIcon} size='34' on:click={(e) => {e.stopPropagation();trailingHandler(e);}}/>
 			</div>
 		{/if}
 	</div>
@@ -264,7 +265,11 @@
       right: 0;
       top: 0;
       border-radius: 100px;
-      backdrop-filter: blur(5px);
+
+      & > :global(*) {
+        border-radius: 100px;
+        backdrop-filter: blur(5px);
+      }
     }
   }
 
