@@ -14,10 +14,14 @@
 <Grid max="4">
     <Card>
         <h2 style="margin: 0 0 10px 0;">Button</h2>
-        <a href="/document/button" style="float: right;"><Button small transparent>document</Button></a>
+        <a href="/nunui/document/button" style="float: right;">
+            <Button small transparent>document</Button>
+        </a>
     </Card>
     <Card>
         <h2 style="margin: 0 0 10px 0;">Tooltip</h2>
-        <a href="/document/tooltip" style="float: right;"><Button small transparent>document</Button></a>
+        <a href="/nunui/document/tooltip" style="float: right;">
+            <Button small transparent>document</Button>
+        </a>
     </Card>
 </Grid>
