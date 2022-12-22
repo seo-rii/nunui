@@ -1,10 +1,11 @@
 <script lang="ts">
+    import {browser} from "$app/environment";
+    /*
     import CodeMirror, {EditorConfiguration} from "codemirror";
     import "codemirror/lib/codemirror.css";
     import "codemirror/mode/markdown/markdown";
     import "codemirror/mode/gfm/gfm";
     import "codemirror/mode/htmlmixed/htmlmixed";
-    import {browser} from "$app/environment";
 
     import Codemirror from "codemirror-svelte";
 
@@ -16,7 +17,7 @@
         lineNumbers: false,
         readOnly: 'nocursor',
         theme: 'neo',
-    };
+    };*/
 
     export let value = "";
 </script>
@@ -24,7 +25,8 @@
 {#if browser}
     {#key value}
         <main>
-            <Codemirror {CodeMirror} {value} options={editorOptions}/>
+            <!--<Codemirror {CodeMirror} {value} options={editorOptions}/>-->
+            <pre><code>{value}</code></pre>
         </main>
     {/key}
 {/if}

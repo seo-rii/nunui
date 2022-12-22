@@ -5,15 +5,18 @@
   "scripts": {
     "dev": "vite dev",
     "build": "svelte-kit sync && svelte-package",
+    "build-page": "vite build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
     "package": "svelte-kit sync && svelte-package",
-    "publish": "npm run package && cd package && npm publish"
+    "publish": "npm run package && cd package && npm publish",
+    "page": "npm run build-page && node gh-pages.js"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "1.0.0",
+    "@sveltejs/adapter-static": "^1.0.0",
     "@sveltejs/kit": "1.0.0",
     "@sveltejs/package": "1.0.0",
     "@types/codemirror": "^5.60.5",
@@ -23,6 +26,7 @@
     "eslint": "8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
+    "gh-pages": "^4.0.0",
     "node-sass": "^8.0.0",
     "prettier": "^2.8.1",
     "prettier-plugin-svelte": "^2.9.0",
