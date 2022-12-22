@@ -4,8 +4,11 @@ specifiers:
   '@sveltejs/adapter-auto': 1.0.0
   '@sveltejs/kit': 1.0.0
   '@sveltejs/package': 1.0.0
+  '@types/codemirror': ^5.60.5
   '@typescript-eslint/eslint-plugin': ^5.46.1
   '@typescript-eslint/parser': ^5.46.1
+  codemirror: ^5.65.11
+  codemirror-svelte: ^1.2.1
   eslint: 8.29.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
@@ -22,14 +25,17 @@ specifiers:
   vite: ^4.0.1
 
 dependencies:
+  codemirror: 5.65.11
   svelte-portal: 2.2.0
 
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0_@sveltejs+kit@1.0.0
   '@sveltejs/kit': 1.0.0_svelte@3.55.0+vite@4.0.1
   '@sveltejs/package': 1.0.0_niwyv7xychq2ag6arq5eqxbomm
+  '@types/codemirror': 5.60.5
   '@typescript-eslint/eslint-plugin': 5.46.1_imrg37k3svwu377c6q7gkarwmi
   '@typescript-eslint/parser': 5.46.1_ha6vam6werchizxrnqvarmz2zu
+  codemirror-svelte: 1.2.1_codemirror@5.65.11
   eslint: 8.29.0
   eslint-config-prettier: 8.5.0_eslint@8.29.0
   eslint-plugin-svelte3: 4.0.0_ffnabc34fed75fjymbd45uofx4
@@ -462,8 +468,18 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
+  /@types/codemirror/5.60.5:
+    resolution: {integrity: sha512-TiECZmm8St5YxjFUp64LK0c8WU5bxMDt9YaAek1UqUb9swrSCoJhh92fWu1p3mTEqlHjhB5sY7OFBhWroJXZVg==}
+    dependencies:
+      '@types/tern': 0.23.4
+    dev: true
+
   /@types/cookie/0.5.1:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
+    dev: true
+
+  /@types/estree/1.0.0:
+    resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -494,6 +510,12 @@ packages:
 
   /@types/semver/7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+    dev: true
+
+  /@types/tern/0.23.4:
+    resolution: {integrity: sha512-JAUw1iXGO1qaWwEOzxTKJZ/5JxVeON9kvGZ/osgZaJImBnyjyn0cjovPsf6FNLmyGY8Vw9DoXZCMlfMkMwHRWg==}
+    dependencies:
+      '@types/estree': 1.0.0
     dev: true
 
   /@typescript-eslint/eslint-plugin/5.46.1_imrg37k3svwu377c6q7gkarwmi:
@@ -898,6 +920,17 @@ packages:
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
     dev: true
+
+  /codemirror-svelte/1.2.1_codemirror@5.65.11:
+    resolution: {integrity: sha512-fvcVoSIIECXo1u/PQaeMeLkVbAdCu7GENQGGYo+ta4u97A8Tzye8CQuvmd+dN+7vi+BYG+fowZ4zwAPSswYE4Q==}
+    peerDependencies:
+      codemirror: ^6.0.1
+    dependencies:
+      codemirror: 5.65.11
+    dev: true
+
+  /codemirror/5.65.11:
+    resolution: {integrity: sha512-Gp62g2eKSCHYt10axmGhKq3WoJSvVpvhXmowNq7pZdRVowwtvBR/hi2LSP5srtctKkRT33T6/n8Kv1UGp7JW4A==}
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
