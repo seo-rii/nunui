@@ -25,11 +25,11 @@
 
 
 <h1>Ripple</h1>
-<a href="/nunui"
+<a href="/"
    style="width: 400px;height:100px;position: relative;background: #eee;display: block;-webkit-tap-highlight-color: transparent;">
     <Ripple/>
 </a>
-<a href="/nunui"
+<a href="/"
    style="width: 400px;height:100px;position: relative;background: #eee;display: block;-webkit-tap-highlight-color: transparent;">
     <Ripple secondary/>
 </a>

@@ -11,9 +11,6 @@ const config = {
         adapter: adapter(),
         alias: {
             nunui: 'src/lib'
-        },
-        paths: {
-            base: '/nunui'
         }
     }
 };
