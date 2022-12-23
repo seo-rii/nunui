@@ -1,5 +1,4 @@
 <script>
-    import ThemeProvider from "$lib/ThemeProvider";
     import Ripple from "$lib/Ripple";
     import Button from "$lib/Button";
     import LinearProgress from "$lib/LinearProgress";
@@ -25,11 +24,11 @@
 
 
 <h1>Ripple</h1>
-<a href="/"
+<a href="/nunui"
    style="width: 400px;height:100px;position: relative;background: #eee;display: block;-webkit-tap-highlight-color: transparent;">
     <Ripple/>
 </a>
-<a href="/"
+<a href="/nunui"
    style="width: 400px;height:100px;position: relative;background: #eee;display: block;-webkit-tap-highlight-color: transparent;">
     <Ripple secondary/>
 </a>
