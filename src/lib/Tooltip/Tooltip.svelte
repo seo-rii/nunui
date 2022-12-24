@@ -6,7 +6,7 @@
         unbounded = false, absolutex = false, absolutey = false, tooltip = true, exOpen = false, hover = false;
     export let xstack = false, ystack = false;
     export let stacked = 0;
-    export let style = '', title = '';
+    export let style = '', title = '', icon = '';
     export let fullWidth = false;
     export let __remap = false;
     export let width = 'fit-content;';
@@ -40,7 +40,7 @@
 
 {#if !mobile || mobileSupport}
 <span class:fullWidth>
-		<Paper {left} {center} {right} {top} {middle} {bottom} {unbounded} {absolutex} {absolutey} {tooltip}
+		<Paper {left} {center} {right} {top} {middle} {bottom} {unbounded} {absolutex} {absolutey} {tooltip} {icon}
                exOpen={(!mobile && hovering) || exOpen} hover={!mobile} {xstack} {ystack} {stacked} {style} {title}
                {fullWidth} {__remap} {width} {padding} {forceRender} let:hide>
 			<Hoverable bind:hovering={hoveringTarget} {delay} {openDelay} slot='target'>
