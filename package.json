@@ -1,7 +1,7 @@
 {
   "name": "nunui",
   "description": "Svelte UI Component Library",
-  "version": "0.0.65",
+  "version": "0.0.66",
   "scripts": {
     "dev": "vite dev",
     "build": "svelte-kit sync && svelte-package",
