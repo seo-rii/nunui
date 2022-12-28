@@ -28,7 +28,7 @@
 
   main {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   table {
