@@ -9,7 +9,7 @@
     export let required = false, number = false, min = null, max = null, helper = '';
     export let autofocus = false, password = false, trailingIcon = '', round = false, nohelper = false,
         autocapitalize = undefined, tabindex = undefined;
-    export let input = null, style = '';
+    export let input = null, style = '', maxlength = undefined;
     export let trailingHandler = () => null;
 
     let rf, _error;
@@ -42,7 +42,7 @@
 		{:else}
 			{#if password}
 				<input class='input' type='password' placeholder='&nbsp;' bind:value on:change on:keydown {autofocus}
-                       on:focus
+                       on:focus {maxlength}
                        on:blur {autocapitalize} {tabindex} on:keydown={(e)=>{
 								if (e.key === 'Enter') {
 									dispatch('submit', value);
@@ -50,7 +50,7 @@
 							}} bind:this={input} {style} class:outlined/>
             {:else if number}
 				<input class='input' type='number' placeholder='&nbsp;' bind:value on:change on:keydown {autofocus}
-                       on:focus
+                       on:focus {maxlength}
                        on:blur {autocapitalize} {tabindex} on:keydown={(e)=>{
 								if (e.key === 'Enter') {
 									dispatch('submit', value);
@@ -58,7 +58,7 @@
 							}} bind:this={input} {style} class:outlined/>
             {:else}
 				<input class='input' type='text' placeholder='&nbsp;' bind:value on:change on:keydown {autofocus}
-                       on:focus
+                       on:focus {maxlength}
                        on:blur {autocapitalize} {tabindex} on:keydown={(e)=>{
 								if (e.key === 'Enter') {
 									dispatch('submit', value);
