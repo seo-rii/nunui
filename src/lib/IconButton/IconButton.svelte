@@ -3,15 +3,17 @@
     import Ripple from "$lib/Ripple";
     import Blocker from "$lib/Blocker";
 
-    export let icon: string, flat = false, size = 36, outlined = undefined, style = "", disabled = false,
+    export let icon: string, flat = false, size = '2rem', outlined = undefined, style = "", disabled = false,
         active = false,
         label = "", secondary = false, primary = !secondary;
 
     let clicked = false, hover = false, container;
+
+    const numeric = /^-?\d+$/;
 </script>
 
 <div class="adapter">
-    <div class="container" bind:this={container} style:--size="{size}px"
+    <div class="container" bind:this={container} style:--size={numeric.test(size) ? size + 'px' : size}
          on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove
          on:mouseout on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover
          on:dragstart on:drop on:scroll>
