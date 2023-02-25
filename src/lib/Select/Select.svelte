@@ -17,11 +17,15 @@
     const _multiple = writable(false);
     const _selected = writable();
     const display = writable([]);
+    const dispatch = createEventDispatcher();
 
     $: $_multiple = multiple;
 
     const update = () => {
-        if (selected !== $_selected) $_selected = selected
+        if (selected !== $_selected) {
+            $_selected = selected;
+            dispatch('select', selected);
+        }
     }
     $: selected = $_selected;
     $: {
