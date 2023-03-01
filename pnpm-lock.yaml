@@ -4,7 +4,7 @@ specifiers:
   '@sveltejs/adapter-auto': 2.0.0
   '@sveltejs/adapter-static': ^2.0.1
   '@sveltejs/kit': 1.9.1
-  '@sveltejs/package': 2.0.2
+  '@sveltejs/package': 1.0.1
   '@types/codemirror': ^5.60.7
   '@typescript-eslint/eslint-plugin': ^5.54.0
   '@typescript-eslint/parser': ^5.54.0
@@ -34,7 +34,7 @@ devDependencies:
   '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.9.1
   '@sveltejs/adapter-static': 2.0.1_@sveltejs+kit@1.9.1
   '@sveltejs/kit': 1.9.1_svelte@3.55.1+vite@4.1.4
-  '@sveltejs/package': 2.0.2_4x7phaipmicbaooxtnresslofa
+  '@sveltejs/package': 1.0.1_4x7phaipmicbaooxtnresslofa
   '@types/codemirror': 5.60.7
   '@typescript-eslint/eslint-plugin': 5.54.0_6mj2wypvdnknez7kws2nfdgupi
   '@typescript-eslint/parser': 5.54.0_ycpbpc6yetojsgtrx3mwntkhsu
@@ -503,8 +503,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/package/2.0.2_4x7phaipmicbaooxtnresslofa:
-    resolution: {integrity: sha512-cCOCcO8yMHnhHyaR51nQtvKZ3o/vSU9UYI1EXLT1j2CKNPMuH1/g6JNwKcNNrtQGwwquudc69ZeYy8D/TDNwEw==}
+  /@sveltejs/package/1.0.1_4x7phaipmicbaooxtnresslofa:
+    resolution: {integrity: sha512-iYoDz4AEJQUfdKUfBcwtYEGYkf4NMByQL3Sl2ESnu+IXsLNsHvhH0zUDhAmUmAgcrH8fVjiR7FuJeyh+7EQtiw==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     peerDependencies:
@@ -514,7 +514,7 @@ packages:
       kleur: 4.1.5
       sade: 1.8.1
       svelte: 3.55.1
-      svelte2tsx: 0.6.2_4x7phaipmicbaooxtnresslofa
+      svelte2tsx: 0.5.23_4x7phaipmicbaooxtnresslofa
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -3050,11 +3050,11 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /svelte2tsx/0.6.2_4x7phaipmicbaooxtnresslofa:
-    resolution: {integrity: sha512-0ircYY2/jMOfistf+iq8fVHERnu1i90nku56c78+btC8svyafsc3OjOV37LDEOV7buqYY1Rv/uy03eMxhopH2Q==}
+  /svelte2tsx/0.5.23_4x7phaipmicbaooxtnresslofa:
+    resolution: {integrity: sha512-jYFnugTQRFmUpvLXPQrKzVYcW5ErT+0QCxg027Zx9BuvYefMZFuoBSTDYe7viPEFGrPPiLgT2m7f5n9khE7f7Q==}
     peerDependencies:
-      svelte: ^3.55
-      typescript: ^4.9.4
+      svelte: ^3.24
+      typescript: ^4.1.2
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2

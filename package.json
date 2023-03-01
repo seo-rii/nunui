@@ -18,7 +18,7 @@
     "@sveltejs/adapter-auto": "2.0.0",
     "@sveltejs/adapter-static": "^2.0.1",
     "@sveltejs/kit": "1.9.1",
-    "@sveltejs/package": "2.0.2",
+    "@sveltejs/package": "1.0.1",
     "@types/codemirror": "^5.60.7",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
