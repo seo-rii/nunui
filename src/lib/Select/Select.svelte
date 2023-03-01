@@ -15,7 +15,7 @@
     let open = false, hide, clientWidth;
 
     const _multiple = writable(false);
-    const _selected = writable();
+    const _selected = writable(selected);
     const display = writable([]);
     const dispatch = createEventDispatcher();
 
@@ -39,7 +39,7 @@
     setContext('display', display);
 </script>
 
-<Paper bind:open bind:hide left bottom xstack width="{clientWidth}px">
+<Paper bind:open bind:hide left bottom xstack width="{clientWidth}px" forceRender>
     <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 4px;"></span>
     <List>
         <slot/>

@@ -1,7 +1,7 @@
 {
   "name": "nunui",
   "description": "Svelte UI Component Library",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "scripts": {
     "dev": "vite dev",
     "build": "svelte-kit sync && svelte-package",
@@ -17,13 +17,13 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "2.0.0",
     "@sveltejs/adapter-static": "^2.0.1",
-    "@sveltejs/kit": "1.8.5",
+    "@sveltejs/kit": "1.9.1",
     "@sveltejs/package": "2.0.2",
     "@types/codemirror": "^5.60.7",
-    "@typescript-eslint/eslint-plugin": "^5.53.0",
-    "@typescript-eslint/parser": "^5.53.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "codemirror-svelte": "^1.2.1",
-    "eslint": "8.34.0",
+    "eslint": "8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "gh-pages": "^5.0.0",

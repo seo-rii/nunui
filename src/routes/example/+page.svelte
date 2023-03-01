@@ -18,7 +18,7 @@
     import Tooltip from "$lib/Tooltip";
     import Select, {Option} from "$lib/Select";
 
-    let fl = false, m = 0;
+    let fl = false, m = 0, test = '1';
     const toggle = () => fl = !fl;
 </script>
 
@@ -214,11 +214,14 @@
 </Tooltip>
 
 <h1>Tooltip</h1>
-<Select placeholder="select">
+<Select placeholder="select" bind:selected={test}>
     <Option data="1" value="1" title="1"/>
     <Option data="2" value="2" title="2" subtitle="2"/>
     <Option data="3" value="3" title="3" icon="star"/>
 </Select>
+<br>
+{test}
+<br>
 <Select placeholder="select" multiple>
     <Option data="1" value="1" title="1"/>
     <Option data="2" value="2" title="2" subtitle="2"/>

@@ -101,7 +101,7 @@
       color: inherit;
       display: block;
       font-size: 1.4rem;
-      margin-left: 1rem+ (1rem/ 2) + (.15rem * 2);
+      margin-left: 1rem+ calc(1rem / 2) + (.15rem * 2);
     }
 
     &.error {
