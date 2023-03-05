@@ -105,7 +105,7 @@
     }
 
     &.fullWidth {
-      display: inline;
+      display: inline-block;
       max-width: unset;
 
       .helper {
