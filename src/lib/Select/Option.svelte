@@ -63,7 +63,11 @@
     <slot {active}/>
     {#if $target && active}
         <Portal target={$target}>
-            <slot {active}/>
+            {#if $$slots.display}
+                <slot name="display" {active}/>
+            {:else}
+                <slot {active}/>
+            {/if}
         </Portal>
     {/if}
 </main>
