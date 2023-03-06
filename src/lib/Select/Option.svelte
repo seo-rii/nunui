@@ -61,7 +61,9 @@
     {/if}
 
     <slot {active}/>
-    {#if $target}
-        <Portal target={$target}/>
+    {#if $target && active}
+        <Portal target={$target}>
+            <slot {active}/>
+        </Portal>
     {/if}
 </main>
