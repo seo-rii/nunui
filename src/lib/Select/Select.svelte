@@ -4,6 +4,7 @@
     import Paper from "$lib/Paper/Paper.svelte";
     import List from "$lib/List/List.svelte";
     import {writable} from "svelte/store";
+    import Ripple from "$lib/Ripple/Ripple.svelte";
 
     export let outlined = false;
     export let placeholder: string, error = '', fullWidth = false;
@@ -40,26 +41,27 @@
 </script>
 
 <Paper bind:open bind:hide left bottom xstack width="{clientWidth}px" forceRender>
-    <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 4px;"></span>
+    <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 0;"></span>
     <List>
         <slot/>
     </List>
 </Paper>
 <span class='container' class:error class:fullWidth class:round class:outlined bind:clientWidth>
 	<div style='position: relative;'>
-		<div class='input' type='text' placeholder='&nbsp;' on:change on:keydown
-             class:focus={open} class:active={open || $display.length} {tabindex}
-             on:click={() => setTimeout(() => open = !open, 1)}
-             on:keydown={(e)=>{
+		<div class='input' type='text' placeholder='&nbsp;' on:change on:keydown class:focus={open}
+             class:active={open || $display.length} {tabindex} on:keydown={(e)=>{
 				if (e.key === 'Enter') {
 					open = true;
 				}
-			}} {style} class:outlined><span>{$display.map(e => e.title).join(separator)}</span></div>
+			 }} {style} class:outlined on:click={() => setTimeout(() => open = true, 1)}>
+            <span>{$display.map(e => e.title).join(separator)}</span>
+            <Ripple/>
+        </div>
         <span class='placeholder'>{placeholder}</span>
         {#if !outlined}
 			<span class='background' class:round></span>
 		{/if}
-        <div class='trailingIcon' class:open on:click={() => setTimeout(() => open = true, 1)}>
+        <div class='trailingIcon' class:open>
 			<Icon icon="expand_more" size='26'/>
 		</div>
 	</div>
@@ -79,10 +81,12 @@
 
     display: inline-block;
     position: relative;
+    left: -4px;
     margin: auto;
     width: 100%;
     max-width: 280px;
     border-radius: var(--border);
+    overflow: hidden;
 
     .input {
       color: var(--on-surface);
