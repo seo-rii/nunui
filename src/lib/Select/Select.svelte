@@ -12,11 +12,13 @@
     export let round = false, nohelper = false, tabindex = undefined;
     export let style = '';
     export let multiple = false, selected = null, separator = ', ';
+    export let override = false;
 
     let open = false, hide, clientWidth;
 
     const _multiple = writable(false);
     const _selected = writable(selected);
+    const target = writable();
     const display = writable([]);
     const dispatch = createEventDispatcher();
 
@@ -38,6 +40,7 @@
     setContext('multiple', _multiple);
     setContext('selected', _selected);
     setContext('display', display);
+    setContext('target', target);
 </script>
 
 <Paper bind:open bind:hide left bottom xstack width="{clientWidth}px" forceRender>
@@ -54,7 +57,11 @@
 					open = true;
 				}
 			 }} {style} class:outlined on:click={() => setTimeout(() => open = true, 1)}>
-            <span>{$display.map(e => e.title).join(separator)}</span>
+            {#if override}
+                <span bind:this={$target}></span>
+            {:else}
+                <span>{$display.map(e => e.title).join(separator)}</span>
+            {/if}
             <Ripple/>
         </div>
         <span class='placeholder'>{placeholder}</span>
