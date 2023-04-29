@@ -1,22 +1,8 @@
 <script>
-    import Ripple from "$lib/Ripple";
-    import Button from "$lib/Button";
-    import LinearProgress from "$lib/LinearProgress";
-    import Icon from "$lib/Icon";
-    import IconButton from "$lib/IconButton";
-    import CircularProgress from "$lib/CircularProgress";
-    import SegmentButton from "$lib/SegmentButton";
-    import Card from "$lib/Card";
-    import Checkbox from "$lib/Checkbox";
-    import Radio from "$lib/Radio";
-    import List from "$lib/List";
-    import OneLine from "$lib/List/components/OneLine.svelte";
-    import TwoLine from "$lib/List/components/TwoLine.svelte";
-    import Paper from "$lib/Paper";
-    import Table, {Th} from "$lib/Table";
-    import Input from "$lib/Input";
-    import Tooltip from "$lib/Tooltip";
-    import Select, {Option} from "$lib/Select";
+    import {
+        Ripple, Button, LinearProgress, Icon, IconButton, CircularProgress, SegmentButton, Card, Checkbox, Radio,
+        List, OneLine, TwoLine, Paper, Table, Th, Input, Tooltip, Select, Option, Date
+    } from "$lib";
 
     let fl = false, m = 0, test = '1';
     const toggle = () => fl = !fl;
@@ -227,6 +213,27 @@
     <Option data="2" value="2" title="2" subtitle="2"/>
     <Option data="3" value="3" title="3" icon="star"/>
 </Select>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Date</h1>
+<Date placeholder="Date"/>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

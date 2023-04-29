@@ -37,6 +37,7 @@
     table-layout: fixed;
     min-width: var(--minWidth);
     width: 100%;
+    --r: 12px;
 
     :global {
       th {
@@ -80,19 +81,28 @@
         &:nth-child(2) {
           background-color: unset;
         }
+
+        &:hover {
+          --r: 18px;
+        }
+
+        &:active {
+          --r: 24px;
+        }
       }
 
       td {
         padding: 10px;
+        transition: all 0.2s ease-in-out;
 
         &:first-child {
-          border-top-left-radius: 12px;
-          border-bottom-left-radius: 12px;
+          border-top-left-radius: var(--r);
+          border-bottom-left-radius: var(--r);
         }
 
         &:last-child {
-          border-top-right-radius: 12px;
-          border-bottom-right-radius: 12px;
+          border-top-right-radius: var(--r);
+          border-bottom-right-radius: var(--r);
         }
 
         & > :global(*) {

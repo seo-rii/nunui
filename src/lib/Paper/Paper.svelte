@@ -60,7 +60,7 @@
     export let padding = 0;
     export let mobile = false;
     export let marginTop = 0;
-    export let inline = false;
+    export let inline = false, block = false;
     export let forceRender = false;
 
     export let open = false, show = () => {
@@ -301,6 +301,10 @@
 
     &.inline {
       display: inline-block;
+    }
+
+    &.block {
+      display: block;
     }
   }
 

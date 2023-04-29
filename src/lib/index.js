@@ -17,6 +17,7 @@ import Table, {Th} from "./Table";
 import ThemeProvider from "./ThemeProvider";
 import Tooltip from "./Tooltip";
 import Select, {Option} from "./Select";
+import Date from "./Date";
 
 export {
     Blocker,
@@ -38,6 +39,7 @@ export {
     ThemeProvider,
     Tooltip,
     Select,
+    Date,
 
     Base,
     OneLine,
