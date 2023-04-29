@@ -248,9 +248,9 @@
     }
 </script>
 
-<main class:block>
+<main>
     <div class='target' bind:this={target} on:click={()=>open=!open} on:click={()=>lock=true} {style} class:fullWidth
-         class:noTarget={!$$slots.target} class:inline>
+         class:noTarget={!$$slots.target} class:inline class:block>
         <slot name='target'/>
     </div>
     {#if render}
