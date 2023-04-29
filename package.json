@@ -1,7 +1,7 @@
 {
   "name": "nunui",
   "description": "Svelte UI Component Library",
-  "version": "0.0.78",
+  "version": "0.0.79",
   "scripts": {
     "dev": "vite dev",
     "build": "svelte-kit sync && svelte-package",
@@ -27,7 +27,6 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "gh-pages": "^5.0.0",
-    "node-sass": "^8.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.0",
     "sass": "^1.62.1",

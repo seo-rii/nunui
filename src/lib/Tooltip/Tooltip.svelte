@@ -44,7 +44,7 @@
 </style>
 
 {#if !mobile || mobileSupport}
-<span class:fullWidth>
+<span class:fullWidth class:block>
 		<Paper {left} {center} {right} {top} {middle} {bottom} {unbounded} {absolutex} {absolutey} {tooltip} {icon}
                exOpen={(!mobile && hovering) || exOpen} hover={!mobile} {xstack} {ystack} {stacked} {style} {title}
                {fullWidth} {__remap} {width} {padding} {forceRender} {block} let:hide>

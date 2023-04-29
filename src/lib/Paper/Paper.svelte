@@ -248,7 +248,7 @@
     }
 </script>
 
-<main>
+<main class:block>
     <div class='target' bind:this={target} on:click={()=>open=!open} on:click={()=>lock=true} {style} class:fullWidth
          class:noTarget={!$$slots.target} class:inline>
         <slot name='target'/>
