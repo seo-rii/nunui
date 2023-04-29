@@ -41,12 +41,26 @@
       style:--primary-light5={mix(norm(c, primary), norm(c, surface), 0.25)}
       style:--primary-light6={mix(norm(c, primary), norm(c, surface), 0.30)}
 
+      style:--primary-dark1={mix(norm(c, primary), norm(c, onSurface), 0.05)}
+      style:--primary-dark2={mix(norm(c, primary), norm(c, onSurface), 0.10)}
+      style:--primary-dark3={mix(norm(c, primary), norm(c, onSurface), 0.15)}
+      style:--primary-dark4={mix(norm(c, primary), norm(c, onSurface), 0.20)}
+      style:--primary-dark5={mix(norm(c, primary), norm(c, onSurface), 0.25)}
+      style:--primary-dark6={mix(norm(c, primary), norm(c, onSurface), 0.30)}
+
       style:--secondary-light1={mix(norm(c, secondary), norm(c, surface), 0.05)}
       style:--secondary-light2={mix(norm(c, secondary), norm(c, surface), 0.10)}
       style:--secondary-light3={mix(norm(c, secondary), norm(c, surface), 0.15)}
       style:--secondary-light4={mix(norm(c, secondary), norm(c, surface), 0.20)}
       style:--secondary-light5={mix(norm(c, secondary), norm(c, surface), 0.25)}
       style:--secondary-light6={mix(norm(c, secondary), norm(c, surface), 0.30)}
+
+      style:--secondary-dark1={mix(norm(c, secondary), norm(c, onSurface), 0.05)}
+      style:--secondary-dark2={mix(norm(c, secondary), norm(c, onSurface), 0.10)}
+      style:--secondary-dark3={mix(norm(c, secondary), norm(c, onSurface), 0.15)}
+      style:--secondary-dark4={mix(norm(c, secondary), norm(c, onSurface), 0.20)}
+      style:--secondary-dark5={mix(norm(c, secondary), norm(c, onSurface), 0.25)}
+      style:--secondary-dark6={mix(norm(c, secondary), norm(c, onSurface), 0.30)}
 
       style:--on-surface-light1={mix(norm(c, onSurface), norm(c, surface), 0.05)}
       style:--on-surface-light2={mix(norm(c, onSurface), norm(c, surface), 0.10)}
