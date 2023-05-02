@@ -76,7 +76,7 @@
       }
 
       @include applyTheme(color);
-      @include applyTheme(border, 1px solid);
+      @include applyTheme(border, 1px solid, '', 4);
     }
 
     &:not(.outlined):not(.transparent) {
