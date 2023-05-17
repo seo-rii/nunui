@@ -90,6 +90,7 @@
   .container {
     --border: 5px 5px 0 0;
 
+    font-size: 1.4em;
     display: inline-block;
     position: relative;
     margin: auto;
@@ -130,7 +131,7 @@
       position: absolute;
       top: 12px;
       left: 10px;
-      font-size: 18px;
+      font-size: 1em;
       color: var(--on-surface);
       font-weight: 300;
       transform-origin: 0 0;
@@ -160,17 +161,18 @@
     }
 
     .input {
-      font-size: 18px;
       border: none;
       outline: none;
       font-weight: 300;
       border-radius: var(--border);
       width: 100%;
 
+      font-size: 1em;
+      height: calc(1.5em + 18px);
+      padding: 0.4em 8px 0 8px;
+
       appearance: none;
       font-family: inherit;
-      padding: 8px 8px 0 8px;
-      height: 46px;
       background: rgba(92, 102, 121, 0.03);
       transition: all .15s ease;
 
