@@ -95,6 +95,10 @@
     border-radius: var(--border);
     overflow: hidden;
 
+    &:not(.outlined) {
+      background: var(--primary-light1);
+    }
+
     .input {
       color: var(--on-surface);
     }
@@ -149,7 +153,6 @@
         border-radius: 100px;
       }
 
-      background: rgba(92, 102, 121, 0.06);
       z-index: -1;
       transform: scaleX(0);
       transform-origin: left;
@@ -169,7 +172,6 @@
       font-family: inherit;
       padding: 8px 8px 0 8px;
       height: 46px;
-      background: rgba(92, 102, 121, 0.03);
       transition: all .15s ease;
       position: relative;
       overflow: hidden;

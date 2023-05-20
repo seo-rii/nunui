@@ -7,9 +7,8 @@
     export let outlined = false;
     export let placeholder: string, value = '', multiline = false, error = '', fullWidth = false;
     export let required = false, number = false, min = null, max = null, helper = '';
-    export let autofocus = false, password = false, trailingIcon = '', round = false, nohelper = false,
-        autocapitalize = undefined, tabindex = undefined;
-    export let input = null, style = '', maxlength = undefined;
+    export let password = false, trailingIcon = '', round = false, nohelper = false;
+    export let input = null;
     export let trailingHandler = () => null;
 
     let rf, _error;
@@ -37,33 +36,29 @@
 	<div style='position: relative;'>
 		{#if multiline}
 			<textarea class='input' placeholder='&nbsp;' bind:value on:change on:keydown bind:this={input} rows='1'
-                      cols='1' on:focus={()=>(rf=!rf)} {autofocus} on:focus on:blur {autocapitalize} {tabindex}
-                      {style} class:outlined></textarea>
+                      cols='1' on:focus={()=>(rf=!rf)} on:focus on:blur {...$$restProps} class:outlined></textarea>
 		{:else}
 			{#if password}
-				<input class='input' type='password' placeholder='&nbsp;' bind:value on:change on:keydown {autofocus}
-                       on:focus {maxlength}
-                       on:blur {autocapitalize} {tabindex} on:keydown={(e)=>{
+				<input class='input' type='password' placeholder='&nbsp;' bind:value on:change on:keydown on:blur
+                       on:focus {...$$restProps} on:keydown={(e)=>{
 								if (e.key === 'Enter') {
 									dispatch('submit', value);
 								}
-							}} bind:this={input} {style} class:outlined/>
+							}} bind:this={input} class:outlined/>
             {:else if number}
-				<input class='input' type='number' placeholder='&nbsp;' bind:value on:change on:keydown {autofocus}
-                       on:focus {maxlength}
-                       on:blur {autocapitalize} {tabindex} on:keydown={(e)=>{
+				<input class='input' type='number' placeholder='&nbsp;' bind:value on:change on:keydown on:blur on:focus
+                       {...$$restProps} on:keydown={(e)=>{
 								if (e.key === 'Enter') {
 									dispatch('submit', value);
 								}
-							}} bind:this={input} {style} class:outlined/>
+							}} bind:this={input} class:outlined/>
             {:else}
-				<input class='input' type='text' placeholder='&nbsp;' bind:value on:change on:keydown {autofocus}
-                       on:focus {maxlength}
-                       on:blur {autocapitalize} {tabindex} on:keydown={(e)=>{
-								if (e.key === 'Enter') {
-									dispatch('submit', value);
-								}
-							}} bind:this={input} {style} class:outlined/>
+				<input class='input' type='text' placeholder='&nbsp;' bind:value on:change on:keydown on:blur on:focus
+                       {...$$restProps} on:keydown={(e)=>{
+							if (e.key === 'Enter') {
+								dispatch('submit', value);
+					   		}
+					  	 }} bind:this={input} class:outlined/>
             {/if}
 		{/if}
         <span class='placeholder'>{placeholder}</span>
@@ -98,8 +93,15 @@
     max-width: 280px;
     border-radius: var(--border);
 
+    &:not(.outlined) {
+      background: var(--primary-light1);
+    }
+
     .input {
+      position: relative;
       color: var(--on-surface);
+      background: transparent;
+      z-index: 2;
     }
 
     &.outlined {
@@ -138,10 +140,13 @@
       transform: translate3d(0, 0, 0);
       transition: all .2s ease;
       pointer-events: none;
+      z-index: 2;
     }
 
     .background {
       position: absolute;
+      z-index: 1;
+      pointer-events: none;
       top: 0;
       left: 0;
       width: 100%;
@@ -152,8 +157,7 @@
         border-radius: 100px;
       }
 
-      background: rgba(92, 102, 121, 0.06);
-      z-index: -1;
+      background: var(--primary-light3);
       transform: scaleX(0);
       transform-origin: left;
       opacity: 0;
@@ -173,7 +177,6 @@
 
       appearance: none;
       font-family: inherit;
-      background: rgba(92, 102, 121, 0.03);
       transition: all .15s ease;
 
       &.outlined {
@@ -284,5 +287,6 @@
     top: 100%;
     color: var(--on-surface);
     opacity: 0.7;
+    z-index: 2;
   }
 </style>
