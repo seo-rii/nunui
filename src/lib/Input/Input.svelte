@@ -85,7 +85,7 @@
   .container {
     --border: 5px 5px 0 0;
 
-    font-size: 1.4em;
+    font-size: 1.1em;
     display: inline-block;
     position: relative;
     margin: auto;
@@ -270,6 +270,7 @@
       right: 0;
       top: 0;
       border-radius: 100px;
+      z-index: 2;
 
       & > :global(*) {
         border-radius: 100px;
