@@ -1,6 +1,6 @@
 <script lang='ts'>
     import Icon from '$lib/Icon';
-    import {createEventDispatcher, setContext} from 'svelte';
+    import {createEventDispatcher, setContext, tick} from 'svelte';
     import Paper from "$lib/Paper/Paper.svelte";
     import List from "$lib/List/List.svelte";
     import {writable} from "svelte/store";
@@ -30,10 +30,10 @@
             dispatch('select', selected);
         }
     }
-    $: selected = $_selected;
+    $: tick().then(() => selected = $_selected);
     $: {
         void selected;
-        update();
+        tick().then(update);
     }
 
     setContext('hide', () => hide?.());
@@ -50,13 +50,11 @@
     </List>
 </Paper>
 <span class='container' class:error class:fullWidth class:round class:outlined bind:clientWidth>
-	<div style='position: relative;'>
+	<div style='position: relative;' on:click={() => setTimeout(() => open = true, 1)}>
 		<div class='input' type='text' placeholder='&nbsp;' on:change on:keydown class:focus={open}
              class:active={open || $display.length} {tabindex} on:keydown={(e)=>{
-				if (e.key === 'Enter') {
-					open = true;
-				}
-			 }} {style} class:outlined on:click={() => setTimeout(() => open = true, 1)}>
+				if (e.key === 'Enter') open = true;
+			 }} {style} class:outlined>
             {#if override}
                 <span bind:this={$target}></span>
             {:else}
