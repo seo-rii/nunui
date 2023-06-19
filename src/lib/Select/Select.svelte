@@ -43,7 +43,7 @@
     setContext('target', target);
 </script>
 
-<Paper forceRender={override} bind:open bind:hide left bottom xstack width="{clientWidth}px">
+<Paper forceRender bind:open bind:hide left bottom xstack width="{clientWidth}px">
     <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 0;"></span>
     <List>
         <slot/>
