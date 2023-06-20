@@ -316,6 +316,11 @@
     overflow: hidden;
     opacity: 0;
     pointer-events: none;
+    display: none;
+
+    &.open {
+      display: initial;
+    }
 
     &.mobile {
       border-radius: 12px 12px 0 0;
