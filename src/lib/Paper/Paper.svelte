@@ -74,7 +74,7 @@
     let target, paper, lock = false, scrim;
     let clientWidth;
     let _left = 0, _top = 0, _height = 0;
-    let render = false;
+    let render = false, _render = false;
     let touchY = 0, paperY = 0, _open = open;
     let hovering;
     let scroll = false;
@@ -207,9 +207,10 @@
     }
 
     $: {
-        let _render = open || exOpen || forceRender;
-        if (_render) render = true;
+        if (open || exOpen || forceRender) render = true;
         else setTimeout(() => render = false, 200);
+        if (open || exOpen) _render = true;
+        else setTimeout(() => _render = false, 200);
     }
 
     const scrollEvent = (e) => {
@@ -257,9 +258,9 @@
         <div class='scrim' on:click|stopPropagation={()=>hide(stacked)} class:open={open && mobile}
              bind:this={scrim}></div>
         <div class='paper' bind:this={paper} class:open={open || exOpen} style={_style} bind:clientWidth
-             on:click={()=>(lock=true)} class:left class:center class:right class:top class:middle class:bottom
-             class:xstack class:ystack class:nxstack={!xstack} class:nystack={!ystack} class:desktop={!mobile}
-             class:mobile={mobile}>
+             class:render={_render} on:click={() => lock = true} class:left class:center class:right class:top
+             class:middle class:bottom class:xstack class:ystack class:nxstack={!xstack} class:nystack={!ystack}
+             class:desktop={!mobile} class:mobile={mobile}>
             {#if mobile}
                 <div class='dragContainer'>
                     <div class='drag'></div>
@@ -318,7 +319,7 @@
     pointer-events: none;
     display: none;
 
-    &.open {
+    &.render {
       display: initial;
     }
 

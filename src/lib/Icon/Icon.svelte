@@ -12,7 +12,7 @@
     font-family: 'Material Symbols Rounded';
     font-style: normal;
     font-weight: 100 700;
-    src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v56/sykg-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjzaqkNCeE.woff2) format('woff2');
+    src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v122/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsLjBuVY.woff2) format('woff2');
   }
 
   span {

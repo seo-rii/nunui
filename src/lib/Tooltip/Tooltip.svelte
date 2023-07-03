@@ -49,7 +49,7 @@
                exOpen={(!mobile && hovering) || exOpen} hover={!mobile} {xstack} {ystack} {stacked} {style} {title}
                {fullWidth} {__remap} {width} {padding} {forceRender} {block} let:hide>
 			<Hoverable bind:hovering={hoveringTarget} {delay} {openDelay} slot='target'>
-					<slot name='target' {hide}/>
+					<slot name='target' />
 			</Hoverable>
             {#if ignoreTarget}
 				<slot {hide} {open}/>
