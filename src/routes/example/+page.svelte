@@ -138,7 +138,7 @@
 </Paper>
 
 <h1>Input</h1>
-<Input placeholder="filled"/>
+<Input placeholder="filled" on:submit={e=>alert(e.detail)}/>
 <Input placeholder="outlined" outlined/>
 <Input placeholder="filled" helper="Helper"/>
 <Input placeholder="filled" error="Error"/>

@@ -41,21 +41,21 @@
 			{#if password}
 				<input class='input' type='password' placeholder='&nbsp;' bind:value on:change on:keydown on:blur
                        on:focus {...$$restProps} on:keydown={(e)=>{
-								if (e.key === 'Enter') {
+								if (e.key === 'Enter' && e.isComposing === false) {
 									dispatch('submit', value);
 								}
 							}} bind:this={input} class:outlined/>
             {:else if number}
 				<input class='input' type='number' placeholder='&nbsp;' bind:value on:change on:keydown on:blur on:focus
                        {...$$restProps} on:keydown={(e)=>{
-								if (e.key === 'Enter') {
+								if (e.key === 'Enter' && e.isComposing === false) {
 									dispatch('submit', value);
 								}
 							}} bind:this={input} class:outlined/>
             {:else}
 				<input class='input' type='text' placeholder='&nbsp;' bind:value on:change on:keydown on:blur on:focus
                        {...$$restProps} on:keydown={(e)=>{
-							if (e.key === 'Enter') {
+							if (e.key === 'Enter' && e.isComposing === false) {
 								dispatch('submit', value);
 					   		}
 					  	 }} bind:this={input} class:outlined/>
