@@ -3,23 +3,20 @@
     import Ripple from "$lib/Ripple";
     import Blocker from "$lib/Blocker";
 
-    export let icon: string, flat = false, size = '2rem', outlined = undefined, style = "", disabled = false,
-        active = false,
-        label = "", secondary = false, primary = !secondary;
+    export let icon: string, flat = false, size, outlined = undefined, disabled = false,
+        active = false, label = "", secondary = false, primary = !secondary;
 
     let clicked = false, hover = false, container;
-
-    const numeric = /^-?\d+$/;
 </script>
 
 <div class="adapter">
-    <div class="container" bind:this={container} style:--size={numeric.test(size) ? size + 'px' : size}
+    <div class="container" bind:this={container} style:--size={+size ? size + 'px' : size}
          on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove
          on:mouseout on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover
          on:dragstart on:drop on:scroll>
-        <div class="wrapper" {style} class:flat>
+        <div class="wrapper" {...$$restProps} class:flat>
             <div class="button" class:flat>
-                <Icon icon={icon} size={size*0.7} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
+                <Icon {icon} {size} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
                       outlined={outlined === undefined ? !active : outlined}/>
             </div>
             <Ripple center bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface
