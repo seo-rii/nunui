@@ -3,7 +3,7 @@
     import Ripple from "$lib/Ripple";
     import Blocker from "$lib/Blocker";
 
-    export let icon: string, flat = false, size, outlined = undefined, disabled = false,
+    export let icon: string, flat = false, size = '2em', outlined = undefined, disabled = false,
         active = false, label = "", secondary = false, primary = !secondary;
 
     let clicked = false, hover = false, container;
@@ -16,7 +16,7 @@
          on:dragstart on:drop on:scroll>
         <div class="wrapper" {...$$restProps} class:flat>
             <div class="button" class:flat>
-                <Icon {icon} {size} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
+                <Icon {icon} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
                       outlined={outlined === undefined ? !active : outlined}/>
             </div>
             <Ripple center bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface

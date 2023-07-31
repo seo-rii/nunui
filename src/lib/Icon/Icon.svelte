@@ -4,7 +4,7 @@
 
 <span on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
       on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-      on:drop on:scroll class="notranslate"
+      on:drop on:scroll class="notranslate" {...$$restProps}
       style="--fill:{outlined ? 0 : 1};{weight?`--weight:${weight || 500};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon || ''}</span>
 
 <style lang="scss">
