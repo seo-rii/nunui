@@ -11,7 +11,7 @@
     export let input = null;
     export let trailingHandler = () => null;
 
-    let rf, _error, fix, lh = '46px', _value = value, _rf = rf;
+    let rf: boolean, _error, lh = '46px', _value = value, _rf = rf;
 
     $: {
         if (!value && required) _error = '필수 항목입니다.';
@@ -24,10 +24,11 @@
         _value = value;
         _rf = rf;
         setTimeout(() => {
-            if (input && fix) {
-                fix.style.height = lh;
+            if (input) {
+                input.parentNode.style.height = Math.max(input.scrollHeight - 2, 40) + 'px';
                 input.style.height = 'auto';
-                input.style.height = lh = Math.max(input.scrollHeight + 2, 46) + 'px';
+                input.style.height = Math.max(input.scrollHeight - 2, 40) + 'px';
+                input.parentNode.style.height = '';
             }
         })
     }
@@ -37,8 +38,8 @@
 	<div style='position: relative;'>
 		{#if multiline}
 			<textarea class='input' placeholder='&nbsp;' bind:value on:change on:keydown bind:this={input} rows='1'
-                      cols='1' on:focus={()=>(rf=!rf)} on:focus on:blur {...$$restProps} class:outlined></textarea>
-			<div bind:this={fix}/>
+                      cols='1' on:focus={() => (rf = !rf)} on:focus on:blur {...$$restProps}
+                      class:outlined></textarea>
 		{:else}
 			{#if password}
 				<input class='input' type='password' placeholder='&nbsp;' bind:value on:change on:keydown on:blur
@@ -238,14 +239,15 @@
     }
 
     textarea.input {
-      padding: 20px 8px 8px 8px;
+      padding: 16px 8px 8px 8px;
       transition: height 0.2s ease-in-out;
       width: 100%;
-      overflow: auto;
       resize: none;
+      margin-bottom: -5px;
+      overflow: hidden;
 
       & + .placeholder + .background {
-        height: calc(100% - 5px);
+        height: 100%;
       }
     }
 

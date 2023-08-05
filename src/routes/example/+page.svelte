@@ -142,6 +142,7 @@
 <Input placeholder="outlined" outlined/>
 <Input placeholder="filled" helper="Helper"/>
 <Input placeholder="filled" error="Error"/>
+<Input placeholder="filled" error="Error" multiline/>
 
 <h1>Table</h1>
 <Table>

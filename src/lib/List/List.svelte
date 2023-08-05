@@ -1,11 +1,3 @@
-<script lang="ts">
-
-</script>
-
-<main>
+<main {...$$restProps}>
     <slot/>
 </main>
-
-<style lang="scss">
-
-</style>
