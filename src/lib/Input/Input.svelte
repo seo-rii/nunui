@@ -11,7 +11,7 @@
     export let input = null;
     export let trailingHandler = () => null;
 
-    let rf, _error;
+    let rf, _error, fix, lh = '46px', _value = value, _rf = rf;
 
     $: {
         if (!value && required) _error = '필수 항목입니다.';
@@ -20,13 +20,14 @@
         else _error = error;
     }
 
-    $: if (multiline) {
-        let _ = value;
-        rf = rf;
+    $: if (multiline && (value !== _value || rf !== _rf)) {
+        _value = value;
+        _rf = rf;
         setTimeout(() => {
-            if (input) {
+            if (input && fix) {
+                fix.style.height = lh;
                 input.style.height = 'auto';
-                input.style.height = Math.max(input.scrollHeight + 2, 46) + 'px';
+                input.style.height = lh = Math.max(input.scrollHeight + 2, 46) + 'px';
             }
         })
     }
@@ -37,6 +38,7 @@
 		{#if multiline}
 			<textarea class='input' placeholder='&nbsp;' bind:value on:change on:keydown bind:this={input} rows='1'
                       cols='1' on:focus={()=>(rf=!rf)} on:focus on:blur {...$$restProps} class:outlined></textarea>
+			<div bind:this={fix}/>
 		{:else}
 			{#if password}
 				<input class='input' type='password' placeholder='&nbsp;' bind:value on:change on:keydown on:blur
