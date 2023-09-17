@@ -1,16 +1,16 @@
 <script lang="ts">
     import Ripple from "$lib/Ripple";
 
-    export let outlined, secondary = false, primary = false, style = '', flat = false, ripple = false;
+    export let outlined, secondary = false, primary = false, style = '', flat = false, ripple = false, active = false;
 </script>
 
 <main class:primary class:secondary class:outlined class:flat
       on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
       on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-      on:drop on:scroll {style}>
+      on:drop on:scroll {style} class:ripple>
     <slot/>
     {#if ripple}
-        <Ripple/>
+        <Ripple {active}/>
     {/if}
 </main>
 
@@ -35,6 +35,10 @@
 
     &.flat {
       box-shadow: none;
+    }
+
+    &.ripple {
+      cursor: pointer;
     }
   }
 </style>
