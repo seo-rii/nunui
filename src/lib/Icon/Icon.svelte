@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let icon: string = $$restProps[Object.keys($$restProps)[0]]
+    export let icon: string = Object.keys($$restProps)[0]
         , color = "", outlined = false, size: any = 0, style = "", weight: number = <any>undefined;
 </script>
 
