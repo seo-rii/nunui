@@ -3,8 +3,8 @@
     import Ripple from "$lib/Ripple";
     import Blocker from "$lib/Blocker";
 
-    export let icon: string, flat = false, size = '2em', outlined = undefined, disabled = false,
-        active = false, label = "", secondary = false, primary = !secondary;
+    export let icon: string = $$restProps[Object.keys($$restProps)[0]], flat = false, size = '2em',
+        outlined = undefined, disabled = false, active = false, label = "", secondary = false, primary = !secondary;
 
     let clicked = false, hover = false, container;
 </script>

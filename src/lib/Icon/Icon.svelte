@@ -1,6 +1,6 @@
 <script lang="ts">
     export let icon: string = $$restProps[Object.keys($$restProps)[0]]
-        , color = "", outlined = false, size = 0, style = "", weight: number = <any>undefined;
+        , color = "", outlined = false, size: any = 0, style = "", weight: number = <any>undefined;
 </script>
 
 <span on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
