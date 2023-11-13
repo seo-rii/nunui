@@ -17,7 +17,7 @@
   "devDependencies": {
     "@sveltejs/adapter-static": "^2.0.3",
     "@sveltejs/kit": "^1.27.5",
-    "@sveltejs/package": "^2.2.2",
+    "@sveltejs/package": "^1.0.2",
     "@types/codemirror": "^5.60.13",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
