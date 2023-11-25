@@ -3,13 +3,13 @@
 
     const col = getContext("col");
 
-    export let style = '', width = 1;
+    export let style = '', width = 1, minwidth = '';
     let idx = $col.length;
 
     const upd = () => $col = $col;
 
     $: {
-        $col[idx] = parseFloat(<any>width);
+        $col[idx] = [parseFloat(<any>width), minwidth];
         upd();
     }
 

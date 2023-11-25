@@ -6,6 +6,8 @@
     const header = writable(), col = writable([]);
     setContext("header", header);
     setContext("col", col);
+
+    $: all = $col.reduce((a, b) => a + b[0], 0);
 </script>
 
 <main style:--minWidth="{minWidth}px" {style}
@@ -16,7 +18,7 @@
     <table>
         <colgroup>
             {#each $col as item}
-                <col style='width:{(item * 100) / $col.reduce((a, b) => a + b, 0)}%;'/>
+                <col style:width="{item[0] * 100 / all}%" style:min-width={item[1]}/>
             {/each}
         </colgroup>
         <slot/>
