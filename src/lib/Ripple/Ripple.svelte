@@ -1,7 +1,7 @@
 <script lang="ts">
     import {onMount} from "svelte";
 
-    export let duration = 300, opacity = 0.3, center = false, active = false,
+    export let duration = 300, opacity = undefined, center = false, active = false,
         primary = true, secondary = false, error = false, surface = true, additional = null;
 
     export let clicked = false, hover = false;
@@ -89,25 +89,41 @@
         applyHandler(container);
         return () => removeHandler(container);
     });
+
+    let _back = 0, _hide = 0;
+
+    $: {
+        if (back || active) _back++;
+        else setTimeout(() => _back && _back--, 200);
+    }
+
+    $: {
+        if (hide) setTimeout(() => _hide && _hide--, 200);
+        else _hide++;
+    }
 </script>
 
-<div class="adapter" bind:this={adapter} class:show class:hide style:--rop={opacity}>
-    <div class="ripple" class:show class:primary class:secondary class:error class:surface
-         style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;"></div>
-</div>
-<div class="back" class:show={back || active} style:--bop="0.2" class:primary class:secondary class:error
-     class:surface></div>
+<main bind:this={adapter} class:show class:hide style:--rop={opacity}>
+    {#if _hide}
+        <span class:show class:primary class:secondary class:error class:surface
+              style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;"/>
+    {/if}
+</main>
+{#if _back}
+    <div class:show={back || active} class:primary class:secondary class:error
+         class:surface/>
+{/if}
 
 <style lang="scss">
   @import "src/lib/Style";
 
-  .adapter {
+  main {
     @include full;
     @include CShow(var(--rop), 0);
     pointer-events: none;
     transition: background 0.3s;
 
-    .ripple {
+    span {
       @include round(round);
       position: absolute;
       left: var(--x);
@@ -132,9 +148,10 @@
     }
   }
 
-  .back {
+  div {
     @include full;
     @include CShow(var(--bop));
+    @include fadeIn(var(--bop));
     background: #888888;
 
     &.surface {

@@ -19,7 +19,7 @@
      on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
      on:drop on:scroll style:background={color}>
-    <div style:--weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}>
+    <div style:--weight={!disabled && (clicked ? 200 : (hover && 500)) || undefined}>
         <slot/>
     </div>
     <Ripple {primary} {secondary} {active} surface={outlined || transparent} opacity={disabled ? 0 : undefined} bind:clicked

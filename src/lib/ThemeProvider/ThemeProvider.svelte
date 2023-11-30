@@ -25,6 +25,7 @@
 <main style:--primary={primary} style:--secondary={secondary} style:--error={error} style:--background={background}
       style:--surface={surface} style:--on-primary={onPrimary} style:--on-secondary={onSecondary}
       style:--on-error={onError} style:--on-background={onBackground} style:--on-surface={onSurface}
+      style:--rop="0.3" style:--bop="0.2" style:--weight="300"
 
       style:--primary-light1={mix(norm(primary), norm(surface), 0.05)}
       style:--primary-light2={mix(norm(primary), norm(surface), 0.10)}

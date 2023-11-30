@@ -9,6 +9,17 @@
   left: -1px;
 }
 
+@mixin fadeIn( $op: 1,$duration: 0.3s, $additional: '' ) {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: $op;
+    }
+  }
+  animation: fadeIn $duration #{$additional};
+}
 
 @mixin CShow( $op: 1, $duration: 0.3s, $additional: '' ) {
   opacity: 0;
