@@ -1,5 +1,6 @@
 <script lang="ts">
     import {onMount} from "svelte";
+    import {fade} from "svelte/transition";
 
     export let duration = 300, opacity = undefined, center = false, active = false,
         primary = true, secondary = false, error = false, surface = true, additional = null;
@@ -110,7 +111,7 @@
     {/if}
 </main>
 {#if _back}
-    <div class:show={back || active} class:primary class:secondary class:error
+    <div transition:fade={{duration: 200}} class:primary class:secondary class:error
          class:surface/>
 {/if}
 
@@ -150,9 +151,8 @@
 
   div {
     @include full;
-    @include CShow(var(--bop));
-    @include fadeIn(var(--bop));
     background: #888888;
+    opacity: 0.3;
 
     &.surface {
       @include applyTheme(background);
