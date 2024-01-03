@@ -13,6 +13,7 @@
     export let style = '';
     export let multiple = false, selected = null, separator = ', ';
     export let override = false;
+    export let mobile = false;
 
     let open = false, hide, clientWidth;
 
@@ -43,7 +44,7 @@
     setContext('target', target);
 </script>
 
-<Paper forceRender bind:open bind:hide left bottom xstack width="{clientWidth}px">
+<Paper forceRender bind:open bind:hide left bottom xstack width="{clientWidth}px" {mobile}>
     <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 0;"></span>
     <List>
         <slot/>
