@@ -1,12 +1,17 @@
 <script lang="ts">
-    export let icon: string = Object.keys($$restProps)[0]
+    export let icon: string = Object.keys($$restProps)[0] || ''
         , color = "", outlined = false, size: any = 0, style = "", weight: number = <any>undefined;
+
+    $: _weight = weight ? `--weight:${weight};` : '';
+    $: _fill = outlined ? '--fill:0;' : ``;
+    $: _color = color ? `color:${color};` : '';
+    $: _size = size ? `font-size:${size}px;` : '';
 </script>
 
 <span on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
       on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
       on:drop on:scroll class="notranslate" {...$$restProps}
-      style="--fill:{outlined ? 0 : 1};{weight?`--weight:${weight || 500};`:''}{color ? `color:${color};` : ''}{size?`font-size:${size}px;`:''}{style}">{icon || ''}</span>
+      style="{_fill}{_weight}{_color}{_size}{style}">{icon}</span>
 
 <style lang="scss">
   @font-face {
@@ -14,6 +19,7 @@
     font-style: normal;
     font-weight: 100 700;
     src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v122/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsLjBuVY.woff2) format('woff2');
+    font-display: block;
   }
 
   span {
@@ -33,8 +39,8 @@
     vertical-align: bottom;
     transition: all 0.2s;
 
-    font-variation-settings: 'FILL' var(--fill),
-    'wght' var(--weight),
+    font-variation-settings: 'FILL' var(--fill, 1),
+    'wght' var(--weight, 500),
     'GRAD' 0
   }
 </style>

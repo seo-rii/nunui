@@ -22,9 +22,12 @@
     <div style:--weight={!disabled && (clicked ? 200 : (hover && 500)) || undefined}>
         <slot/>
     </div>
-    <Ripple {primary} {secondary} {active} surface={outlined || transparent} opacity={disabled ? 0 : undefined} bind:clicked
+    <Ripple {primary} {secondary} {active} surface={outlined || transparent} opacity={disabled ? 0 : undefined}
+            bind:clicked
             bind:hover/>
-    <Blocker active={disabled}/>
+    {#if disabled}
+        <Blocker active/>
+    {/if}
 </div>
 
 <style lang="scss">

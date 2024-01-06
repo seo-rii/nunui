@@ -1,13 +1,13 @@
 <script lang="ts">
     import {onMount} from "svelte";
-    import {fade} from "svelte/transition";
+    import {tweened} from "svelte/motion";
 
     export let duration = 300, opacity = undefined, center = false, active = false,
         primary = true, secondary = false, error = false, surface = true, additional = null;
 
     export let clicked = false, hover = false;
 
-    let container, adapter, lastAdditional;
+    let container: HTMLElement, adapter, lastAdditional;
     let x = 0, y = 0, size = 0, show = false, hide = false, back = false, ts = 0, ig = 0, iig = 0;
 
     $: clicked = show && !hide;
@@ -20,12 +20,14 @@
         }
     }
 
-    function rippleSize(targetX, targetY) {
-        const rect = container.getBoundingClientRect();
+    function rippleSize(targetX: number, targetY: number) {
+        const rect = container.getBoundingClientRect(), width = rect.width, height = rect.height;
         if (!center) {
-            const size = Math.sqrt(rect.width ** 2 + rect.height ** 2) * 2,
-                x = targetX - rect.left - size / 2 - window.scrollX,
-                y = targetY - rect.top - size / 2 - window.scrollY;
+            const __x = targetX - rect.left - window.scrollX,
+                __y = targetY - rect.top - window.scrollY;
+            const _x = Math.max(__x, width - __x), _y = Math.max(__y, height - __y);
+            const size = Math.sqrt(_x * _x + _y * _y) * 2;
+            const x = __x - size / 2, y = __y - size / 2;
             return {x, y, size};
         } else {
             const size = Math.max(rect.width, rect.height),
@@ -91,11 +93,16 @@
         return () => removeHandler(container);
     });
 
+    const backOp = tweened(0, {duration: 200});
     let _back = 0, _hide = 0;
+    $: {
+        if (_back === 1) backOp.set(0.3);
+        else if (_back === 0) backOp.set(0);
+    }
 
     $: {
         if (back || active) _back++;
-        else setTimeout(() => _back && _back--, 200);
+        else setTimeout(() => _back && _back--);
     }
 
     $: {
@@ -110,9 +117,9 @@
               style="--x:{x}px;--y:{y}px;--size:{size}px;--dur:{duration}ms;"/>
     {/if}
 </main>
-{#if _back}
-    <div transition:fade={{duration: 200}} class:primary class:secondary class:error
-         class:surface/>
+{#if $backOp}
+    <div class:primary class:secondary class:error
+         class:surface style:opacity={$backOp}/>
 {/if}
 
 <style lang="scss">
@@ -132,6 +139,7 @@
       width: var(--size);
       height: var(--size);
       background: #888888;
+      animation-timing-function: cubic-bezier(0,.57,.1,.98) !important;
 
       @include applyThemeOn(background);
 
@@ -152,7 +160,6 @@
   div {
     @include full;
     background: #888888;
-    opacity: 0.3;
 
     &.surface {
       @include applyTheme(background);
