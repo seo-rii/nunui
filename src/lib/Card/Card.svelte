@@ -1,7 +1,7 @@
 <script lang="ts">
     import Ripple from "$lib/Ripple";
 
-    export let outlined, secondary = false, primary = false, style = '', flat = false, ripple = false, active = false;
+    export let outlined, secondary = false, primary = false, style = '', flat = false, ripple = false, active = false, clicked;
 </script>
 
 <main class:primary class:secondary class:outlined class:flat
@@ -10,7 +10,7 @@
       on:drop on:scroll {style} class:ripple>
     <slot/>
     {#if ripple}
-        <Ripple {active}/>
+        <Ripple {active} bind:clicked/>
     {/if}
 </main>
 
