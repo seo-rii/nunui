@@ -339,7 +339,8 @@
 
     &.desktop {
       @include round;
-      transition: opacity 0.25s cubic-bezier(0, .65, .35, 1);
+      transition: opacity 0.2s cubic-bezier(1,0,.67,1), transform 0.2s cubic-bezier(1,0,.67,1);
+      transform: scale(0.85);
 
       &.left.top.nxstack.nystack, &.right.top.xstack.nystack, &.left.bottom.nxstack.ystack, &.right.bottom.xstack.ystack {
         transform-origin: right bottom;
@@ -415,7 +416,7 @@
 
   @keyframes open-desktop {
     0% {
-      transform: scale(0.85);
+      transform: scale(0.75);
       opacity: 0;
     }
     100% {

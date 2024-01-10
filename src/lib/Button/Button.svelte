@@ -7,14 +7,13 @@
         transparent = false;
 
     let clicked = false, hover = false;
+    $: _raised = raised || (clicked && !outlined && !transparent && !disabled);
 </script>
 
 <div class="wrapper button {className}" class:primary class:secondary {tabindex} class:small class:round
      class:transparent class:--active={active} class:active={(hover && !disabled) || active}
-     class:clicked={clicked && !disabled} class:outlined class:raised {style} on:keypress={(e)=>{
-			if(e.key==='Enter'){
-				e.target.click();
-			}
+     class:clicked={clicked && !disabled} class:outlined class:raised={_raised} {style} on:keypress={(e)=>{
+			if (e.key==='Enter') e.target.click();
 		 }}
      on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
@@ -94,6 +93,10 @@
 
     &.raised {
       @include shadow("common", "mini");
+
+      &.primary {
+        @include shadow("primary", "mini");
+      }
     }
   }
 </style>
