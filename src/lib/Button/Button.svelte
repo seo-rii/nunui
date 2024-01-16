@@ -7,7 +7,7 @@
         transparent = false;
 
     let clicked = false, hover = false;
-    $: _raised = raised || (clicked && !outlined && !transparent && !disabled);
+    $: _raised = raised || (hover && !clicked && !outlined && !transparent && !disabled);
 </script>
 
 <div class="wrapper button {className}" class:primary class:secondary {tabindex} class:small class:round
