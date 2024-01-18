@@ -36,7 +36,7 @@
     <Icon icon="priority" outlined={fl}/>
     Outlined?
 </Button>
-<Button small>dfdfd</Button>
+<Button small tooltip="jkjkjk">1</Button>
 <Button primary round>dfdfd</Button>
 <Button primary raised>dfdfd</Button>
 <Button transparent>dfdfd</Button>

@@ -2,33 +2,46 @@
     import Icon from "$lib/Icon";
     import Ripple from "$lib/Ripple";
     import Blocker from "$lib/Blocker";
+    import Tooltip from "$lib/Tooltip";
 
     export let icon: string = Object.keys($$restProps)[0], flat = false, size = '2em',
         outlined: any = undefined, disabled = false, active = false, label = "", secondary = false,
-        primary = !secondary;
+        primary = !secondary, tooltip = '';
+
+    export let xstack, ystack, left, right, top, bottom;
 
     let clicked = false, hover = false, container;
 </script>
 
-<div class="adapter">
-    <div class="container" bind:this={container} style:--size={+size ? size + 'px' : size}
-         on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove
-         on:mouseout on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover
-         on:dragstart on:drop on:scroll>
-        <div class="wrapper" {...$$restProps} class:flat>
-            <div class="button" class:flat>
-                <Icon {icon} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
-                      outlined={outlined === undefined ? !active : outlined}/>
+{#if !tooltip}
+    <div class="adapter">
+        <div class="container" bind:this={container} style:--size={+size ? size + 'px' : size}
+             on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove
+             on:mouseout on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave
+             on:dragover
+             on:dragstart on:drop on:scroll>
+            <div class="wrapper" {...$$restProps} class:flat>
+                <div class="button" class:flat>
+                    <Icon {icon} weight={disabled ? 300 : (clicked ? 200 : (hover ? 500 : 300))}
+                          outlined={outlined === undefined ? !active : outlined}/>
+                </div>
+                <Ripple center bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface
+                        additional={container} {primary} {secondary}/>
+                <Blocker active={disabled}/>
             </div>
-            <Ripple center bind:clicked bind:hover {active} opacity={disabled ? 0 : undefined} surface
-                    additional={container} {primary} {secondary}/>
-            <Blocker active={disabled}/>
+            {#if label}
+                <div class="label">{label}</div>
+            {/if}
         </div>
-        {#if label}
-            <div class="label">{label}</div>
-        {/if}
     </div>
-</div>
+{:else}
+    <Tooltip {left} {right} {top} {bottom} {xstack} {ystack}>
+        <svelte:self {...$$props} tooltip={undefined} slot="target">
+            <slot/>
+        </svelte:self>
+        {tooltip}
+    </Tooltip>
+{/if}
 
 <style lang="scss">
   @import "src/lib/Style";

@@ -50,7 +50,7 @@
 
     const mobileAnim = tweened(0, {duration: 200});
 
-    export let left = false, center = false, right = false, top = false, middle = false, bottom = false,
+    export let left = !$$props.right, center = false, right = false, top = !$$props.bottom, middle = false, bottom = false,
         unbounded = false, absolutex = false, absolutey = false, tooltip = false, exOpen = false, hover = false;
     export let xstack = false, ystack = false;
     export let stacked = 0;
@@ -63,16 +63,10 @@
     export let inline = false, block = false;
     export let forceRender = false;
 
-    export let open = false, show = () => {
-        setTimeout(() => open = true, 0);
-    }, hide = (lv = stacked) => {
-        if (lv <= stacked) {
-            open = false;
-            exOpen = false;
-        }
+    export let open = false, show = () => setTimeout(() => open = true, 0), hide = (lv = stacked) => {
+        if (lv <= stacked) open = exOpen = false;
     };
-    let target, paper, lock = false, scrim;
-    let clientWidth;
+    let target, paper, lock = false, scrim, clientWidth;
     let _left = 0, _top = 0, _height = 0;
     let render = false, _render = false;
     let touchY = 0, paperY = 0, _open = open;
@@ -339,7 +333,7 @@
 
     &.desktop {
       @include round;
-      transition: opacity 0.2s cubic-bezier(1,0,.67,1), transform 0.2s cubic-bezier(1,0,.67,1);
+      transition: opacity 0.2s cubic-bezier(1, 0, .67, 1), transform 0.2s cubic-bezier(1, 0, .67, 1);
       transform: scale(0.85);
 
       &.left.top.nxstack.nystack, &.right.top.xstack.nystack, &.left.bottom.nxstack.ystack, &.right.bottom.xstack.ystack {
