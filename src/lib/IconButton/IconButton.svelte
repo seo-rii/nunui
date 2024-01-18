@@ -35,7 +35,7 @@
     </div>
 {:else}
     <Tooltip {left} {right} {top} {bottom} {xstack} {ystack}>
-        <div class="adapter">
+        <div class="adapter" slot="target">
             <div class="container" bind:this={container} style:--size={+size ? size + 'px' : size} use:ev>
                 <div class="wrapper" {...$$restProps} class:flat>
                     <div class="button" class:flat>
