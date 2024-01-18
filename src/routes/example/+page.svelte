@@ -36,8 +36,8 @@
     <Icon icon="priority" outlined={fl}/>
     Outlined?
 </Button>
-<Button small tooltip="jkjkjk">1</Button>
-<Button primary round>dfdfd</Button>
+<Button small tooltip="jkjkjk" on:click={toggle}>1</Button>
+<Button primary round on:click={toggle}>dfdfd</Button>
 <Button primary raised>dfdfd</Button>
 <Button transparent>dfdfd</Button>
 <Button primary disabled>dfdfd</Button>
@@ -108,7 +108,7 @@
 
 <h1>List</h1>
 <List>
-    <OneLine title="OneLine" icon="star" iconHandler={() => console.log(1)}/>
+    <OneLine title="OneLine" icon="star" iconHandler={() => console.log(1)} on:click={() => console.log(2)}/>
     <OneLine title="OneLine" icon="star"/>
     <OneLine title="OneLine" icon="star"/>
     <OneLine title="OneLine" icon="star"/>
@@ -121,7 +121,7 @@
 <Paper left top xstack icon="list" title="Menu">
     <Button slot="target">Open menu</Button>
     <List>
-        <OneLine title="OneLine" icon="star"/>
+        <OneLine title="OneLine" icon="star" on:click={() => alert(1)}/>
         <OneLine title="OneLine" icon="star"/>
         <OneLine title="OneLine" icon="star"/>
         <OneLine title="OneLine" icon="star"/>
@@ -138,8 +138,9 @@
 </Paper>
 
 <h1>Input</h1>
-<Input placeholder="filled" on:submit={e=>alert(e.detail)}/>
+<Input placeholder="filled" on:submit={e=>alert(e.detail)} on:focus={e => console.log(e)}/>
 <Input placeholder="outlined" outlined/>
+<Input placeholder="plain" plain/>
 <Input placeholder="filled" helper="Helper"/>
 <Input placeholder="filled" error="Error"/>
 <Input placeholder="filled" error="Error" multiline/>
@@ -201,7 +202,7 @@
 </Tooltip>
 
 <h1>Tooltip</h1>
-<Select placeholder="select" bind:selected={test}>
+<Select placeholder="select" bind:selected={test} plain>
     <Option data="1" value="1" title="1"/>
     <Option data="2" value="2" title="2" subtitle="2"/>
     <Option data="3" value="3" title="3" icon="star"/>

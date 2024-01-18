@@ -1,13 +1,13 @@
 <script lang="ts">
     import Ripple from "$lib/Ripple";
+    import forward from "$lib/Utility/forward";
 
-    export let outlined, secondary = false, primary = false, style = '', flat = false, ripple = false, active = false, clicked;
+    const ev = forward();
+    export let outlined, secondary = false, primary = false, style = '', flat = false, ripple = false, active = false,
+        clicked;
 </script>
 
-<main class:primary class:secondary class:outlined class:flat
-      on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
-      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-      on:drop on:scroll {style} class:ripple>
+<main class:primary class:secondary class:outlined class:flat class:ripple use:ev {style}>
     <slot/>
     {#if ripple}
         <Ripple {active} bind:clicked/>

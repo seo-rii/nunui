@@ -5,8 +5,10 @@
     import List from "$lib/List/List.svelte";
     import {writable} from "svelte/store";
     import Ripple from "$lib/Ripple/Ripple.svelte";
+    import forward from "$lib/Utility/forward";
 
-    export let outlined = false;
+    const ev = forward();
+    export let outlined = false, plain = false;
     export let placeholder: string, error = '', fullWidth = false;
     export let helper = '';
     export let round = false, nohelper = false, tabindex = undefined;
@@ -45,14 +47,14 @@
 </script>
 
 <Paper forceRender bind:open bind:hide left bottom xstack width="{clientWidth}px" {mobile}>
-    <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 0;"></span>
+    <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 0;top: 4px"></span>
     <List>
         <slot/>
     </List>
 </Paper>
-<span class='container' class:error class:fullWidth class:round class:outlined bind:clientWidth>
-	<div style='position: relative;' on:click={() => setTimeout(() => open = true, 1)}>
-		<div class='input' type='text' placeholder='&nbsp;' on:change on:keydown class:focus={open}
+<span class='container' class:error class:fullWidth class:round class:outlined class:plain bind:clientWidth>
+	<div style='position: relative;' on:click={() => {if (open) hide();else setTimeout(() => open = true, 1)}}>
+		<div class='input' type='text' placeholder='&nbsp;' use:ev class:focus={open}
              class:active={open || $display.length} {tabindex} on:keydown={(e)=>{
 				if (e.key === 'Enter') open = true;
 			 }} {style} class:outlined>
@@ -78,12 +80,26 @@
 </span>
 
 <style lang='scss'>
+  @import "src/lib/Style";
+
   * {
     box-sizing: border-box;
   }
 
   .container {
-    --border: 5px 5px 0 0;
+    --border: 8px 8px 0 0;
+
+    &.plain {
+      --border: 12px;
+
+      .input {
+        border-bottom: transparent !important;
+
+        &:hover:not(:active) {
+          @include shadow("primary", "mini");
+        }
+      }
+    }
 
     font-size: 1.1em;
     display: inline-block;
@@ -93,7 +109,6 @@
     width: 100%;
     max-width: 280px;
     border-radius: var(--border);
-    overflow: hidden;
 
     &:not(.outlined) {
       background: var(--primary-light1);

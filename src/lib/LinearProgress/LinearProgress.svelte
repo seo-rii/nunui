@@ -1,7 +1,10 @@
 <script lang="ts">
+    import forward from "$lib/Utility/forward";
+
     export let progress = 0, width = "100%", style = "", indeterminate = false, secondary = false, primary = !secondary,
         color = '';
 
+    const ev = forward();
     let _progress, _indeterminate = indeterminate, start = false, stop = false;
 
     $: {
@@ -25,10 +28,7 @@
     $: setTimeout(() => _progress = stop ? 1 : (indeterminate ? 0 : (Math.max(0, progress) || 0)), 50);
 </script>
 
-<div class="adapter" style={`width: ${width};${style}`}
-     on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
-     on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-     on:drop on:scroll>
+<div class="adapter" style={`width: ${width};${style}`} use:ev>
     <div class="container" class:primary class:secondary>
         {#if _indeterminate || indeterminate}
             <div class:exit={start}>

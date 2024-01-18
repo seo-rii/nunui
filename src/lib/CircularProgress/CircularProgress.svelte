@@ -1,6 +1,9 @@
 <script lang="ts">
+    import forward from "$lib/Utility/forward.js";
+
     export let progress = 0, indeterminate = false, size = 60, secondary = false, primary = !secondary, color = '';
 
+    const ev = forward();
     let _progress, _indeterminate = indeterminate, start = false, stop = false;
 
     $: {
@@ -25,10 +28,7 @@
 </script>
 
 <svg style="width: {size}px;height:{size}px;" width="35px" height="35px" viewBox="0 0 70 70"
-     xmlns="http://www.w3.org/2000/svg"
-     on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
-     on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-     on:drop on:scroll>
+     xmlns="http://www.w3.org/2000/svg" use:ev>
     <circle class="rail" fill="none" stroke-width="3" stroke-linecap="round" cx="35" cy="35" r="30" class:primary
             class:secondary  style:stroke={color}></circle>
     {#if indeterminate || _indeterminate}

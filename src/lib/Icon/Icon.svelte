@@ -1,4 +1,9 @@
 <script lang="ts">
+
+    import forward from "$lib/Utility/forward.js";
+
+    const ev = forward();
+
     export let icon: string = Object.keys($$restProps)[0] || ''
         , color = "", outlined = false, size: any = 0, style = "", weight: number = <any>undefined;
 
@@ -8,10 +13,7 @@
     $: _size = size ? `font-size:${size}px;` : '';
 </script>
 
-<span on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
-      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-      on:drop on:scroll class="notranslate" {...$$restProps}
-      style="{_fill}{_weight}{_color}{_size}{style}">{icon}</span>
+<span use:ev class="notranslate" {...$$restProps} style="{_fill}{_weight}{_color}{_size}{style}">{icon}</span>
 
 <style lang="scss">
   @font-face {

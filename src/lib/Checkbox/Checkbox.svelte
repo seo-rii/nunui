@@ -1,24 +1,24 @@
 <script lang="ts">
     import Ripple from "$lib/Ripple";
+    import forward from "$lib/Utility/forward.js";
+
+    const ev = forward();
 
     export let secondary = false, primary = !secondary, label = "";
-
     export let error = false, checked, tabindex = 0;
 
     let checkbox, container;
 </script>
 
-<span class="checkbox" class:primary class:secondary class:error on:click={()=>checkbox.click()}
-      bind:this={container}
-      on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove on:mouseout
-      on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover on:dragstart
-      on:drop on:scroll>
-  <div class="ripple">
-    <Ripple additional={container} center surface={!!checked} primary={primary && !!checked}
-            secondary={secondary && !!checked} error={error && !!checked}/>
-  </div>
-  <input type="checkbox" name="checkbox" {tabindex} bind:this={checkbox} class:primary class:secondary bind:checked on:change>
-  <label class:primary class:secondary>{label}</label>
+<span class="checkbox" class:primary class:secondary class:error on:click={() => checkbox.click()}
+      bind:this={container} use:ev>
+    <div class="ripple">
+        <Ripple additional={container} center surface={!!checked} primary={primary && !!checked}
+                secondary={secondary && !!checked} error={error && !!checked}/>
+    </div>
+    <input type="checkbox" name="checkbox" {tabindex} bind:this={checkbox} class:primary class:secondary bind:checked
+           on:change>
+    <label class:primary class:secondary>{label}</label>
     {#if error}<span class="message">{error}</span>{/if}
 </span>
 

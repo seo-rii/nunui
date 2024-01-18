@@ -1,10 +1,12 @@
 <script lang='ts'>
     import IconButton from '$lib/IconButton';
     import {createEventDispatcher} from 'svelte';
+    import forward from "$lib/Utility/forward";
 
+    const ev = forward();
     const dispatch = createEventDispatcher();
 
-    export let outlined = false;
+    export let outlined = false, plain = false;
     export let placeholder: string, value = '', multiline = false, error = '', fullWidth = false;
     export let required = false, number = false, min = null, max = null, helper = '';
     export let password = false, trailingIcon = '', round = false, nohelper = false;
@@ -32,36 +34,29 @@
             }
         })
     }
+
+    const submit = (e) => {
+        if (e.key === 'Enter' && e.isComposing === false) {
+            dispatch('submit', value);
+        }
+    }
 </script>
 
-<span class='container' class:error={_error} class:fullWidth class:round class:outlined>
+<span class='container' class:error={_error} class:fullWidth class:round class:outlined class:plain>
 	<div style='position: relative;'>
 		{#if multiline}
-			<textarea class='input' placeholder='&nbsp;' bind:value on:change on:keydown bind:this={input} rows='1'
-                      cols='1' on:focus={() => (rf = !rf)} on:focus on:blur {...$$restProps}
-                      class:outlined></textarea>
+			<textarea class='input' placeholder='&nbsp;' bind:value use:ev bind:this={input} rows='1'
+                      cols='1' on:focus={() => (rf = !rf)} {...$$restProps} class:outlined></textarea>
 		{:else}
 			{#if password}
-				<input class='input' type='password' placeholder='&nbsp;' bind:value on:change on:keydown on:blur
-                       on:focus {...$$restProps} on:keydown={(e)=>{
-								if (e.key === 'Enter' && e.isComposing === false) {
-									dispatch('submit', value);
-								}
-							}} bind:this={input} class:outlined/>
+                <input class='input' type='password' placeholder='&nbsp;' bind:value use:ev {...$$restProps}
+                       on:keydown={submit} bind:this={input} class:outlined/>
             {:else if number}
-				<input class='input' type='number' placeholder='&nbsp;' bind:value on:change on:keydown on:blur on:focus
-                       {...$$restProps} on:keydown={(e)=>{
-								if (e.key === 'Enter' && e.isComposing === false) {
-									dispatch('submit', value);
-								}
-							}} bind:this={input} class:outlined/>
+				<input class='input' type='number' placeholder='&nbsp;' bind:value use:ev {...$$restProps}
+                       on:keydown={submit} bind:this={input} class:outlined/>
             {:else}
-				<input class='input' type='text' placeholder='&nbsp;' bind:value on:change on:keydown on:blur on:focus
-                       {...$$restProps} on:keydown={(e)=>{
-							if (e.key === 'Enter' && e.isComposing === false) {
-								dispatch('submit', value);
-					   		}
-					  	 }} bind:this={input} class:outlined/>
+				<input class='input' type='text' placeholder='&nbsp;' bind:value use:ev {...$$restProps}
+                       on:keydown={submit} bind:this={input} class:outlined/>
             {/if}
 		{/if}
         <span class='placeholder'>{placeholder}</span>
@@ -81,12 +76,30 @@
 </span>
 
 <style lang='scss'>
+  @import "src/lib/Style";
+
   * {
     box-sizing: border-box;
   }
 
   .container {
-    --border: 5px 5px 0 0;
+    --border: 8px 8px 0 0;
+
+    &.plain {
+      --border: 12px;
+
+      .input {
+        border-bottom: transparent !important;
+
+        &:hover:not(:active) {
+          @include shadow("primary", "mini");
+        }
+
+        &:focus:not(:active) {
+          @include shadow("primary", "mini");
+        }
+      }
+    }
 
     font-size: 1.1em;
     display: inline-block;

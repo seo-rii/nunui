@@ -3,6 +3,9 @@
     import Blocker from "$lib/Blocker";
     import Icon from "$lib/Icon";
     import Tooltip from "$lib/Tooltip";
+    import forward from "$lib/Utility/forward";
+
+    const ev = forward();
 
     export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
         raised = false, tabindex = undefined, disabled = false, active = false, className = "", color = '',
@@ -19,12 +22,7 @@
          class:transparent class:--active={active} class:active={(hover && !disabled) || active}
          class:clicked={clicked && !disabled} class:outlined class:raised={_raised} {style} on:keypress={(e)=>{
 			if (e.key==='Enter') e.target.click();
-		 }}
-         on:auxclick on:click on:contextmenu on:dblclick on:mousedown on:mouseenter on:mouseleave on:mousemove
-         on:mouseout
-         on:mouseover on:mouseup on:select on:wheel on:drag on:dragend on:dragenter on:dragleave on:dragover
-         on:dragstart
-         on:drop on:scroll style:background={color}>
+		 }} use:ev|self style:background={color}>
         <div style:--weight={!disabled && (clicked ? 200 : (hover && 500)) || undefined}>
             {#if icon}
                 <Icon {icon} style="margin-right: 4px"/>
@@ -40,9 +38,24 @@
     </div>
 {:else}
     <Tooltip {left} {right} {top} {bottom} {xstack} {ystack}>
-        <svelte:self {...$$props} tooltip={undefined} slot="target">
-            <slot/>
-        </svelte:self>
+        <div class="wrapper button {className}" class:primary class:secondary {tabindex} class:small class:round
+             class:transparent class:--active={active} class:active={(hover && !disabled) || active}
+             class:clicked={clicked && !disabled} class:outlined class:raised={_raised} {style} on:keypress={(e)=>{
+			if (e.key==='Enter') e.target.click();
+		 }} use:ev|self style:background={color} slot="target">
+            <div style:--weight={!disabled && (clicked ? 200 : (hover && 500)) || undefined}>
+                {#if icon}
+                    <Icon {icon} style="margin-right: 4px"/>
+                {/if}
+                <slot/>
+            </div>
+            <Ripple {primary} {secondary} {active} surface={outlined || transparent} opacity={disabled ? 0 : undefined}
+                    bind:clicked
+                    bind:hover/>
+            {#if disabled}
+                <Blocker active/>
+            {/if}
+        </div>
         {tooltip}
     </Tooltip>
 {/if}

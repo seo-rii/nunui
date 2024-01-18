@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let active = false;
+    export let active = false;
 </script>
 
 <div class="blocker" class:active></div>
