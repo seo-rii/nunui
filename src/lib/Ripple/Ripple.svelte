@@ -3,7 +3,7 @@
     import {tweened} from "svelte/motion";
 
     export let duration = 300, opacity = undefined, center = false, active = false,
-        primary = true, secondary = false, error = false, surface = true, additional = null;
+        secondary = false, error = false, primary = !secondary && !error, surface = true, additional = null;
 
     export let clicked = false, hover = false;
 
@@ -139,7 +139,7 @@
       width: var(--size);
       height: var(--size);
       background: #888888;
-      animation-timing-function: cubic-bezier(0,.57,.1,.98) !important;
+      animation-timing-function: cubic-bezier(0, .57, .1, .98) !important;
 
       @include applyThemeOn(background);
 

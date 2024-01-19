@@ -7,9 +7,10 @@
 
     const ev = forward();
 
-    export let style = "", secondary = false, primary = !secondary, small = false, round = false, outlined = false,
-        raised = false, tabindex = undefined, disabled = false, active = false, className = "", color = '',
-        transparent = false, tooltip = '', icon = '';
+    export let secondary = false, error = false, primary = !secondary && !error,
+        small = false, round = false, outlined = false, raised = false, transparent = false,
+        tabindex = undefined, disabled = false, active = false,
+        className = "", color = '', tooltip = '', icon = '', style = "";
 
     export let xstack, ystack, left, right, top, bottom;
 
@@ -18,7 +19,7 @@
 </script>
 
 {#if !tooltip}
-    <div class="wrapper button {className}" class:primary class:secondary {tabindex} class:small class:round
+    <div class="wrapper button {className}" class:primary class:secondary class:error {tabindex} class:small class:round
          class:transparent class:--active={active} class:active={(hover && !disabled) || active}
          class:clicked={clicked && !disabled} class:outlined class:raised={_raised} {style} on:keypress={(e)=>{
 			if (e.key==='Enter') e.target.click();
@@ -29,9 +30,8 @@
             {/if}
             <slot/>
         </div>
-        <Ripple {primary} {secondary} {active} surface={outlined || transparent} opacity={disabled ? 0 : undefined}
-                bind:clicked
-                bind:hover/>
+        <Ripple {primary} {secondary} {active} {error} surface={outlined || transparent}
+                opacity={disabled ? 0 : undefined} bind:clicked bind:hover/>
         {#if disabled}
             <Blocker active/>
         {/if}
