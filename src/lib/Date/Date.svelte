@@ -1,7 +1,11 @@
+<script lang="ts" context="module">
+    let pr;
+</script>
+
 <script lang="ts">
-    import {DatePicker} from 'date-picker-svelte'
-    import {ko} from 'date-fns/locale'
     import {Input, Paper} from "$lib";
+    import {browser} from "$app/environment";
+    import {onMount} from "svelte";
 
     export let value, min, max;
     let display = '', _display = '';
@@ -13,12 +17,23 @@
         else _display = '';
     }
     $: if (display !== _display) display = _display;
+
+    let DatePicker, ko;
+    if (browser) onMount(() => {
+        if (pr) pr.then(m => ([DatePicker, ko] = m))
+        else pr = Promise.all([
+            import('date-picker-svelte'),
+            import('date-fns/locale')
+        ]).then(([m1, m2]) => ([DatePicker, ko] = [m1.DatePicker, m2.ko]))
+    })
 </script>
 
 <Paper left bottom xstack>
     <Input bind:value={display} {...$$restProps} slot="target"/>
     <main>
-        <DatePicker locale={ko} {min} {max} bind:value/>
+        {#if DatePicker && ko}
+            <DatePicker locale={ko} {min} {max} bind:value/>
+        {/if}
     </main>
 </Paper>
 

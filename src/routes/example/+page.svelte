@@ -224,7 +224,9 @@
 <br>
 <br>
 <h1>Date</h1>
-<Date placeholder="Date"/>
+{#if fl}
+    <Date placeholder="Date"/>
+{/if}
 <br>
 <br>
 <br>
