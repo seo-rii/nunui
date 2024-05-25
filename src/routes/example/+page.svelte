@@ -118,7 +118,7 @@
 </List>
 
 <h1>Paper</h1>
-<Paper left top xstack icon="list" title="Menu">
+<Paper left bottom xstack icon="list" title="Menu">
     <Button slot="target">Open menu</Button>
     <List>
         <OneLine title="OneLine" icon="star" on:click={() => alert(1)}/>

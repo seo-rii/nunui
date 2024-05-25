@@ -50,7 +50,8 @@
 
     const mobileAnim = tweened(0, {duration: 200});
 
-    export let left = !$$props.right, center = false, right = false, top = !$$props.bottom, middle = false, bottom = false,
+    export let left = !$$props.right, center = false, right = false, top = !$$props.bottom, middle = false,
+        bottom = false,
         unbounded = false, absolutex = false, absolutey = false, tooltip = false, exOpen = false, hover = false;
     export let xstack = false, ystack = false;
     export let stacked = 0;
@@ -73,6 +74,7 @@
     let hovering;
     let scroll = false;
     let diffX, diffY;
+    let maxHeight = 0;
 
     $: if (hover && (exOpen || !exOpen) && !hovering) open = false;
 
@@ -128,6 +130,7 @@
 
         _left = __left;
         _top = __top;
+        maxHeight = window.innerHeight - __top - 12;
     }
 
 
@@ -141,6 +144,7 @@
     $: if (open || exOpen) {
         if (!tooltip) closeAll(stacked);
         open = true;
+        maxHeight = 10000;
         tick().then(() => {
             getDiff();
             _height = 0;
@@ -215,6 +219,8 @@
         } else if (e.currentTarget.scrollTop == 0) e.preventDefault();
     };
 
+    let main;
+
     onMount(() => {
         closeFunc.add(hide);
         window.addEventListener('click', outsideClickDetect);
@@ -224,10 +230,9 @@
             closeFunc.delete(hide);
             window.removeEventListener('click', outsideClickDetect);
             if (paperMount) {
-                paper?.removeEventListener?.('touchstart', touchStart);
-                paper?.removeEventListener?.('touchmove', touchMove);
-                paper?.removeEventListener?.('touchend', touchEnd);
-                paper?.removeEventListener?.(wheelEvent, scrollEvent, wheelOpt);
+                main?.removeEventListener?.('touchstart', touchStart);
+                main?.removeEventListener?.('touchmove', touchMove);
+                main?.removeEventListener?.('touchend', touchEnd);
             }
         };
     });
@@ -236,14 +241,13 @@
 
     $: if (paper) {
         paperMount = true;
-        paper.addEventListener('touchstart', touchStart);
-        paper.addEventListener('touchmove', touchMove);
-        paper.addEventListener('touchend', touchEnd);
-        paper.addEventListener(wheelEvent, scrollEvent, wheelOpt);
+        main.addEventListener('touchstart', touchStart);
+        main.addEventListener('touchmove', touchMove);
+        main.addEventListener('touchend', touchEnd);
     }
 </script>
 
-<main>
+<main bind:this={main}>
     <div class='target' bind:this={target} on:click={()=>open=!open} on:click={()=>lock=true} {style} class:fullWidth
          class:noTarget={!$$slots.target} class:inline class:block>
         <slot name='target'/>
@@ -254,7 +258,7 @@
         <div class='paper' bind:this={paper} class:open={open || exOpen} style={_style} bind:clientWidth
              class:render={_render} on:click={() => lock = true} class:left class:center class:right class:top
              class:middle class:bottom class:xstack class:ystack class:nxstack={!xstack} class:nystack={!ystack}
-             class:desktop={!mobile} class:mobile={mobile}>
+             class:desktop={!mobile} class:mobile={mobile} style:max-height="{maxHeight}px" on:wheel|nonpassive|stopPropagation>
             {#if mobile}
                 <div class='dragContainer'>
                     <div class='drag'></div>
@@ -308,10 +312,11 @@
     z-index: 9999999;
     @include shadow;
     background: var(--surface);
-    overflow: hidden;
     opacity: 0;
     pointer-events: none;
     display: none;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     &.render {
       display: initial;
