@@ -47,6 +47,7 @@
 	import { tweened } from 'svelte/motion';
 	import Hoverable from '$lib/Hoverable';
 	import Icon from '$lib/Icon';
+	import { browser } from '$app/environment';
 
 	const mobileAnim = tweened(0, { duration: 200 });
 
@@ -219,17 +220,11 @@
 		} else if (e.currentTarget.scrollTop == 0) e.preventDefault();
 	};
 
-	let main;
+	let main, rmp = null;
 
 	onMount(() => {
 		closeFunc.add(hide);
 		window.addEventListener('click', outsideClickDetect);
-		let _place = paper.parentElement;
-		if (__remap) {
-			document.getElementById('app').append(paper);
-			document.getElementById('app').append(scrim);
-		}
-
 		return () => {
 			if (open && !tooltip) unlockScroll();
 			closeFunc.delete(hide);
@@ -239,14 +234,22 @@
 				main?.removeEventListener?.('touchmove', touchMove);
 				main?.removeEventListener?.('touchend', touchEnd);
 			}
-			if (__remap) {
-				_place.append(paper);
-				_place.append(scrim);
+			if (rmp) {
+				rmp.append(paper);
+				rmp.append(scrim);
 			}
 		};
 	});
 
 	let paperMount = false;
+
+	$: if (__remap && paper && scrim && browser) {
+		if (!rmp) {
+			rmp = paper?.parentElement;
+			document.getElementById('app').append(paper);
+			document.getElementById('app').append(scrim);
+		}
+	}
 
 	$: if (paper) {
 		paperMount = true;
