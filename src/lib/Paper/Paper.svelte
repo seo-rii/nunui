@@ -76,6 +76,7 @@
 	let scroll = false;
 	let diffX, diffY;
 	let maxHeight = 0;
+	let touching = false;
 
 	$: if (hover && (exOpen || !exOpen) && !hovering) open = false;
 
@@ -188,6 +189,7 @@
 	function touchStart(e) {
 		touchY = e.touches[0].clientY;
 		paperY = 0;
+		touching = true;
 		e.stopPropagation();
 	}
 
@@ -202,6 +204,7 @@
 	function touchEnd(e) {
 		if (paperY < -100) hide();
 		else paperY = 0;
+		touching = false;
 		e.stopPropagation();
 	}
 
@@ -270,7 +273,7 @@
 		<div class='paper' bind:this={paper} class:open={open || exOpen} style={_style} bind:clientWidth
 				 class:render={_render} on:click={() => lock = true} class:left class:center class:right class:top
 				 class:middle class:bottom class:xstack class:ystack class:nxstack={!xstack} class:nystack={!ystack}
-				 class:desktop={!mobile} class:mobile={mobile} style:max-height="{maxHeight}px"
+				 class:desktop={!mobile} class:mobile={mobile} style:max-height="{maxHeight}px" class:touching
 				 on:wheel|nonpassive|stopPropagation>
 			{#if mobile}
 				<div class='dragContainer'>
@@ -347,6 +350,10 @@
         pointer-events: unset;
         transition: bottom 0.15s cubic-bezier(0, .35, .65, 1), opacity 0.15s cubic-bezier(0, 1, 0, 1);
       }
+
+			&.touching {
+				transition: none;
+			}
     }
 
     &.desktop {
