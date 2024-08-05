@@ -14,7 +14,7 @@
 </script>
 
 <span use:ev class="notranslate" {...$$restProps} style="{_fill}{_weight}{_color}{_size}{style}"
-      aria-hidden="true">{icon}</span>
+      aria-hidden="true" data-nosnippet="true">{icon}</span>
 
 <style lang="scss">
   @font-face {
