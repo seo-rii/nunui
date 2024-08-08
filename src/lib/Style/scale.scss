@@ -1,6 +1,6 @@
 @import './cross';
 
-@mixin --scaleIn {
+@mixin S--scaleIn {
   0% {
     transform: scale(var(--i-sc));
   }
@@ -10,7 +10,7 @@
 }
 
 @include keyframes(scaleIn) {
-  @include --scaleIn;
+  @include S--scaleIn;
 }
 
 @mixin AScaleIn( $duration, $sc: 1, $additional: '' ) {

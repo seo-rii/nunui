@@ -1,61 +1,61 @@
 <script lang='ts'>
-    import Icon from '$lib/Icon';
-    import {createEventDispatcher, setContext, tick} from 'svelte';
-    import Paper from "$lib/Paper/Paper.svelte";
-    import List from "$lib/List/List.svelte";
-    import {writable} from "svelte/store";
-    import Ripple from "$lib/Ripple/Ripple.svelte";
-    import forward from "$lib/Utility/forward";
+	import Icon from '$lib/Icon';
+	import { createEventDispatcher, setContext, tick } from 'svelte';
+	import Paper from '$lib/Paper/Paper.svelte';
+	import List from '$lib/List/List.svelte';
+	import { writable } from 'svelte/store';
+	import Ripple from '$lib/Ripple/Ripple.svelte';
+	import forward from '$lib/Utility/forward';
 
-    const ev = forward();
-    export let outlined = false, plain = false;
-    export let placeholder: string, error = '', fullWidth = false;
-    export let helper = '';
-    export let round = false, nohelper = false, tabindex = undefined;
-    export let style = '';
-    export let multiple = false, selected = null, separator = ', ';
-    export let override = false;
-    export let mobile = false;
+	const ev = forward();
+	export let outlined = false, plain = false;
+	export let placeholder: string, error = '', fullWidth = false;
+	export let helper = '';
+	export let round = false, nohelper = false, tabindex = undefined;
+	export let style = '';
+	export let multiple = false, selected = null, separator = ', ';
+	export let override = false;
+	export let mobile = false;
 
-    let open = false, hide, clientWidth;
+	let open = false, hide, clientWidth;
 
-    const _multiple = writable(false);
-    const _selected = writable(selected);
-    const target = writable();
-    const display = writable([]);
-    const dispatch = createEventDispatcher();
+	const _multiple = writable(false);
+	const _selected = writable(selected);
+	const target = writable();
+	const display = writable([]);
+	const dispatch = createEventDispatcher();
 
-    $: $_multiple = multiple;
+	$: $_multiple = multiple;
 
-    const update = () => {
-        if (selected !== $_selected) {
-            $_selected = selected;
-            dispatch('select', selected);
-        }
-    }
-    $: tick().then(() => selected = $_selected);
-    $: {
-        void selected;
-        tick().then(update);
-    }
+	const update = () => {
+		if (selected !== $_selected) {
+			$_selected = selected;
+			dispatch('select', selected);
+		}
+	};
+	$: tick().then(() => selected = $_selected);
+	$: {
+		void selected;
+		tick().then(update);
+	}
 
-    setContext('hide', () => hide?.());
-    setContext('multiple', _multiple);
-    setContext('selected', _selected);
-    setContext('display', display);
-    setContext('target', target);
+	setContext('hide', () => hide?.());
+	setContext('multiple', _multiple);
+	setContext('selected', _selected);
+	setContext('display', display);
+	setContext('target', target);
 </script>
 
 <Paper forceRender bind:open bind:hide left bottom xstack width="{clientWidth}px" {mobile}>
-    <span slot="target" style="display: inline-block;margin: 0;position: relative;left: 0;top: 4px"></span>
-    <List>
-        <slot/>
-    </List>
+	<span slot="target" style="display: inline-block;margin: 0;position: relative;left: 0;top: 4px"></span>
+	<List>
+		<slot />
+	</List>
 </Paper>
 <span class='container' class:error class:fullWidth class:round class:outlined class:plain bind:clientWidth>
 	<div style='position: relative;' on:click={() => {if (open) hide();else setTimeout(() => open = true, 1)}}>
 		<div class='input' type='text' placeholder='&nbsp;' use:ev class:focus={open}
-             class:active={open || $display.length} {tabindex} on:keydown={(e)=>{
+				 class:active={open || $display.length} {tabindex} on:keydown={(e)=>{
 				if (e.key === 'Enter') open = true;
 			 }} {style} class:outlined>
             {#if override}
@@ -63,19 +63,19 @@
             {:else}
                 <span>{$display.map(e => e.title).join(separator)}</span>
             {/if}
-            <Ripple/>
+			<Ripple />
         </div>
         <span class='placeholder'>{placeholder}</span>
-        {#if !outlined}
+		{#if !outlined}
 			<span class='background' class:round></span>
 		{/if}
-        <div class='trailingIcon' class:open>
-			<Icon icon="expand_more" size='26'/>
+		<div class='trailingIcon' class:open>
+			<Icon icon="expand_more" size='26' />
 		</div>
 	</div>
-    {#if !nohelper && (error || helper)}
+	{#if !nohelper && (error || helper)}
 		<span class='helper'><span
-                style='position: relative;top:-2px;margin-left: 2px;'>{error || helper}</span></span>
+			style='position: relative;top:-2px;margin-left: 2px;'>{error || helper}</span></span>
 	{/if}
 </span>
 
@@ -87,28 +87,33 @@
   }
 
   .container {
-    --border: 8px 8px 0 0;
+    & {
+      --border: 8px 8px 0 0;
+      font-size: 1.1em;
+      display: inline-block;
+      position: relative;
+      left: -4px;
+      margin: auto;
+      width: 100%;
+      max-width: 280px;
+      border-radius: var(--border);
+    }
 
     &.plain {
-      --border: 12px;
+      & {
+        --border: 12px;
+      }
 
       .input {
-        border-bottom: transparent !important;
+        & {
+          border-bottom: transparent !important;
+        }
 
         &:hover:not(:active) {
           @include shadow("primary", "mini");
         }
       }
     }
-
-    font-size: 1.1em;
-    display: inline-block;
-    position: relative;
-    left: -4px;
-    margin: auto;
-    width: 100%;
-    max-width: 280px;
-    border-radius: var(--border);
 
     &:not(.outlined) {
       background: var(--primary-light1);
@@ -123,10 +128,14 @@
     }
 
     &.round {
-      border-radius: 100px;
+      & {
+        border-radius: 100px;
+      }
 
       .input {
-        border-radius: 100px;
+        & {
+          border-radius: 100px;
+        }
 
         &:not(.outlined) {
           border-bottom: none !important;
@@ -135,8 +144,10 @@
     }
 
     &.fullWidth {
-      display: inline-block;
-      max-width: unset;
+      & {
+        display: inline-block;
+        max-width: unset;
+      }
 
       .helper {
         display: contents;
@@ -157,40 +168,44 @@
     }
 
     .background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: var(--border);
+      & {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: var(--border);
+
+        z-index: -1;
+        transform: scaleX(0);
+        transform-origin: left;
+        opacity: 0;
+        transition: opacity .2s ease, transform .2s cubic-bezier(1, 0, 1, 0);
+      }
 
       &.round {
         border-radius: 100px;
       }
-
-      z-index: -1;
-      transform: scaleX(0);
-      transform-origin: left;
-      opacity: 0;
-      transition: opacity .2s ease, transform .2s cubic-bezier(1, 0, 1, 0);
     }
 
     .input {
-      border: none;
-      outline: none;
-      font-weight: 300;
-      border-radius: var(--border);
-      width: 100%;
-      cursor: pointer;
+      & {
+        border: none;
+        outline: none;
+        font-weight: 300;
+        border-radius: var(--border);
+        width: 100%;
+        cursor: pointer;
 
-      font-size: 1em;
-      height: calc(1.5em + 18px);
-      padding: 0.4em 8px 0 8px;
+        font-size: 1em;
+        height: calc(1.5em + 18px);
+        padding: 0.4em 8px 0 8px;
 
-      font-family: inherit;
-      transition: all .15s ease;
-      position: relative;
-      overflow: hidden;
+        font-family: inherit;
+        transition: all .15s ease;
+        position: relative;
+        overflow: hidden;
+      }
 
       span {
         position: relative;
@@ -198,10 +213,12 @@
       }
 
       &.outlined {
-        background: unset;
-        border: solid 1px var(--on-surface);
-        padding: 0 8px;
-        height: 42px;
+        & {
+          background: unset;
+          border: solid 1px var(--on-surface);
+          padding: 0 8px;
+          height: 42px;
+        }
 
         & + .placeholder {
           top: 4px;
@@ -224,12 +241,16 @@
       }
 
       &.focus {
-        transition: all .15s ease;
+        & {
+          transition: all .15s ease;
+        }
 
         & + .placeholder {
-          transform: translate3d(0, -8px, 0) scale(.5);
-          color: var(--primary);
-          opacity: 1;
+          & {
+            transform: translate3d(0, -8px, 0) scale(.5);
+            color: var(--primary);
+            opacity: 1;
+          }
 
           & + .background {
             transform: scaleX(1);
@@ -239,7 +260,9 @@
         }
 
         &.outlined {
-          border: solid 1px var(--primary);
+          & {
+            border: solid 1px var(--primary);
+          }
 
           & + .placeholder {
             transform: translate3d(0, -12px, 0) scale(.5);
@@ -272,14 +295,16 @@
     }
 
     .trailingIcon {
-      position: absolute;
-      padding: 6px;
-      right: 0;
-      top: 3px;
-      border-radius: 100px;
-      cursor: pointer;
-      --weight: 300;
-      transition: transform .2s ease;
+      & {
+        position: absolute;
+        padding: 6px;
+        right: 0;
+        top: 3px;
+        border-radius: 100px;
+        cursor: pointer;
+        --weight: 300;
+        transition: transform .2s ease;
+      }
 
       &.open {
         transform: rotate(180deg);

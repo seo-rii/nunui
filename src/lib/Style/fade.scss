@@ -1,6 +1,6 @@
 @import './cross';
 
-@mixin --fadeIn {
+@mixin S--fadeIn {
   0% {
     opacity: 0;
   }
@@ -10,7 +10,7 @@
 }
 
 @include keyframes(fadeIn) {
-  @include --fadeIn;
+  @include S--fadeIn;
 }
 
 @mixin AFadeIn( $duration: 0.3s, $op: 1, $additional: forwards ) {
@@ -20,7 +20,7 @@
   }
 }
 
-@mixin --fadeOut {
+@mixin S--fadeOut {
   0% {
     opacity: var(--i-op);
   }
@@ -30,7 +30,7 @@
 }
 
 @include keyframes(fadeOut) {
-  @include --fadeOut;
+  @include S--fadeOut;
 }
 
 @mixin AFadeOut( $duration: 0.3s, $op: 1, $additional: forwards ) {

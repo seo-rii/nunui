@@ -1,88 +1,88 @@
 <script lang='ts'>
-    import IconButton from '$lib/IconButton';
-    import {createEventDispatcher} from 'svelte';
+	import IconButton from '$lib/IconButton';
+	import { createEventDispatcher } from 'svelte';
 
-    const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher();
 
-    export let outlined = false, plain = false;
-    export let placeholder: string, value = '', multiline = false, error = '', fullWidth = false;
-    export let required = false, number = false, min = null, max = null, helper = '';
-    export let password = false, trailingIcon = '', round = false, nohelper = false;
-    export let input = null;
-    export let trailingHandler = () => null;
+	export let outlined = false, plain = false;
+	export let placeholder: string, value = '', multiline = false, error = '', fullWidth = false;
+	export let required = false, number = false, min = null, max = null, helper = '';
+	export let password = false, trailingIcon = '', round = false, nohelper = false;
+	export let input = null;
+	export let trailingHandler = () => null;
 
-    let rf: boolean, _error, lh = '46px', _value = value, _rf = rf;
+	let rf: boolean, _error, lh = '46px', _value = value, _rf = rf;
 
-    $: {
-        if (!value && required) _error = '필수 항목입니다.';
-        else if (number && !/^[\-]?[0-9]+(\.[0-9]+)?$/.test(value)) _error = '숫자만 입력해주세요.';
-        else if (number && ((min !== undefined && parseFloat(value) < min) || (max !== undefined && parseFloat(value) > max))) _error = `${min}부터 ${max}까지의 숫자를 입력해주세요.`;
-        else _error = error;
-    }
+	$: {
+		if (!value && required) _error = '필수 항목입니다.';
+		else if (number && !/^[\-]?[0-9]+(\.[0-9]+)?$/.test(value)) _error = '숫자만 입력해주세요.';
+		else if (number && ((min !== undefined && parseFloat(value) < min) || (max !== undefined && parseFloat(value) > max))) _error = `${min}부터 ${max}까지의 숫자를 입력해주세요.`;
+		else _error = error;
+	}
 
-    $: if (multiline && (value !== _value || rf !== _rf)) {
-        _value = value;
-        _rf = rf;
-        setTimeout(() => {
-            if (input) {
-                input.parentNode.style.height = Math.max(input.scrollHeight - 2, 40) + 'px';
-                input.style.height = 'auto';
-                input.style.height = Math.max(input.scrollHeight - 2, 40) + 'px';
-                input.parentNode.style.height = '';
-            }
-        })
-    }
+	$: if (multiline && (value !== _value || rf !== _rf)) {
+		_value = value;
+		_rf = rf;
+		setTimeout(() => {
+			if (input) {
+				input.parentNode.style.height = Math.max(input.scrollHeight - 2, 40) + 'px';
+				input.style.height = 'auto';
+				input.style.height = Math.max(input.scrollHeight - 2, 40) + 'px';
+				input.parentNode.style.height = '';
+			}
+		});
+	}
 
-    const submit = (e) => {
-        if (e.key === 'Enter' && e.isComposing === false) {
-            dispatch('submit', value);
-        }
-    }
+	const submit = (e) => {
+		if (e.key === 'Enter' && e.isComposing === false) {
+			dispatch('submit', value);
+		}
+	};
 </script>
 
 <span class='container' class:error={_error} class:fullWidth class:round class:outlined class:plain>
 	<div style='position: relative;'>
 		{#if multiline}
 			<textarea class='input' placeholder='&nbsp;' bind:value on:change on:keydown bind:this={input} rows='1'
-                      cols='1' on:focus={() => (rf = !rf)} on:focus on:blur {...$$restProps}
-                      class:outlined></textarea>
+								cols='1' on:focus={() => (rf = !rf)} on:focus on:blur {...$$restProps}
+								class:outlined></textarea>
 		{:else}
 			{#if password}
 				<input class='input' type='password' placeholder='&nbsp;' bind:value on:change on:keydown on:blur
-                       on:focus {...$$restProps} on:keydown={(e)=>{
+							 on:focus {...$$restProps} on:keydown={(e)=>{
 								if (e.key === 'Enter' && e.isComposing === false) {
 									dispatch('submit', value);
 								}
-							}} bind:this={input} class:outlined/>
-            {:else if number}
+							}} bind:this={input} class:outlined />
+			{:else if number}
 				<input class='input' type='number' placeholder='&nbsp;' bind:value on:change on:keydown on:blur on:focus
-                       {...$$restProps} on:keydown={(e)=>{
+							 {...$$restProps} on:keydown={(e)=>{
 								if (e.key === 'Enter' && e.isComposing === false) {
 									dispatch('submit', value);
 								}
-							}} bind:this={input} class:outlined/>
-            {:else}
+							}} bind:this={input} class:outlined />
+			{:else}
 				<input class='input' type='text' placeholder='&nbsp;' bind:value on:change on:keydown on:blur on:focus
-                       {...$$restProps} on:keydown={(e)=>{
+							 {...$$restProps} on:keydown={(e)=>{
 							if (e.key === 'Enter' && e.isComposing === false) {
 								dispatch('submit', value);
 					   		}
-					  	 }} bind:this={input} class:outlined/>
-            {/if}
+					  	 }} bind:this={input} class:outlined />
+			{/if}
 		{/if}
-        <span class='placeholder'>{placeholder}</span>
-        {#if !outlined}
+		<span class='placeholder'>{placeholder}</span>
+		{#if !outlined}
 			<span class='background' class:round></span>
 		{/if}
-        {#if trailingIcon}
+		{#if trailingIcon}
 			<div class='trailingIcon'>
-				<IconButton icon={trailingIcon} size='34' on:click={(e) => {e.stopPropagation();trailingHandler(e);}}/>
+				<IconButton icon={trailingIcon} size='34' on:click={(e) => {e.stopPropagation();trailingHandler(e);}} />
 			</div>
 		{/if}
 	</div>
-    {#if !nohelper && (_error || helper)}
+	{#if !nohelper && (_error || helper)}
 		<span class='helper'><span
-                style='position: relative;top:-2px;margin-left: 2px;'>{_error || helper}</span></span>
+			style='position: relative;top:-2px;margin-left: 2px;'>{_error || helper}</span></span>
 	{/if}
 </span>
 
@@ -94,7 +94,9 @@
   }
 
   .container {
-    --border: 8px 8px 0 0;
+    & {
+      --border: 8px 8px 0 0;
+    }
 
     &.plain {
       --border: 12px;
@@ -112,13 +114,15 @@
       }
     }
 
-    font-size: 1.1em;
-    display: inline-block;
-    position: relative;
-    margin: auto;
-    width: 100%;
-    max-width: 280px;
-    border-radius: var(--border);
+    & {
+      font-size: 1.1em;
+      display: inline-block;
+      position: relative;
+      margin: auto;
+      width: 100%;
+      max-width: 280px;
+      border-radius: var(--border);
+    }
 
     &:not(.outlined) {
       background: var(--primary-light1);
@@ -184,11 +188,13 @@
         border-radius: 100px;
       }
 
-      background: var(--primary-light3);
-      transform: scaleX(0);
-      transform-origin: left;
-      opacity: 0;
-      transition: opacity .2s ease, transform .2s cubic-bezier(1, 0, 1, 0);
+      & {
+        background: var(--primary-light3);
+        transform: scaleX(0);
+        transform-origin: left;
+        opacity: 0;
+        transition: opacity .2s ease, transform .2s cubic-bezier(1, 0, 1, 0);
+      }
     }
 
     .input {
